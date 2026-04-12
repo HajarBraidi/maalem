@@ -1,0 +1,14 @@
+version: '3.8'
+
+services:
+  android-build:
+    build: .
+    container_name: maalem-build
+    volumes:
+      - .:/app
+      - gradle-cache:/root/.gradle
+      - android-sdk-cache:/opt/android-sdk
+
+volumes:
+  gradle-cache:
+  android-sdk-cache:

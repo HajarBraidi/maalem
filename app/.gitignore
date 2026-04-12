@@ -1,0 +1,17 @@
+# Android
+*.iml
+.gradle/
+local.properties
+.idea/
+.DS_Store
+build/
+/captures
+.externalNativeBuild
+.cxx
+
+# Firebase — ne jamais committer
+google-services.json
+firebase-adminsdk*.json
+
+# Docker
+.env
