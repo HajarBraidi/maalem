@@ -60,6 +60,7 @@ dependencies {
     implementation(libs.firebase.messaging)
     implementation(libs.firebase.database)
     implementation(libs.hilt.android)
+    implementation(libs.androidx.room.ktx)
     ksp(libs.hilt.compiler)
     implementation(libs.kotlinx.coroutines)
     implementation(libs.coil)
