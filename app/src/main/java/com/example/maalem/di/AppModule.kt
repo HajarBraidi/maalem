@@ -1,9 +1,12 @@
 package com.example.maalem.di
 
 import com.example.maalem.data.repository.AuthRepositoryImpl
+import com.example.maalem.data.repository.CitizenRepositoryImpl
 import com.example.maalem.domain.repository.AuthRepository
+import com.example.maalem.domain.repository.CitizenRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.storage.FirebaseStorage
 import dagger.Binds
 import dagger.Module
 import dagger.Provides
@@ -22,6 +25,11 @@ object FirebaseModule {
     @Provides
     @Singleton
     fun provideFirestore(): FirebaseFirestore = FirebaseFirestore.getInstance()
+
+    @Provides
+    @Singleton
+    fun provideFirebaseStorage(): FirebaseStorage = FirebaseStorage.getInstance()
+    //  Bien à l'intérieur de FirebaseModule
 }
 
 @Module
@@ -31,4 +39,9 @@ abstract class RepositoryModule {
     @Binds
     @Singleton
     abstract fun bindAuthRepository(impl: AuthRepositoryImpl): AuthRepository
+
+    @Binds
+    @Singleton
+    abstract fun bindCitizenRepository(impl: CitizenRepositoryImpl): CitizenRepository
+    // CitizenRepository ici, pas besoin de CitizenRepositoryModule séparé
 }

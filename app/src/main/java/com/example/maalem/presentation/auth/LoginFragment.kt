@@ -1,5 +1,6 @@
 package com.example.maalem.presentation.auth
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.View
 import androidx.core.view.isVisible
@@ -9,6 +10,7 @@ import androidx.lifecycle.lifecycleScope
 import com.example.maalem.R
 import com.example.maalem.data.model.UserRole
 import com.example.maalem.databinding.FragmentLoginBinding
+import com.example.maalem.presentation.citizen.CitizenHomeActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -54,10 +56,29 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     }
 
     private fun navigateByRole(role: UserRole) {
-        // TODO: navigation selon le rôle
-        // CITIZEN  → CitizenHomeFragment
-        // ARTISAN  → ArtisanHomeFragment
-        // ADMIN    → AdminHomeFragment
+        when (role) {
+            UserRole.CITIZEN -> {
+                val intent = Intent(requireContext(), CitizenHomeActivity::class.java)
+                startActivity(intent)
+                requireActivity().finish()
+            }
+            UserRole.ARTISAN -> {
+                // Pas encore développé
+                Snackbar.make(
+                    binding.root,
+                    "⏳ Espace artisan en cours de développement",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+            UserRole.ADMIN -> {
+                // Pas encore développé
+                Snackbar.make(
+                    binding.root,
+                    "⏳ Espace admin en cours de développement",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     override fun onDestroyView() {

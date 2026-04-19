@@ -20,7 +20,8 @@ data class Citizen(
     override val role: String = "citizen",
     override val isActive: Boolean = true,
     override val createdAt: Long = System.currentTimeMillis(),
-    val address: String = ""
+    val address: String = "",
+    val photoUrl: String = ""
 ) : User(uid, name, email, phone, role, isActive, createdAt)
 
 // Artisan
