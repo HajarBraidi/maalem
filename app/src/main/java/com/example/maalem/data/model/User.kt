@@ -31,14 +31,14 @@ data class Artisan(
     override val email: String = "",
     override val phone: String = "",
     override val role: String = "artisan",
-    override val isActive: Boolean = false, // attend validation admin
+    override val isActive: Boolean = false,
     override val createdAt: Long = System.currentTimeMillis(),
     val specialty: String = "",
     val city: String = "",
     val bio: String = "",
-    val isValidated: Boolean = false
+    val isValidated: Boolean = false,
+    val cinPhotoBase64: String = ""  // ← NOUVEAU CHAMP
 ) : User(uid, name, email, phone, role, isActive, createdAt)
-
 // Admin
 data class Admin(
     override val uid: String = "",

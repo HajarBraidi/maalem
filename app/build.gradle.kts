@@ -40,7 +40,10 @@ android {
 
     buildFeatures {
         viewBinding = true
+
     }
+
+
 }
 
 dependencies {
@@ -67,7 +70,7 @@ dependencies {
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
     implementation("com.google.firebase:firebase-storage-ktx")
-// Pour charger les images (Glide)
+// pour charger les images (Glide)
     implementation("com.github.bumptech.glide:glide:4.16.0")
-    implementation("com.github.bumptech.glide:glide:4.16.0")
+
 }

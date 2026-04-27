@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
-<uses-permission android:name="android.permission.READ_MEDIA_IMAGES"/>
-    <!-- Pour Android < 13 -->
-<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"
-        android:maxSdkVersion="32"/>
+
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- Pour Android < 13 -->
+    <uses-permission
+        android:name="android.permission.READ_EXTERNAL_STORAGE"
+        android:maxSdkVersion="32" />
+
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -16,10 +18,16 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Maalem">
         <activity
+            android:name=".presentation.artisan.ArtisanHomeActivity"
+            android:exported="false" />
+        <activity
             android:name=".presentation.citizen.CitizenHomeActivity"
             android:exported="false" />
         <activity
             android:name=".MainActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.artisan.PendingValidationActivity"
             android:exported="false" />
         <activity
             android:name=".presentation.auth.AuthActivity"
@@ -31,6 +39,5 @@
             </intent-filter>
         </activity>
     </application>
-
 
 </manifest>

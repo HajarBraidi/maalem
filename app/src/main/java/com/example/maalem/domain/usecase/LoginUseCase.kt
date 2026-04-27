@@ -1,13 +1,13 @@
 package com.example.maalem.domain.usecase
 
-import com.example.maalem.data.model.UserRole
 import com.example.maalem.domain.repository.AuthRepository
+import com.example.maalem.domain.repository.LoginResult
 import javax.inject.Inject
 
 class LoginUseCase @Inject constructor(
     private val authRepository: AuthRepository
 ) {
-    suspend operator fun invoke(email: String, password: String): Result<UserRole> {  //operator fun invoke permet d’appeler la classe comme une fonction
+    suspend operator fun invoke(email: String, password: String): Result<LoginResult> {
         if (email.isBlank() || password.isBlank())
             return Result.failure(Exception("Email et mot de passe requis"))
         if (password.length < 6)

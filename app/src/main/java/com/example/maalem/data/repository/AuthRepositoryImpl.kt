@@ -6,19 +6,26 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
-
+import com.example.maalem.domain.repository.LoginResult
 class AuthRepositoryImpl @Inject constructor(
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore
 ) : AuthRepository {
 
-    override suspend fun login(email: String, password: String): Result<UserRole> {
+    override suspend fun login(email: String, password: String): Result<LoginResult> {
         return try {
             auth.signInWithEmailAndPassword(email, password).await()
             val uid = auth.currentUser!!.uid
             val doc = firestore.collection("users").document(uid).get().await()
             val role = UserRole.fromString(doc.getString("role") ?: "citizen")
-            Result.success(role)
+
+            val isValidated = if (role == UserRole.ARTISAN) {
+                doc.getBoolean("isValidated") ?: false
+            } else {
+                true
+            }
+
+            Result.success(LoginResult(role, isValidated))
         } catch (e: Exception) {
             Result.failure(e)
         }
@@ -57,6 +64,7 @@ class AuthRepositoryImpl @Inject constructor(
                     "bio" to user.bio,
                     "isActive" to false,
                     "isValidated" to false,
+                    "cinPhotoBase64" to user.cinPhotoBase64,  // ← NOUVEAU
                     "createdAt" to System.currentTimeMillis()
                 )
                 else -> hashMapOf(
