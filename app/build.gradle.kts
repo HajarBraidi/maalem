@@ -66,4 +66,12 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+<<<<<<< Updated upstream
+=======
+    implementation("com.google.firebase:firebase-storage-ktx")
+// Pour charger les images (Glide)
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("com.github.bumptech.glide:glide:4.16.0")
+    implementation("androidx.gridlayout:gridlayout:1.0.0")
+>>>>>>> Stashed changes
 }
