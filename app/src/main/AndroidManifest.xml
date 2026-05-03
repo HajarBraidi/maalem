@@ -2,14 +2,13 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-<<<<<<< Updated upstream
-=======
-    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" /> <!-- Pour Android < 13 -->
+    <!-- Permissions -->
+    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.READ_MEDIA_IMAGES" />
     <uses-permission
         android:name="android.permission.READ_EXTERNAL_STORAGE"
         android:maxSdkVersion="32" />
 
->>>>>>> Stashed changes
     <application
         android:name=".MyApp"
         android:allowBackup="true"
@@ -20,24 +19,40 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.Maalem">
+
+        <!-- Auth : activité principale (launcher) -->
         <activity
-<<<<<<< Updated upstream
-=======
-            android:name=".presentation.admin.AdminHomeActivity"
-            android:exported="false" />
-        <activity
-            android:name=".presentation.citizen.CitizenHomeActivity"
-            android:exported="false" />
-        <activity
->>>>>>> Stashed changes
-            android:name=".MainActivity"
+            android:name=".presentation.auth.AuthActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <!-- Citoyen -->
+        <activity
+            android:name=".presentation.citizen.CitizenHomeActivity"
+            android:exported="false" />
+
+        <!-- Artisan -->
+        <activity
+            android:name=".presentation.artisan.ArtisanHomeActivity"
+            android:exported="false" />
+        <activity
+            android:name=".presentation.artisan.PendingValidationActivity"
+            android:exported="false" />
+
+        <!-- Admin -->
+        <activity
+            android:name=".presentation.admin.AdminHomeActivity"
+            android:exported="false" />
+
+        <!-- Main (si utilisé) -->
+        <activity
+            android:name=".MainActivity"
+            android:exported="false" />
+
     </application>
 
 </manifest>

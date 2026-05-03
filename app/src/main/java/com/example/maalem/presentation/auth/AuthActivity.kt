@@ -5,6 +5,7 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import com.example.maalem.R
 import com.example.maalem.presentation.admin.AdminHomeActivity
+import com.example.maalem.presentation.artisan.ArtisanHomeActivity
 import com.example.maalem.presentation.citizen.CitizenHomeActivity
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -35,15 +36,14 @@ class AuthActivity : AppCompatActivity() {
 
     private fun navigateToHome() {
         val uid = auth.currentUser?.uid ?: return
-
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 val role = doc.getString("role") ?: "citizen"
                 val intent = when (role) {
                     "citizen" -> Intent(this, CitizenHomeActivity::class.java)
-                    // "artisan" → ArtisanHomeActivity (à développer plus tard)
-                     "admin"  -> Intent(this, AdminHomeActivity::class.java)
-                    else -> Intent(this, CitizenHomeActivity::class.java)
+                    "artisan" -> Intent(this, ArtisanHomeActivity::class.java)
+                    "admin"   -> Intent(this, AdminHomeActivity::class.java)
+                    else      -> Intent(this, CitizenHomeActivity::class.java)
                 }
                 startActivity(intent)
                 finish()

@@ -10,7 +10,10 @@ import androidx.lifecycle.lifecycleScope
 import com.example.maalem.R
 import com.example.maalem.data.model.UserRole
 import com.example.maalem.databinding.FragmentLoginBinding
+import com.example.maalem.domain.repository.LoginResult
 import com.example.maalem.presentation.admin.AdminHomeActivity
+import com.example.maalem.presentation.artisan.ArtisanHomeActivity
+import com.example.maalem.presentation.artisan.PendingValidationActivity
 import com.example.maalem.presentation.citizen.CitizenHomeActivity
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -46,7 +49,8 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 binding.btnLogin.isEnabled = state !is LoginState.Loading
 
                 when (state) {
-                    is LoginState.Success -> navigateByRole(state.role)
+                    // ✅ On utilise LoginResult de Khadija (contient isValidated)
+                    is LoginState.Success -> navigateByResult(state.result)
                     is LoginState.Error -> Snackbar.make(
                         binding.root, state.message, Snackbar.LENGTH_LONG
                     ).show()
@@ -56,24 +60,30 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
         }
     }
 
-    private fun navigateByRole(role: UserRole) {
-        when (role) {
+    private fun navigateByResult(result: LoginResult) {
+        when (result.role) {
+
+            // ✅ Citoyen → CitizenHomeActivity
             UserRole.CITIZEN -> {
-                val intent = Intent(requireContext(), CitizenHomeActivity::class.java)
+                startActivity(Intent(requireContext(), CitizenHomeActivity::class.java))
+                requireActivity().finish()
+            }
+
+            // ✅ Artisan → vérifier si validé par admin
+            UserRole.ARTISAN -> {
+                val intent = if (result.isValidated) {
+                    Intent(requireContext(), ArtisanHomeActivity::class.java)
+                } else {
+                    // Artisan non validé → page d'attente
+                    Intent(requireContext(), PendingValidationActivity::class.java)
+                }
                 startActivity(intent)
                 requireActivity().finish()
             }
-            UserRole.ARTISAN -> {
-                // Pas encore développé
-                Snackbar.make(
-                    binding.root,
-                    "⏳ Espace artisan en cours de développement",
-                    Snackbar.LENGTH_LONG
-                ).show()
-            }
+
+            // ✅ Admin → AdminHomeActivity (développé par Hajar)
             UserRole.ADMIN -> {
-                val intent = Intent(requireContext(), AdminHomeActivity::class.java)
-                startActivity(intent)
+                startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
                 requireActivity().finish()
             }
         }

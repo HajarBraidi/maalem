@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_artisan_requests"
+        android:icon="@android:drawable/ic_menu_search"
+        android:title="Demandes" />
+
+    <item
+        android:id="@+id/nav_artisan_offers"
+        android:icon="@android:drawable/ic_menu_send"
+        android:title="Mes offres" />
+
+    <item
+        android:id="@+id/nav_artisan_profile"
+        android:icon="@android:drawable/ic_menu_myplaces"
+        android:title="Profil" />
+
+</menu>

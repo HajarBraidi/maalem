@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:gravity="center"
+    android:padding="32dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="⏳"
+        android:textSize="80sp"
+        android:layout_marginBottom="24dp" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="En attente de validation"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:gravity="center" />
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:text="Votre compte artisan est en cours de vérification par l'administrateur. Vous recevrez un accès complet à l'application une fois votre CIN vérifiée. Ce processus prend généralement 24 à 48 heures."
+        android:textSize="15sp"
+        android:gravity="center"
+        android:textColor="#555" />
+
+    <Button
+        android:id="@+id/btnPendingLogout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="48dp"
+        android:text="Se déconnecter"
+        android:backgroundTint="#E53935" />
+
+</LinearLayout>

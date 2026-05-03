@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <!-- Toolbar en haut -->
+    <!-- Toolbar en haut avec bouton Quitter -->
     <com.google.android.material.appbar.AppBarLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -16,14 +16,12 @@
             android:layout_height="?attr/actionBarSize"
             android:background="?attr/colorPrimary">
 
-
-            <!-- Bouton Quitter aligné à droite -->
             <Button
                 android:id="@+id/btn_logout"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="end"
-                android:text=" Quitter"
+                android:text="🚪 Quitter"
                 android:textSize="12sp"
                 android:backgroundTint="#F44336"
                 android:textColor="#FFFFFF"/>

@@ -14,6 +14,7 @@ import javax.inject.Inject
 class CitizenHomeActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityCitizenHomeBinding
+
     @Inject lateinit var auth: FirebaseAuth
 
     override fun onCreate(savedInstanceState: Bundle?) {
