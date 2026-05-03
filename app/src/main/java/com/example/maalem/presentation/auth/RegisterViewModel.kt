@@ -7,9 +7,11 @@ import android.provider.MediaStore
 import android.util.Base64
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.maalem.data.model.Admin
 import com.example.maalem.data.model.Artisan
 import com.example.maalem.data.model.Citizen
 import com.example.maalem.data.model.User
+import com.example.maalem.data.model.UserRole
 import com.example.maalem.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -33,16 +35,13 @@ class RegisterViewModel @Inject constructor(
     private val _state = MutableStateFlow<RegisterState>(RegisterState.Idle)
     val state: StateFlow<RegisterState> = _state
 
-    // Stocke temporairement la photo CIN choisie
+    // ✅ Stocke temporairement la photo CIN (ajout de Khadija)
     private var cinUri: Uri? = null
 
-    fun setCinUri(uri: Uri) {
-        cinUri = uri
-    }
-
+    fun setCinUri(uri: Uri) { cinUri = uri }
     fun hasCinPhoto(): Boolean = cinUri != null
 
-    // Inscription Citoyen
+    // ✅ Inscription Citoyen
     fun registerCitizen(
         name: String,
         email: String,
@@ -64,7 +63,8 @@ class RegisterViewModel @Inject constructor(
         )
     }
 
-    // Inscription Artisan avec CIN
+    // ✅ Inscription Artisan avec photo CIN (Khadija)
+    @Suppress("DEPRECATION")
     fun registerArtisan(
         context: Context,
         name: String,
@@ -111,5 +111,23 @@ class RegisterViewModel @Inject constructor(
         } catch (e: Exception) {
             _state.value = RegisterState.Error("Erreur lecture photo: ${e.message}")
         }
+    }
+
+    // ✅ Inscription Admin (Hajar)
+    fun registerAdmin(
+        name: String,
+        email: String,
+        password: String,
+        confirmPassword: String
+    ) = viewModelScope.launch {
+        _state.value = RegisterState.Loading
+        val admin = Admin(
+            name = name,
+            email = email
+        )
+        registerUseCase(email, password, confirmPassword, admin).fold(
+            onSuccess = { _state.value = RegisterState.Success },
+            onFailure = { _state.value = RegisterState.Error(it.message ?: "Erreur") }
+        )
     }
 }

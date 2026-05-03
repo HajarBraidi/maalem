@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/nav_stats"
+        android:icon="@drawable/ic_home"
+        android:title="Tableau de bord"/>
+
+    <item
+        android:id="@+id/nav_artisans"
+        android:icon="@drawable/ic_person"
+        android:title="Artisans"/>
+
+    <item
+        android:id="@+id/nav_users"
+        android:icon="@drawable/ic_person"
+        android:title="Utilisateurs"/>
+
+    <item
+        android:id="@+id/nav_categories"
+        android:icon="@drawable/ic_add"
+        android:title="Catégories"/>
+
+    <item
+        android:id="@+id/nav_notif"
+        android:icon="@drawable/ic_add"
+        android:title="Notifs"/>
+
+</menu>
