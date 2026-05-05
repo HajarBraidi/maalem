@@ -10,8 +10,6 @@ import androidx.lifecycle.viewModelScope
 import com.example.maalem.data.model.Admin
 import com.example.maalem.data.model.Artisan
 import com.example.maalem.data.model.Citizen
-import com.example.maalem.data.model.User
-import com.example.maalem.data.model.UserRole
 import com.example.maalem.domain.usecase.RegisterUseCase
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -87,11 +85,28 @@ class RegisterViewModel @Inject constructor(
         try {
             // Convertir la photo CIN en Base64
             val bitmap = MediaStore.Images.Media.getBitmap(context.contentResolver, uri)
-            val resized = Bitmap.createScaledBitmap(bitmap, 800, 800, true)
+            val maxSize = 400
+            val ratio = minOf(maxSize.toFloat() / bitmap.width, maxSize.toFloat() / bitmap.height)
+            val resized = if (ratio < 1f) {
+                Bitmap.createScaledBitmap(
+                    bitmap,
+                    (bitmap.width * ratio).toInt(),
+                    (bitmap.height * ratio).toInt(),
+                    true
+                )
+            } else bitmap
+
+            // ✅ Qualité 40% au lieu de 70% → ~50-80KB en Base64
             val baos = ByteArrayOutputStream()
-            resized.compress(Bitmap.CompressFormat.JPEG, 70, baos)
+            resized.compress(Bitmap.CompressFormat.JPEG, 40, baos)
             val cinBase64 = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
 
+            // Vérifier la taille finale
+            val sizeKB = baos.size() / 1024
+            if (sizeKB > 900) {  // Firestore limite à ~1MB par document
+                _state.value = RegisterState.Error("Photo trop volumineuse, choisissez-en une autre")
+                return@launch
+            }
             val artisan = Artisan(
                 name = name,
                 email = email,

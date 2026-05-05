@@ -43,13 +43,17 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 .commit()
         }
 
+        arguments?.getString("error")?.let { errorMsg ->
+            Snackbar.make(binding.root, errorMsg, Snackbar.LENGTH_LONG).show()
+        }
+
         viewLifecycleOwner.lifecycleScope.launch {
             viewModel.state.collect { state ->
                 binding.progressBar.isVisible = state is LoginState.Loading
                 binding.btnLogin.isEnabled = state !is LoginState.Loading
 
                 when (state) {
-                    // ✅ On utilise LoginResult de Khadija (contient isValidated)
+                    // On utilise LoginResult de Khadija (contient isValidated)
                     is LoginState.Success -> navigateByResult(state.result)
                     is LoginState.Error -> Snackbar.make(
                         binding.root, state.message, Snackbar.LENGTH_LONG
@@ -63,13 +67,13 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
     private fun navigateByResult(result: LoginResult) {
         when (result.role) {
 
-            // ✅ Citoyen → CitizenHomeActivity
+            //  Citoyen → CitizenHomeActivity
             UserRole.CITIZEN -> {
                 startActivity(Intent(requireContext(), CitizenHomeActivity::class.java))
                 requireActivity().finish()
             }
 
-            // ✅ Artisan → vérifier si validé par admin
+            //  Artisan → vérifier si validé par admin
             UserRole.ARTISAN -> {
                 val intent = if (result.isValidated) {
                     Intent(requireContext(), ArtisanHomeActivity::class.java)
@@ -81,7 +85,7 @@ class LoginFragment : Fragment(R.layout.fragment_login) {
                 requireActivity().finish()
             }
 
-            // ✅ Admin → AdminHomeActivity (développé par Hajar)
+            // Admin → AdminHomeActivity (développé par Hajar)
             UserRole.ADMIN -> {
                 startActivity(Intent(requireContext(), AdminHomeActivity::class.java))
                 requireActivity().finish()

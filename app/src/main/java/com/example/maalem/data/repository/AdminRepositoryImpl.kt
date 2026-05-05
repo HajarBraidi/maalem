@@ -31,7 +31,8 @@ class AdminRepositoryImpl @Inject constructor(
                     bio = doc.getString("bio") ?: "",
                     isActive = doc.getBoolean("isActive") ?: false,
                     isValidated = doc.getBoolean("isValidated") ?: false,
-                    createdAt = doc.getLong("createdAt") ?: 0L
+                    createdAt = doc.getLong("createdAt") ?: 0L,
+                    cinPhotoBase64 = doc.getString("cinPhotoBase64") ?: ""
                 )
             }
             Result.success(list)

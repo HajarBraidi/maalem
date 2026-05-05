@@ -69,5 +69,12 @@
             android:layout_marginTop="12dp"
             android:text="Envoyer une offre" />
 
+        <Button
+            android:id="@+id/btn_chat_citizen"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="💬 Contacter le citoyen"
+            android:backgroundTint="?attr/colorPrimary"/>
+
     </LinearLayout>
 </androidx.cardview.widget.CardView>

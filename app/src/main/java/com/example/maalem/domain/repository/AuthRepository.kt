@@ -5,7 +5,8 @@ import com.example.maalem.data.model.UserRole
 
 data class LoginResult(
     val role: UserRole,
-    val isValidated: Boolean = true
+    val isValidated: Boolean = true,
+    val isActive: Boolean = true
 )
 
 interface AuthRepository {

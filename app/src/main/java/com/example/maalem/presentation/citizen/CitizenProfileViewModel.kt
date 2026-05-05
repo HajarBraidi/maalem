@@ -74,6 +74,20 @@ class CitizenProfileViewModel @Inject constructor(
                     "address" to address
                 )
             ).await()
+            // 2. Mettre à jour citizenName dans toutes ses requêtes
+            val requests = firestore.collection("requests")
+                .whereEqualTo("citizenId", uid)
+                .get().await()
+
+            // Batch update pour mettre à jour toutes les requêtes en même temps
+            if (requests.documents.isNotEmpty()) {
+                val batch = firestore.batch()
+                requests.documents.forEach { doc ->
+                    batch.update(doc.reference, "citizenName", name)
+                }
+                batch.commit().await()
+            }
+
             _state.value = ProfileState.Updated
         } catch (e: Exception) {
             _state.value = ProfileState.Error(e.message ?: "Erreur")

@@ -13,6 +13,7 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.maalem.R
+import com.example.maalem.presentation.chat.ChatMessagesFragment
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 
@@ -35,19 +36,33 @@ class ArtisanRequestsFragment : Fragment() {
         val progress = view.findViewById<ProgressBar>(R.id.requestsProgress)
         val empty = view.findViewById<TextView>(R.id.tvEmptyRequests)
 
-        adapter = RequestAdapter(emptyList()) { request ->
-            val dialog = SendOfferDialog(request.id) { price, delay, message ->
-                viewModel.sendOffer(
-                    requestId = request.id,
-                    price = price,
-                    delay = delay,
-                    message = message,
-                    artisanName = "",  // rempli plus tard via profil
-                    artisanPhone = ""
+        adapter = RequestAdapter(
+            requests = emptyList(),
+            onSendOfferClick = { request ->
+                val dialog = SendOfferDialog(request.id) { price, delay, message ->
+                    viewModel.sendOffer(
+                        requestId = request.id,
+                        price = price,
+                        delay = delay,
+                        message = message,
+                        artisanName = "",
+                        artisanPhone = ""
+                    )
+                }
+                dialog.show(parentFragmentManager, "SendOfferDialog")
+            },
+            //Nouveau callback chat
+            onChatClick = { request ->
+                val fragment = ChatMessagesFragment.newInstance(
+                    otherId = request.citizenId,
+                    otherName = request.citizenName
                 )
+                parentFragmentManager.beginTransaction()
+                    .replace(R.id.artisanFragmentContainer, fragment)
+                    .addToBackStack(null)
+                    .commit()
             }
-            dialog.show(parentFragmentManager, "SendOfferDialog")
-        }
+        )
 
         rv.layoutManager = LinearLayoutManager(requireContext())
         rv.adapter = adapter

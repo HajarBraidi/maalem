@@ -28,7 +28,7 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
     @Inject lateinit var firestore: FirebaseFirestore
 
     private val categories = listOf(
-        "Tous", "Plombier", "Électricien", "Maçon",
+        "Tous", "Plomberie", "Électricien", "Maçon",
         "Peintre", "Menuisier", "Carreleur"
     )
 

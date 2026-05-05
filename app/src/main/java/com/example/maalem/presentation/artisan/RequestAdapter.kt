@@ -11,7 +11,8 @@ import com.example.maalem.data.model.Request
 
 class RequestAdapter(
     private var requests: List<Request>,
-    private val onSendOfferClick: (Request) -> Unit
+    private val onSendOfferClick: (Request) -> Unit,
+    private val onChatClick: (Request) -> Unit  // ✅ Callback ajouté
 ) : RecyclerView.Adapter<RequestAdapter.RequestViewHolder>() {
 
     class RequestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
@@ -21,6 +22,7 @@ class RequestAdapter(
         val tvCity: TextView = view.findViewById(R.id.tvRequestCity)
         val tvCitizen: TextView = view.findViewById(R.id.tvRequestCitizen)
         val btnSendOffer: Button = view.findViewById(R.id.btnSendOffer)
+        val btnChatCitizen: Button = view.findViewById(R.id.btn_chat_citizen) // ✅
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): RequestViewHolder {
@@ -36,7 +38,15 @@ class RequestAdapter(
         holder.tvDescription.text = request.description
         holder.tvCity.text = "📍 ${request.city}"
         holder.tvCitizen.text = "Par ${request.citizenName}"
-        holder.btnSendOffer.setOnClickListener { onSendOfferClick(request) }
+
+        holder.btnSendOffer.setOnClickListener {
+            onSendOfferClick(request)
+        }
+
+        // ✅ Utiliser le callback au lieu de parentFragmentManager
+        holder.btnChatCitizen.setOnClickListener {
+            onChatClick(request)
+        }
     }
 
     override fun getItemCount() = requests.size

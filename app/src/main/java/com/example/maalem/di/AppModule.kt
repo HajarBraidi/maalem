@@ -4,10 +4,12 @@ package com.example.maalem.di
 import com.example.maalem.data.repository.AdminRepositoryImpl
 import com.example.maalem.data.repository.ArtisanRepositoryImpl
 import com.example.maalem.data.repository.AuthRepositoryImpl
+import com.example.maalem.data.repository.ChatRepositoryImpl
 import com.example.maalem.data.repository.CitizenRepositoryImpl
 import com.example.maalem.domain.repository.AdminRepository
 import com.example.maalem.domain.repository.ArtisanRepository
 import com.example.maalem.domain.repository.AuthRepository
+import com.example.maalem.domain.repository.ChatRepository
 import com.example.maalem.domain.repository.CitizenRepository
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -69,4 +71,13 @@ abstract class RepositoryModule {
     abstract fun bindAdminRepository(
         impl: AdminRepositoryImpl
     ): AdminRepository
+
+    @Module
+    @InstallIn(SingletonComponent::class)
+    abstract class ChatRepositoryModule {
+        @Binds
+        @Singleton
+        abstract fun bindChatRepository(impl: ChatRepositoryImpl): ChatRepository
+    }
+
 }

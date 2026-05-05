@@ -39,6 +39,27 @@ class AuthActivity : AppCompatActivity() {
         firestore.collection("users").document(uid).get()
             .addOnSuccessListener { doc ->
                 val role = doc.getString("role") ?: "citizen"
+
+                //  Vérifier isActive au redémarrage aussi
+                val isActive = doc.getBoolean("isActive") ?: true
+                if (!isActive) {
+                    auth.signOut()
+                    // Rester sur LoginFragment avec message
+                    supportFragmentManager.beginTransaction()
+                        .replace(R.id.fragment_container, LoginFragment().apply {
+                            arguments = Bundle().apply {
+                                putString("error", "Votre compte a été désactivé.")
+                            }
+                        })
+                        .commit()
+                    return@addOnSuccessListener
+                }
+
+                //  Vérifier isValidated pour les artisans
+                val isValidated = if (role == "artisan") {
+                    doc.getBoolean("isValidated") ?: false
+                } else true
+
                 val intent = when (role) {
                     "citizen" -> Intent(this, CitizenHomeActivity::class.java)
                     "artisan" -> Intent(this, ArtisanHomeActivity::class.java)

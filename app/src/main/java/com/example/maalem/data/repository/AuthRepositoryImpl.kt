@@ -19,13 +19,20 @@ class AuthRepositoryImpl @Inject constructor(
             val doc = firestore.collection("users").document(uid).get().await()
             val role = UserRole.fromString(doc.getString("role") ?: "citizen")
 
+            val isActive = doc.getBoolean("isActive") ?: true
+            if (!isActive) {
+                auth.signOut()  // ← déconnecter immédiatement
+                return Result.failure(Exception("Votre compte a été désactivé. Contactez l'administrateur."))
+            }
+
+
             val isValidated = if (role == UserRole.ARTISAN) {
                 doc.getBoolean("isValidated") ?: false
             } else {
                 true
             }
 
-            Result.success(LoginResult(role, isValidated))
+            Result.success(LoginResult(role, isValidated, isActive))
         } catch (e: Exception) {
             Result.failure(e)
         }

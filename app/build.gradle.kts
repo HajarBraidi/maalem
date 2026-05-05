@@ -74,6 +74,7 @@ dependencies {
     implementation("com.github.bumptech.glide:glide:4.16.0")
     implementation("androidx.gridlayout:gridlayout:1.0.0")
     implementation("com.google.firebase:firebase-storage-ktx")
+    
 
 
 }
