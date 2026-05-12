@@ -14,7 +14,7 @@
         android:id="@+id/tvOffersTitle"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Mes offres envoyées"
+        android:text="Mes offres de service envoyées"
         android:textSize="24sp"
         android:textStyle="bold"
         android:textColor="#1A1A2E"

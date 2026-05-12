@@ -29,7 +29,7 @@
                 android:id="@+id/tv_welcome"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Bonjour 👋"
+                android:text="Bonjour "
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -39,7 +39,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="4dp"
-                android:text="Trouvez votre artisan"
+                android:text="Trouvez votre maalem !"
                 android:textColor="#CCFFFFFF"
                 android:textSize="14sp"/>
 
@@ -54,7 +54,7 @@
             android:layout_marginHorizontal="20dp"
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
-            android:text="Catégories"
+            android:text="Spécialités"
             android:textColor="#1A1A2E"
             android:textSize="16sp"
             android:textStyle="bold"

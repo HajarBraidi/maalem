@@ -10,7 +10,7 @@
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Envoyer une offre"
+        android:text="Envoyer une offre de service"
         android:textSize="22sp"
         android:textStyle="bold"
         android:textColor="#1A1A2E"
