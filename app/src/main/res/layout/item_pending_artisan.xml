@@ -5,46 +5,50 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="8dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_marginVertical="9dp"
+    app:cardCornerRadius="22dp"
+    app:cardElevation="6dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="18dp">
 
         <!-- Badge "En attente" -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" En attente de validation"
+            android:text="En attente de validation"
             android:textSize="11sp"
-            android:textColor="#FFFFFF"
-            android:background="#FF9800"
-            android:paddingHorizontal="8dp"
-            android:paddingVertical="4dp"
-            android:layout_marginBottom="12dp"/>
+            android:textStyle="bold"
+            android:textColor="#C2410C"
+            android:background="#FFEDD5"
+            android:paddingHorizontal="10dp"
+            android:paddingVertical="5dp"
+            android:layout_marginBottom="14dp"/>
 
         <!-- Nom -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Nom : "
+                android:text="Nom : "
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#111827"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -53,19 +57,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Email : "
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#4B5563"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -74,19 +80,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Tél : "
+                android:text="Tél : "
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#4B5563"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -95,20 +103,22 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Spécialité : "
+                android:text="Spécialité : "
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_specialty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="#5B4FCF"
+                android:textStyle="bold"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -117,19 +127,21 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="7dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Ville : "
+                android:text="Ville : "
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:textColor="#4B5563"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -138,13 +150,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="6dp">
+            android:layout_marginBottom="8dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Bio :"
+                android:text="Bio :"
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="14sp"/>
 
             <TextView
@@ -152,7 +165,8 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#555555"
+                android:textColor="#6B7280"
+                android:lineSpacingExtra="2dp"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
 
@@ -161,13 +175,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="16dp">
+            android:layout_marginBottom="14dp">
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text=" Inscrit le : "
+                android:text="Inscrit le : "
                 android:textStyle="bold"
+                android:textColor="#374151"
                 android:textSize="13sp"/>
 
             <TextView
@@ -175,8 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#888888"/>
-
+                android:textColor="#6B7280"/>
 
         </LinearLayout>
 
@@ -186,6 +200,7 @@
             android:layout_height="wrap_content"
             android:text="Photo CIN :"
             android:textStyle="bold"
+            android:textColor="#111827"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
@@ -202,7 +217,7 @@
             android:layout_width="match_parent"
             android:layout_height="200dp"
             android:scaleType="centerCrop"
-            android:background="#F5F5F5"
+            android:background="#F3F4F6"
             android:visibility="gone"
             android:layout_marginBottom="4dp"/>
 
@@ -211,7 +226,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Aucune photo CIN"
-            android:textColor="#F44336"
+            android:textColor="#DC2626"
             android:textSize="13sp"
             android:visibility="gone"
             android:layout_marginBottom="12dp"/>
@@ -220,8 +235,8 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#EEEEEE"
-            android:layout_marginBottom="12dp"/>
+            android:background="#F0F0F0"
+            android:layout_marginBottom="14dp"/>
 
         <!-- Boutons -->
         <LinearLayout
@@ -232,21 +247,25 @@
             <Button
                 android:id="@+id/btn_approve"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text=" Valider"
-                android:backgroundTint="#4CAF50"
+                android:text="Valider"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:backgroundTint="#10B981"
                 android:textColor="#FFFFFF"
                 android:layout_marginEnd="8dp"/>
 
             <Button
                 android:id="@+id/btn_reject"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text=" Refuser"
-                android:backgroundTint="#F44336"
-                android:textColor="#FFFFFF"/>
+                android:text="Refuser"
+                android:textAllCaps="false"
+                android:textStyle="bold"
+                android:backgroundTint="#FEE2E2"
+                android:textColor="#DC2626"/>
         </LinearLayout>
 
     </LinearLayout>

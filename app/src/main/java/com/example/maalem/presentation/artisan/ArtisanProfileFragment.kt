@@ -58,8 +58,8 @@ class ArtisanProfileFragment : Fragment() {
                     etSpecialty.setText(artisan.specialty)
                     etCity.setText(artisan.city)
                     etBio.setText(artisan.bio)
-                    tvStatus.text = if (artisan.isValidated) "✓ Compte validé"
-                    else "⏳ En attente de validation admin"
+                    tvStatus.text = if (artisan.isValidated) " Compte validé"
+                    else " En attente de validation admin"
                     tvStatus.setTextColor(
                         if (artisan.isValidated) android.graphics.Color.parseColor("#2E7D32")
                         else android.graphics.Color.parseColor("#F57C00")
@@ -83,7 +83,7 @@ class ArtisanProfileFragment : Fragment() {
                     city = etCity.text.toString().trim(),
                     bio = etBio.text.toString().trim()
                 ).fold(
-                    onSuccess = { Toast.makeText(requireContext(), "Profil mis à jour ✓", Toast.LENGTH_SHORT).show() },
+                    onSuccess = { Toast.makeText(requireContext(), "Profil mis à jour ", Toast.LENGTH_SHORT).show() },
                     onFailure = { Toast.makeText(requireContext(), it.message, Toast.LENGTH_LONG).show() }
                 )
             }

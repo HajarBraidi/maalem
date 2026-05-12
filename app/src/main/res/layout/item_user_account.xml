@@ -5,15 +5,16 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="3dp">
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="20dp"
+    app:cardElevation="5dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="18dp">
 
         <!-- Ligne 1 : Nom + Switch -->
         <LinearLayout
@@ -32,8 +33,9 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textStyle="bold"/>
+                    android:textSize="17sp"
+                    android:textStyle="bold"
+                    android:textColor="#111827"/>
 
                 <TextView
                     android:id="@+id/tv_role_badge"
@@ -41,9 +43,10 @@
                     android:layout_height="wrap_content"
                     android:textSize="12sp"
                     android:textColor="#FFFFFF"
-                    android:paddingHorizontal="8dp"
-                    android:paddingVertical="2dp"
-                    android:layout_marginTop="4dp"/>
+                    android:textStyle="bold"
+                    android:paddingHorizontal="10dp"
+                    android:paddingVertical="4dp"
+                    android:layout_marginTop="6dp"/>
 
             </LinearLayout>
 
@@ -59,28 +62,37 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#EEEEEE"
-            android:layout_marginVertical="10dp"/>
+            android:background="#F0F0F0"
+            android:layout_marginVertical="14dp"/>
 
         <!-- Email -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="7dp"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="✉️ "
-                android:textSize="13sp"/>
+            <FrameLayout
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="#F7F4FF">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_dialog_email"
+                    app:tint="#5B4FCF"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#555555"/>
+                android:textColor="#4B5563"
+                android:layout_marginStart="8dp"/>
         </LinearLayout>
 
         <!-- Téléphone -->
@@ -88,20 +100,29 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:layout_marginBottom="7dp"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📞 "
-                android:textSize="13sp"/>
+            <FrameLayout
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="#F7F4FF">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_call"
+                    app:tint="#5B4FCF"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#555555"/>
+                android:textColor="#4B5563"
+                android:layout_marginStart="8dp"/>
         </LinearLayout>
 
         <!-- Champ spécifique artisan : Spécialité -->
@@ -110,21 +131,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="7dp"
+            android:gravity="center_vertical"
             android:visibility="gone">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="🔨 "
-                android:textSize="13sp"/>
+            <FrameLayout
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="#F7F4FF">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_menu_manage"
+                    app:tint="#5B4FCF"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_specialty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="?attr/colorPrimary"/>
+                android:textColor="#5B4FCF"
+                android:textStyle="bold"
+                android:layout_marginStart="8dp"/>
         </LinearLayout>
 
         <!-- Champ spécifique artisan : Ville -->
@@ -133,21 +164,30 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp"
+            android:layout_marginBottom="7dp"
+            android:gravity="center_vertical"
             android:visibility="gone">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="📍 "
-                android:textSize="13sp"/>
+            <FrameLayout
+                android:layout_width="28dp"
+                android:layout_height="28dp"
+                android:background="#F7F4FF">
+
+                <ImageView
+                    android:layout_width="16dp"
+                    android:layout_height="16dp"
+                    android:layout_gravity="center"
+                    android:src="@android:drawable/ic_dialog_map"
+                    app:tint="#5B4FCF"/>
+            </FrameLayout>
 
             <TextView
                 android:id="@+id/tv_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#555555"/>
+                android:textColor="#4B5563"
+                android:layout_marginStart="8dp"/>
         </LinearLayout>
 
         <!-- Statut compte -->
@@ -156,7 +196,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold"
+            android:textColor="#6B7280"
+            android:layout_marginTop="10dp"/>
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

@@ -42,7 +42,7 @@ class RequestAdapter(
             // ✅ Badge statut + bouton selon statut
             when (RequestStatus.fromString(request.status)) {
                 RequestStatus.PENDING -> {
-                    tvStatus.text = "⏳ En attente"
+                    tvStatus.text = " En attente"
                     tvStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_orange_dark)
                     )
@@ -51,7 +51,7 @@ class RequestAdapter(
                     btnViewOffers.setOnClickListener { onViewOffers(request) }
                 }
                 RequestStatus.ACCEPTED -> {
-                    tvStatus.text = "✅ Acceptée"
+                    tvStatus.text = " Acceptée"
                     tvStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_green_dark)
                     )
@@ -59,7 +59,7 @@ class RequestAdapter(
                     btnViewOffers.isVisible = false
                 }
                 RequestStatus.COMPLETED -> {
-                    tvStatus.text = "🏁 Terminée"
+                    tvStatus.text = " Terminée"
                     tvStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_blue_dark)
                     )

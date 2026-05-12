@@ -62,10 +62,10 @@ class ManageAccountsFragment : Fragment(R.layout.fragment_manage_accounts) {
     private fun setupTabs() {
         // Ajouter les onglets
         binding.tabLayout.addTab(
-            binding.tabLayout.newTab().setText("🔨 Artisans")
+            binding.tabLayout.newTab().setText(" Artisans")
         )
         binding.tabLayout.addTab(
-            binding.tabLayout.newTab().setText("👤 Citoyens")
+            binding.tabLayout.newTab().setText(" Citoyens")
         )
 
         // Listener sur changement d'onglet
@@ -100,7 +100,7 @@ class ManageAccountsFragment : Fragment(R.layout.fragment_manage_accounts) {
                     is AdminUiState.ActionSuccess -> {
                         Snackbar.make(
                             binding.root,
-                            "✅ Compte mis à jour !",
+                            " Compte mis à jour !",
                             Snackbar.LENGTH_SHORT
                         ).show()
                         // Recharger la liste active
@@ -126,7 +126,7 @@ class ManageAccountsFragment : Fragment(R.layout.fragment_manage_accounts) {
         super.onDestroyView()
         _binding = null
     }
-    // ✅ Recharger à chaque fois qu'on revient sur ce fragment
+    //  Recharger à chaque fois qu'on revient sur ce fragment
     override fun onResume() {
         super.onResume()
         if (binding.tabLayout.selectedTabPosition == 0)

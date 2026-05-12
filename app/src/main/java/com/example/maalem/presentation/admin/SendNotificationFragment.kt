@@ -37,7 +37,7 @@ class SendNotificationFragment : Fragment() {
         }
 
         val title = TextView(requireContext()).apply {
-            text = "🔔 Envoyer une notification"
+            text = " Envoyer une notification"
             textSize = 20f
             setPadding(0, 0, 0, 32)
         }
@@ -72,7 +72,7 @@ class SendNotificationFragment : Fragment() {
         }
 
         val btnSend = Button(requireContext()).apply {
-            text = "📤 Envoyer"
+            text = " Envoyer"
             layoutParams = LinearLayout.LayoutParams(
                 ViewGroup.LayoutParams.MATCH_PARENT,
                 ViewGroup.LayoutParams.WRAP_CONTENT

@@ -36,7 +36,7 @@ class UserAccountAdapter(
             // Badge rôle avec couleur
             when (user.role) {
                 "artisan" -> {
-                    tvRoleBadge.text = "🔨 Artisan"
+                    tvRoleBadge.text = " Artisan"
                     tvRoleBadge.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_orange_dark)
                     )
@@ -48,7 +48,7 @@ class UserAccountAdapter(
                     tvCity.text = artisan?.city ?: ""
                 }
                 "citizen" -> {
-                    tvRoleBadge.text = "👤 Citoyen"
+                    tvRoleBadge.text = " Citoyen"
                     tvRoleBadge.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_blue_dark)
                     )
@@ -59,12 +59,12 @@ class UserAccountAdapter(
 
             // Statut compte
             if (user.isActive) {
-                tvStatus.text = "🟢 Compte actif"
+                tvStatus.text = " Compte actif"
                 tvStatus.setTextColor(
                     ContextCompat.getColor(root.context, android.R.color.holo_green_dark)
                 )
             } else {
-                tvStatus.text = "🔴 Compte désactivé"
+                tvStatus.text = " Compte désactivé"
                 tvStatus.setTextColor(
                     ContextCompat.getColor(root.context, android.R.color.holo_red_dark)
                 )

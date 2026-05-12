@@ -1,10 +1,10 @@
 package com.example.maalem.data.model
 
 enum class Specialty(val value: String, val displayName: String) {
-    PLUMBING("plumbing", "Plomberie (fuites d'eau)"),
-    ELECTRICAL("electrical", "Électricité (prises, installations)"),
-    CRACKS("cracks", "Maçonnerie (fissures de murs)"),
-    HUMIDITY("humidity", "Peinture (murs humides)"),
+    PLUMBING("plumbing", "Plombier (fuites d'eau)"),
+    ELECTRICAL("electrical", "Électricien (prises, installations)"),
+    CRACKS("cracks", "Maçon (fissures de murs)"),
+    HUMIDITY("humidity", "Peintre (murs humides)"),
     CARPENTRY("carpentry", "Menuiserie (portes endommagées)");
 
     companion object {

@@ -31,13 +31,13 @@ data class Artisan(
     override val email: String = "",
     override val phone: String = "",
     override val role: String = "artisan",
-    override val isActive: Boolean = true, // ✅ true (mapping explicite depuis Firestore)
+    override val isActive: Boolean = true, //  true (mapping explicite depuis Firestore)
     override val createdAt: Long = System.currentTimeMillis(),
     val specialty: String = "",
     val city: String = "",
     val bio: String = "",
     val isValidated: Boolean = false,
-    val cinPhotoBase64: String = "" // ✅ champ ajouté par Khadija
+    val cinPhotoBase64: String = "" //  champ ajouté par Khadija
 ) : User(uid, name, email, phone, role, isActive, createdAt)
 
 // Admin

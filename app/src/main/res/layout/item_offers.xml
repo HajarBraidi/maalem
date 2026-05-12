@@ -1,19 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.cardview.widget.CardView
+<com.google.android.material.card.MaterialCardView
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:layout_marginHorizontal="16dp"
-    android:layout_marginVertical="6dp"
-    app:cardCornerRadius="12dp"
-    app:cardElevation="4dp">
+    android:layout_marginVertical="8dp"
+    app:cardCornerRadius="24dp"
+    app:cardElevation="4dp"
+    app:strokeWidth="0dp"
+    app:cardBackgroundColor="#FFFFFF">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="16dp">
+        android:padding="20dp">
 
         <!-- Nom artisan + Badge statut -->
         <LinearLayout
@@ -21,7 +23,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:layout_marginBottom="8dp">
+            android:layout_marginBottom="14dp">
 
             <TextView
                 android:id="@+id/tv_artisan_name"
@@ -29,17 +31,20 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"
+                android:fontFamily="@font/poppins_bold"/>
 
             <TextView
                 android:id="@+id/tv_offer_status"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:paddingHorizontal="10dp"
-                android:paddingVertical="4dp"
+                android:paddingHorizontal="12dp"
+                android:paddingVertical="5dp"
                 android:textSize="11sp"
                 android:textColor="#FFFFFF"
                 android:textStyle="bold"/>
+
         </LinearLayout>
 
         <!-- Prix -->
@@ -47,20 +52,35 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_category_icon_active"
+            android:paddingHorizontal="14dp"
+            android:paddingVertical="10dp"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="18dp"
+                android:layout_height="18dp"
+                android:src="@drawable/ic_star_filled"
+                android:layout_marginEnd="8dp"
+                app:tint="#5B4FCF"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="💰 Prix : "
+                android:text="Prix : "
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"/>
+
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="?attr/colorPrimary"
+                android:textColor="#5B4FCF"
                 android:textStyle="bold"/>
+
         </LinearLayout>
 
         <!-- Délai -->
@@ -68,19 +88,31 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginBottom="4dp">
+            android:gravity="center_vertical"
+            android:layout_marginBottom="10dp">
+
+            <ImageView
+                android:layout_width="16dp"
+                android:layout_height="16dp"
+                android:src="@drawable/ic_info"
+                android:layout_marginEnd="8dp"
+                app:tint="#787585"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="⏱️ Délai : "
+                android:text="Délai : "
                 android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"/>
+
             <TextView
                 android:id="@+id/tv_delay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="#555555"/>
+                android:textColor="#787585"/>
+
         </LinearLayout>
 
         <!-- Message -->
@@ -88,71 +120,95 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical"
-            android:layout_marginBottom="12dp">
+            android:layout_marginBottom="14dp">
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="💬 Message :"
-                android:textSize="14sp"
-                android:textStyle="bold"/>
+                android:text="Message :"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#1A1A2E"
+                android:layout_marginBottom="6dp"/>
+
             <TextView
                 android:id="@+id/tv_message"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#666666"
-                android:layout_marginTop="4dp"/>
+                android:textColor="#787585"
+                android:lineSpacingMultiplier="1.4"
+                android:background="@drawable/bg_search_bar_light"
+                android:padding="12dp"/>
+
         </LinearLayout>
 
+        <!-- Séparateur -->
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#EEEEEE"
-            android:layout_marginBottom="12dp"/>
+            android:background="#E5E1EC"
+            android:layout_marginBottom="14dp"/>
 
         <!-- Bouton profil artisan -->
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_view_artisan"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="👤 Voir profil artisan"
+            android:layout_height="48dp"
+            android:background="@drawable/bg_button_gradient"
+            android:text="Voir profil artisan"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@null"
             android:layout_marginBottom="8dp"/>
 
-        <!-- Après btn_view_artisan -->
-        <Button
+        <!-- Bouton contacter -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_chat_artisan"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="💬 Contacter l'artisan"
-            android:backgroundTint="#4CAF50"
-            android:layout_marginBottom="8dp"/>
+            android:layout_height="48dp"
+            android:background="@drawable/bg_button_gradient"
+            android:text="Contacter l'artisan"
+            android:textColor="#FFFFFF"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:stateListAnimator="@null"
+            android:layout_marginBottom="12dp"/>
 
-        <!-- Boutons Accepter/Refuser (cachés si offre déjà traitée) -->
+        <!-- Boutons Accepter / Refuser -->
         <LinearLayout
             android:id="@+id/layout_accept_reject"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_accept"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="✅ Accepter"
-                android:backgroundTint="#4CAF50"
+                android:background="@drawable/bg_button_green"
+                android:text="Accepter"
                 android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null"
                 android:layout_marginEnd="8dp"/>
 
-            <Button
+            <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_reject"
                 android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_height="48dp"
                 android:layout_weight="1"
-                android:text="❌ Refuser"
-                android:backgroundTint="#F44336"
-                android:textColor="#FFFFFF"/>
+                android:background="@drawable/bg_button_logout"
+                android:text="Refuser"
+                android:textColor="#FFFFFF"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:stateListAnimator="@null"/>
+
         </LinearLayout>
 
     </LinearLayout>
-</androidx.cardview.widget.CardView>
+</com.google.android.material.card.MaterialCardView>

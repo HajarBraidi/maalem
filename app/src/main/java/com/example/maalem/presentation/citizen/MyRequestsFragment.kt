@@ -36,7 +36,7 @@ class MyRequestsFragment : Fragment(R.layout.fragment_my_requests) {
 
     private fun setupRecyclerView() {
         adapter = RequestAdapter { request ->
-            // ✅ Naviguer vers OffersFragment
+            //  Naviguer vers OffersFragment
             val fragment = OffersFragment.newInstance(request)
             parentFragmentManager.beginTransaction()
                 .replace(R.id.fragment_container, fragment)

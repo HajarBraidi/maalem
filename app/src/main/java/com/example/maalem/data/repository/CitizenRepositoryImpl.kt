@@ -47,7 +47,7 @@ class CitizenRepositoryImpl @Inject constructor(
         } catch (e: Exception) { Result.failure(e) }
     }
 
-    // ✅ Mes demandes triées par date
+    //  Mes demandes triées par date
     override suspend fun getMyRequests(citizenId: String): Result<List<Request>> {
         return try {
             val snapshot = firestore.collection("requests")
@@ -71,7 +71,7 @@ class CitizenRepositoryImpl @Inject constructor(
         } catch (e: Exception) { Result.failure(e) }
     }
 
-    // ✅ Offres reçues pour une demande
+    //  Offres reçues pour une demande
     override suspend fun getOffersForRequest(requestId: String): Result<List<Offer>> {
         return try {
             val snapshot = firestore.collection("offers")
@@ -95,7 +95,7 @@ class CitizenRepositoryImpl @Inject constructor(
         } catch (e: Exception) { Result.failure(e) }
     }
 
-    // ✅ Accepter une offre → met à jour offre + demande + rejette les autres
+    // Accepter une offre → met à jour offre + demande + rejette les autres
     override suspend fun acceptOffer(offer: Offer, request: Request): Result<Unit> {
         return try {
             val batch = firestore.batch()
@@ -127,7 +127,7 @@ class CitizenRepositoryImpl @Inject constructor(
         } catch (e: Exception) { Result.failure(e) }
     }
 
-    // ✅ Refuser une offre
+    //  Refuser une offre
     override suspend fun rejectOffer(offerId: String): Result<Unit> {
         return try {
             firestore.collection("offers").document(offerId)
@@ -136,7 +136,7 @@ class CitizenRepositoryImpl @Inject constructor(
         } catch (e: Exception) { Result.failure(e) }
     }
 
-    // ✅ Profil artisan
+    //  Profil artisan
     override suspend fun getArtisanById(artisanId: String): Result<Artisan> {
         return try {
             val doc = firestore.collection("users").document(artisanId).get().await()

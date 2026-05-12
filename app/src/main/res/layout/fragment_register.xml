@@ -1,118 +1,327 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:id="@+id/registerScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:fillViewport="true">
+    android:background="#FAFAFA"
+    android:fillViewport="true"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        android:padding="24dp">
+        android:paddingHorizontal="20dp"
+        android:paddingTop="32dp"
+        android:paddingBottom="40dp">
 
+        <!-- ══════════════════════════════════ -->
+        <!-- HEADER                             -->
+        <!-- ══════════════════════════════════ -->
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Créer un compte"
-            android:textSize="26sp"
-            android:textStyle="bold" />
+            android:textSize="32sp"
+            android:textStyle="bold"
+            android:textColor="#1C1B23"
+            android:fontFamily="@font/poppins_bold"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Je suis :"
+            android:text="Rejoignez la plus grande communauté d'artisans au Maroc"
             android:textSize="14sp"
-            android:textColor="#555"
-            android:layout_marginTop="24dp" />
+            android:textColor="#6B7280"
+            android:layout_marginTop="6dp"
+            android:layout_marginBottom="28dp"/>
 
+        <!-- ══════════════════════════════════ -->
+        <!-- ROLE SELECTOR CARDS                -->
+        <!-- ══════════════════════════════════ -->
         <RadioGroup
             android:id="@+id/rgRole"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="horizontal"
-            android:layout_marginTop="8dp">
+            android:layout_marginBottom="24dp">
 
-            <RadioButton
-                android:id="@+id/rbCitizen"
+            <!-- Card Citoyen -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Citoyen"
-                android:checked="true" />
+                android:layout_marginEnd="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="20dp"
+                android:id="@+id/cardCitizenRole"
+                android:background="@drawable/bg_role_card_selected"
+                android:elevation="4dp">
 
-            <RadioButton
-                android:id="@+id/rbArtisan"
+                <FrameLayout
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_role_icon"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_person"
+                        app:tint="#5B4FCF"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Citoyen"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#1C1B23"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Je cherche un service"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- RadioButton caché -->
+                <RadioButton
+                    android:id="@+id/rbCitizen"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:checked="true"
+                    android:visibility="gone"/>
+            </LinearLayout>
+
+            <!-- Card Artisan -->
+            <LinearLayout
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Artisan (Maalem)" />
+                android:layout_marginStart="8dp"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:padding="20dp"
+                android:id="@+id/cardArtisanRole"
+                android:background="@drawable/bg_role_card_normal"
+                android:elevation="4dp">
+
+                <FrameLayout
+                    android:layout_width="64dp"
+                    android:layout_height="64dp"
+                    android:background="@drawable/bg_role_icon"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="32dp"
+                        android:layout_height="32dp"
+                        android:layout_gravity="center"
+                        android:src="@drawable/ic_build"
+                        app:tint="#5B4FCF"/>
+                </FrameLayout>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Artisan"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:textColor="#1C1B23"
+                    android:fontFamily="@font/poppins_bold"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Je propose mes services"
+                    android:textSize="12sp"
+                    android:textColor="#6B7280"
+                    android:gravity="center"
+                    android:layout_marginTop="4dp"/>
+
+                <!-- RadioButton caché -->
+                <RadioButton
+                    android:id="@+id/rbArtisan"
+                    android:layout_width="0dp"
+                    android:layout_height="0dp"
+                    android:visibility="gone"/>
+            </LinearLayout>
         </RadioGroup>
 
-        <!-- CHAMPS COMMUNS -->
+        <!-- ══════════════════════════════════ -->
+        <!-- CHAMPS COMMUNS                     -->
+        <!-- ══════════════════════════════════ -->
+
+        <!-- Nom complet -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Nom complet"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#474554"
+            android:layout_marginBottom="6dp"/>
+
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Nom complet"
-            android:layout_marginTop="16dp">
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="#F3F4F6"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:hintEnabled="false">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etName"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content" />
+                android:layout_height="match_parent"
+                android:hint="Ahmed El Amrani"
+                android:textColorHint="#9CA3AF"
+                android:textSize="14sp"
+                android:inputType="textPersonName"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Email -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Email"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#474554"
+            android:layout_marginBottom="6dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Email"
-            android:layout_marginTop="8dp">
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="#F3F4F6"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:hintEnabled="false">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etEmail"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textEmailAddress" />
+                android:layout_height="match_parent"
+                android:hint="ahmed@example.com"
+                android:textColorHint="#9CA3AF"
+                android:textSize="14sp"
+                android:inputType="textEmailAddress"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Téléphone -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Téléphone"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#474554"
+            android:layout_marginBottom="6dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Téléphone"
-            android:layout_marginTop="8dp">
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="#F3F4F6"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:hintEnabled="false">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPhone"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="phone" />
+                android:layout_height="match_parent"
+                android:hint="+212 6XX XX XX XX"
+                android:textColorHint="#9CA3AF"
+                android:textSize="14sp"
+                android:inputType="phone"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Mot de passe -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mot de passe"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#474554"
+            android:layout_marginBottom="6dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Mot de passe"
-            android:layout_marginTop="8dp"
-            app:passwordToggleEnabled="true">
+            android:layout_height="56dp"
+            android:layout_marginBottom="16dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="#F3F4F6"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#787585">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:layout_height="match_parent"
+                android:hint="••••••••"
+                android:textColorHint="#9CA3AF"
+                android:textSize="14sp"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
+
+        <!-- Confirmer mot de passe -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Confirmer mot de passe"
+            android:textSize="13sp"
+            android:textStyle="bold"
+            android:textColor="#474554"
+            android:layout_marginBottom="6dp"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="Confirmer mot de passe"
-            android:layout_marginTop="8dp"
-            app:passwordToggleEnabled="true">
+            android:layout_height="56dp"
+            android:layout_marginBottom="24dp"
+            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+            app:boxBackgroundColor="#F3F4F6"
+            app:boxCornerRadiusTopStart="12dp"
+            app:boxCornerRadiusTopEnd="12dp"
+            app:boxCornerRadiusBottomStart="12dp"
+            app:boxCornerRadiusBottomEnd="12dp"
+            app:hintEnabled="false"
+            app:passwordToggleEnabled="true"
+            app:passwordToggleTint="#787585">
             <com.google.android.material.textfield.TextInputEditText
                 android:id="@+id/etConfirmPassword"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
+                android:layout_height="match_parent"
+                android:hint="••••••••"
+                android:textColorHint="#9CA3AF"
+                android:textSize="14sp"
+                android:inputType="textPassword"/>
         </com.google.android.material.textfield.TextInputLayout>
 
-        <!-- CHAMPS SPÉCIFIQUES CITOYEN -->
+        <!-- ══════════════════════════════════ -->
+        <!-- CHAMPS CITOYEN                     -->
+        <!-- ══════════════════════════════════ -->
         <LinearLayout
             android:id="@+id/citizenFields"
             android:layout_width="match_parent"
@@ -120,19 +329,39 @@
             android:orientation="vertical"
             android:visibility="visible">
 
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Adresse"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#474554"
+                android:layout_marginBottom="6dp"/>
+
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Adresse"
-                android:layout_marginTop="8dp">
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                app:boxBackgroundColor="#F3F4F6"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintEnabled="false">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:hint="Votre adresse"
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp"/>
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
-        <!-- CHAMPS SPÉCIFIQUES ARTISAN -->
+        <!-- ══════════════════════════════════ -->
+        <!-- CHAMPS ARTISAN                     -->
+        <!-- ══════════════════════════════════ -->
         <LinearLayout
             android:id="@+id/artisanFields"
             android:layout_width="match_parent"
@@ -140,102 +369,198 @@
             android:orientation="vertical"
             android:visibility="gone">
 
+            <!-- Séparateur titre -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Informations professionnelles"
+                android:textSize="18sp"
+                android:textStyle="bold"
+                android:textColor="#1C1B23"
+                android:fontFamily="@font/poppins_bold"
+                android:layout_marginBottom="16dp"/>
+
+            <!-- Spécialité -->
+
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Spécialité"
-                android:textSize="14sp"
-                android:textColor="#555"
-                android:layout_marginTop="16dp"
-                android:layout_marginStart="4dp" />
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#474554"
+                android:layout_marginBottom="6dp"/>
 
-            <Spinner
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
                 android:id="@+id/spSpecialty"
                 android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Choisir une spécialité"
+                android:paddingHorizontal="16dp"
+                android:textSize="14sp"
+                android:textColor="#111827"
+                android:textColorHint="#9CA3AF"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:completionThreshold="0" />
+
+            <!-- Ville -->
+            <TextView
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:background="@android:drawable/btn_dropdown" />
+                android:text="Ville"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#474554"
+                android:layout_marginBottom="6dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:hint="Ville"
-                android:layout_marginTop="12dp">
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                app:boxBackgroundColor="#F3F4F6"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintEnabled="false">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etCity"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="match_parent"
+                    android:hint="Casablanca, Rabat..."
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp"/>
             </com.google.android.material.textfield.TextInputLayout>
+
+            <!-- Bio -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Bio professionnelle"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:textColor="#474554"
+                android:layout_marginBottom="6dp"/>
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Bio (années d'expérience, savoir-faire)"
-                android:layout_marginTop="8dp">
+                android:layout_marginBottom="20dp"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                app:boxBackgroundColor="#F3F4F6"
+                app:boxCornerRadiusTopStart="12dp"
+                app:boxCornerRadiusTopEnd="12dp"
+                app:boxCornerRadiusBottomStart="12dp"
+                app:boxCornerRadiusBottomEnd="12dp"
+                app:hintEnabled="false">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/etBio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Décrivez votre expérience et vos compétences..."
+                    android:textColorHint="#9CA3AF"
+                    android:textSize="14sp"
                     android:minLines="3"
-                    android:gravity="top" />
+                    android:gravity="top"
+                    android:inputType="textMultiLine"/>
             </com.google.android.material.textfield.TextInputLayout>
 
+            <!-- CIN Upload -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Photo CIN (recto) — obligatoire"
-                android:textSize="14sp"
+                android:text="Vérification d'identité (CIN)"
+                android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#555"
-                android:layout_marginTop="16dp" />
+                android:textColor="#474554"
+                android:layout_marginBottom="6dp"/>
 
-            <TextView
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Cette photo servira à vérifier votre identité. Elle reste confidentielle."
-                android:textSize="12sp"
-                android:textColor="#888"
-                android:layout_marginTop="4dp" />
-
-            <Button
+            <LinearLayout
                 android:id="@+id/btnPickCin"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="📷 Choisir une photo"
-                android:layout_marginTop="8dp" />
+                android:layout_height="120dp"
+                android:background="@drawable/bg_cin_upload"
+                android:orientation="vertical"
+                android:gravity="center"
+                android:layout_marginBottom="12dp">
+
+                <ImageView
+                    android:layout_width="44dp"
+                    android:layout_height="44dp"
+                    android:background="@drawable/bg_rating_badge"
+                    android:src="@drawable/ic_add"
+                    app:tint="#5B4FCF"
+                    android:padding="10dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Prendre une photo de la CIN"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="#5B4FCF"
+                    android:layout_marginTop="8dp"/>
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Format JPG ou PNG (Max. 5Mo)"
+                    android:textSize="11sp"
+                    android:textColor="#6B7280"
+                    android:layout_marginTop="4dp"/>
+            </LinearLayout>
 
             <ImageView
                 android:id="@+id/ivCinPreview"
                 android:layout_width="match_parent"
                 android:layout_height="150dp"
-                android:layout_marginTop="8dp"
                 android:scaleType="centerCrop"
-                android:background="#F0F0F0"
-                android:visibility="gone" />
+                android:background="@drawable/bg_role_card_normal"
+                android:visibility="gone"
+                android:layout_marginBottom="16dp"/>
+
         </LinearLayout>
 
-        <Button
-            android:id="@+id/btnRegister"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="S'inscrire"
-            android:layout_marginTop="24dp" />
-
-        <TextView
-            android:id="@+id/tvGoToLogin"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:text="Déjà un compte ? Se connecter"
-            android:textColor="#1a4d3a"
-            android:padding="8dp"
-            android:layout_marginTop="8dp" />
-
+        <!-- ProgressBar -->
         <ProgressBar
             android:id="@+id/registerProgress"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:visibility="gone" />
+            android:visibility="gone"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Bouton S'inscrire -->
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btnRegister"
+            android:layout_width="match_parent"
+            android:layout_height="56dp"
+            android:text="S'inscrire →"
+            android:textColor="#FFFFFF"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:background="@drawable/bg_btn_login"
+            android:stateListAnimator="@null"
+            android:layout_marginTop="8dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Lien Se connecter -->
+        <TextView
+            android:id="@+id/tvGoToLogin"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:text="Déjà inscrit ? Se connecter"
+            android:textSize="14sp"
+            android:textColor="#6B7280"
+            android:paddingVertical="8dp"/>
+
     </LinearLayout>
 </ScrollView>

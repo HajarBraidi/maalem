@@ -10,8 +10,9 @@ import android.widget.Button
 import android.widget.ImageView
 import android.widget.LinearLayout
 import android.widget.ProgressBar
+import android.widget.RadioButton
 import android.widget.RadioGroup
-import android.widget.Spinner
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import android.widget.TextView
 import androidx.activity.result.contract.ActivityResultContracts
 import androidx.core.view.isVisible
@@ -19,16 +20,24 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import com.example.maalem.R
-import com.example.maalem.data.model.Specialty
+import android.util.Log
+import com.example.maalem.domain.repository.CategoryRepository
 import com.google.android.material.snackbar.Snackbar
 import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
+import javax.inject.Inject
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     private val viewModel: RegisterViewModel by viewModels()
+
+    @Inject
+    lateinit var categoryRepository: CategoryRepository
+
+    private var categories: List<String> = emptyList()
+    private lateinit var spSpecialty: MaterialAutoCompleteTextView
 
     // Launcher pour sélectionner une image
     private val pickImageLauncher = registerForActivityResult(
@@ -51,48 +60,80 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         // Références aux vues
         val rgRole = view.findViewById<RadioGroup>(R.id.rgRole)
+
+        val cardCitizen = view.findViewById<LinearLayout>(R.id.cardCitizenRole)
+        val cardArtisan = view.findViewById<LinearLayout>(R.id.cardArtisanRole)
+
+        val rbCitizen = view.findViewById<RadioButton>(R.id.rbCitizen)
+        val rbArtisan = view.findViewById<RadioButton>(R.id.rbArtisan)
+
         val citizenFields = view.findViewById<LinearLayout>(R.id.citizenFields)
         val artisanFields = view.findViewById<LinearLayout>(R.id.artisanFields)
+
         val etName = view.findViewById<TextInputEditText>(R.id.etName)
         val etEmail = view.findViewById<TextInputEditText>(R.id.etEmail)
         val etPhone = view.findViewById<TextInputEditText>(R.id.etPhone)
         val etPassword = view.findViewById<TextInputEditText>(R.id.etPassword)
         val etConfirmPassword = view.findViewById<TextInputEditText>(R.id.etConfirmPassword)
         val etAddress = view.findViewById<TextInputEditText>(R.id.etAddress)
-        val spSpecialty = view.findViewById<Spinner>(R.id.spSpecialty)
+
+        spSpecialty = view.findViewById(R.id.spSpecialty)
+
         val etCity = view.findViewById<TextInputEditText>(R.id.etCity)
         val etBio = view.findViewById<TextInputEditText>(R.id.etBio)
-        val btnPickCin = view.findViewById<Button>(R.id.btnPickCin)
+
+        val btnPickCin = view.findViewById<LinearLayout>(R.id.btnPickCin)
         val btnRegister = view.findViewById<Button>(R.id.btnRegister)
         val tvGoToLogin = view.findViewById<TextView>(R.id.tvGoToLogin)
         val progress = view.findViewById<ProgressBar>(R.id.registerProgress)
 
-        // Initialiser le Spinner des spécialités
-        val specialtyAdapter = ArrayAdapter(
-            requireContext(),
-            android.R.layout.simple_spinner_item,
-            Specialty.displayNames()
-        )
-        specialtyAdapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
-        spSpecialty.adapter = specialtyAdapter
+        // Charger les spécialités depuis Firebase
+        loadCategories(view)
 
-        // Switch entre citoyen et artisan
+        // Fonction pour sélectionner le rôle
+        fun selectRole(isCitizen: Boolean) {
+            rbCitizen.isChecked = isCitizen
+            rbArtisan.isChecked = !isCitizen
+
+            if (isCitizen) {
+                citizenFields.visibility = View.VISIBLE
+                artisanFields.visibility = View.GONE
+
+                cardCitizen.setBackgroundResource(R.drawable.bg_role_card_selected)
+                cardArtisan.setBackgroundResource(R.drawable.bg_role_card_normal)
+            } else {
+                citizenFields.visibility = View.GONE
+                artisanFields.visibility = View.VISIBLE
+
+                cardArtisan.setBackgroundResource(R.drawable.bg_role_card_selected)
+                cardCitizen.setBackgroundResource(R.drawable.bg_role_card_normal)
+            }
+        }
+
+        // État initial : Citoyen sélectionné
+        selectRole(true)
+
+        cardCitizen.setOnClickListener {
+            selectRole(true)
+        }
+
+        cardArtisan.setOnClickListener {
+            selectRole(false)
+        }
+
         rgRole.setOnCheckedChangeListener { _, checkedId ->
             when (checkedId) {
-                R.id.rbCitizen -> {
-                    citizenFields.visibility = View.VISIBLE
-                    artisanFields.visibility = View.GONE
-                }
-                R.id.rbArtisan -> {
-                    citizenFields.visibility = View.GONE
-                    artisanFields.visibility = View.VISIBLE
-                }
+                R.id.rbCitizen -> selectRole(true)
+                R.id.rbArtisan -> selectRole(false)
             }
         }
 
         // Picker photo CIN
         btnPickCin.setOnClickListener {
-            val intent = Intent(Intent.ACTION_PICK, android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+            val intent = Intent(
+                Intent.ACTION_PICK,
+                android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI
+            )
             pickImageLauncher.launch(intent)
         }
 
@@ -114,18 +155,56 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                 return@setOnClickListener
             }
 
-            if (rgRole.checkedRadioButtonId == R.id.rbCitizen) {
+            if (password.isBlank() || confirmPassword.isBlank()) {
+                Snackbar.make(view, "Mot de passe requis", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (password != confirmPassword) {
+                Snackbar.make(view, "Les mots de passe ne correspondent pas", Snackbar.LENGTH_SHORT).show()
+                return@setOnClickListener
+            }
+
+            if (rbCitizen.isChecked) {
                 // Inscription CITOYEN
                 val address = etAddress.text.toString().trim()
-                viewModel.registerCitizen(name, email, phone, password, confirmPassword, address)
+
+                viewModel.registerCitizen(
+                    name = name,
+                    email = email,
+                    phone = phone,
+                    password = password,
+                    confirmPassword = confirmPassword,
+                    address = address
+                )
             } else {
                 // Inscription ARTISAN
                 if (!viewModel.hasCinPhoto()) {
                     Snackbar.make(view, "Photo CIN obligatoire", Snackbar.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
-                val specialtyIdx = spSpecialty.selectedItemPosition
-                val specialtyValue = Specialty.entries[specialtyIdx].value
+
+                if (categories.isEmpty()) {
+                    Snackbar.make(
+                        view,
+                        "Aucun métier disponible. Contactez l'administrateur.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    return@setOnClickListener
+                }
+
+                val specialty = spSpecialty.text.toString().trim()
+
+                if (specialty.isBlank()) {
+                    Snackbar.make(view, "Veuillez choisir un métier", Snackbar.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (!categories.contains(specialty)) {
+                    Snackbar.make(view, "Veuillez choisir un métier valide", Snackbar.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
                 val city = etCity.text.toString().trim()
                 val bio = etBio.text.toString().trim()
 
@@ -141,7 +220,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     phone = phone,
                     password = password,
                     confirmPassword = confirmPassword,
-                    specialty = specialtyValue,
+                    specialty = specialty,
                     city = city,
                     bio = bio
                 )
@@ -156,22 +235,78 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
                 when (state) {
                     is RegisterState.Success -> {
-                        val msg = if (rgRole.checkedRadioButtonId == R.id.rbArtisan) {
+                        val msg = if (rbArtisan.isChecked) {
                             "✓ Inscription réussie ! Votre compte artisan sera validé par l'admin."
                         } else {
                             "✓ Inscription réussie ! Connectez-vous."
                         }
+
                         Snackbar.make(view, msg, Snackbar.LENGTH_LONG).show()
-                        // Retour au login
+
                         view.postDelayed({
                             parentFragmentManager.popBackStack()
                         }, 1500)
                     }
+
                     is RegisterState.Error -> {
                         Snackbar.make(view, state.message, Snackbar.LENGTH_LONG).show()
                     }
+
                     else -> {}
                 }
+            }
+        }
+    }
+
+    private fun loadCategories(view: View) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = categoryRepository.getCategories()
+
+            result.onSuccess { list ->
+                categories = list
+                Log.d("RegisterFragment", "Categories loaded = $categories")
+
+                if (categories.isEmpty()) {
+                    Snackbar.make(
+                        view,
+                        "Aucun métier trouvé dans Firebase",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    return@onSuccess
+                }
+
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_dropdown_item_1line,
+                    categories
+                )
+
+                spSpecialty.setAdapter(adapter)
+                spSpecialty.threshold = 0
+                spSpecialty.isFocusable = false
+
+                spSpecialty.setOnClickListener {
+                    spSpecialty.post {
+                        spSpecialty.showDropDown()
+                    }
+                }
+
+                spSpecialty.setOnTouchListener { _, _ ->
+                    spSpecialty.post {
+                        spSpecialty.showDropDown()
+                    }
+                    false
+                }
+            }
+
+            result.onFailure { e ->
+                Log.e("RegisterFragment", "Erreur chargement catégories", e)
+
+                Snackbar.make(
+                    view,
+                    "Erreur lors du chargement des métiers : ${e.message}",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }

@@ -1,39 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ScrollView
+<androidx.core.widget.NestedScrollView
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#F5F5F5">
+    android:background="#FAFAFA"
+    android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <!-- Header -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="?attr/colorPrimary"
-            android:padding="16dp"
+            android:background="@drawable/bg_banner_purple"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            android:padding="20dp"
             android:orientation="horizontal"
             android:gravity="center_vertical">
 
             <ImageView
                 android:id="@+id/iv_back"
-                android:layout_width="32dp"
-                android:layout_height="32dp"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
                 android:src="@drawable/ic_home"
-                android:layout_marginEnd="12dp"
-                android:padding="4dp"/>
+                android:background="@drawable/bg_add_button"
+                android:padding="8dp"
+                android:layout_marginEnd="14dp"
+                app:tint="#5B4FCF"/>
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="👤 Profil Artisan"
+                android:text="Profil Artisan"
                 android:textColor="#FFFFFF"
                 android:textSize="18sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_bold"/>
+
         </LinearLayout>
 
         <ProgressBar
@@ -42,43 +51,52 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
+            android:indeterminateTint="#5B4FCF"
             android:visibility="gone"/>
 
         <!-- Carte infos -->
-        <androidx.cardview.widget.CardView
-            xmlns:app="http://schemas.android.com/apk/res-auto"
+        <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_margin="16dp"
-            app:cardCornerRadius="12dp"
-            app:cardElevation="4dp">
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="16dp"
+            app:cardCornerRadius="24dp"
+            app:cardElevation="4dp"
+            app:strokeWidth="0dp"
+            app:cardBackgroundColor="#FFFFFF">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="vertical"
-                android:padding="20dp">
+                android:padding="24dp">
 
+                <!-- Nom -->
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:textStyle="bold"
+                    android:textColor="#1A1A2E"
+                    android:fontFamily="@font/poppins_bold"
                     android:layout_marginBottom="4dp"/>
 
+                <!-- Spécialité -->
                 <TextView
                     android:id="@+id/tv_specialty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textSize="16sp"
-                    android:textColor="?attr/colorPrimary"
+                    android:textSize="14sp"
+                    android:textColor="#5B4FCF"
+                    android:textStyle="bold"
                     android:layout_marginBottom="16dp"/>
 
+                <!-- Séparateur -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#EEEEEE"
+                    android:background="#E5E1EC"
                     android:layout_marginBottom="16dp"/>
 
                 <!-- Email -->
@@ -86,18 +104,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="✉️ "
-                        android:textSize="14sp"/>
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_notifications"
+                        android:layout_marginEnd="10dp"
+                        app:tint="#5B4FCF"/>
+
                     <TextView
                         android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#555555"/>
+                        android:textColor="#474554"/>
+
                 </LinearLayout>
 
                 <!-- Téléphone -->
@@ -105,18 +128,23 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📞 "
-                        android:textSize="14sp"/>
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="10dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_info"
+                        android:layout_marginEnd="10dp"
+                        app:tint="#5B4FCF"/>
+
                     <TextView
                         android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#555555"/>
+                        android:textColor="#474554"/>
+
                 </LinearLayout>
 
                 <!-- Ville -->
@@ -124,45 +152,67 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:orientation="horizontal"
-                    android:layout_marginBottom="8dp">
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:text="📍 "
-                        android:textSize="14sp"/>
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <ImageView
+                        android:layout_width="18dp"
+                        android:layout_height="18dp"
+                        android:src="@drawable/ic_location_on"
+                        android:layout_marginEnd="10dp"
+                        app:tint="#5B4FCF"/>
+
                     <TextView
                         android:id="@+id/tv_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#555555"/>
+                        android:textColor="#474554"/>
+
                 </LinearLayout>
 
                 <!-- Bio -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="📝 Bio :"
-                    android:textSize="14sp"
+                    android:text="Bio :"
+                    android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="4dp"/>
+                    android:textColor="#1A1A2E"
+                    android:layout_marginBottom="8dp"/>
+
                 <TextView
                     android:id="@+id/tv_bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#666666"/>
+                    android:textColor="#787585"
+                    android:lineSpacingMultiplier="1.4"
+                    android:background="@drawable/bg_search_bar_light"
+                    android:padding="12dp"
+                    android:layout_marginBottom="20dp"/>
 
-                <!-- Après tv_bio, avant la fin de la CardView -->
-                <Button
+                <!-- Séparateur -->
+                <View
+                    android:layout_width="match_parent"
+                    android:layout_height="1dp"
+                    android:background="#E5E1EC"
+                    android:layout_marginBottom="16dp"/>
+
+                <!-- Bouton message -->
+                <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_start_chat"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:text="💬 Envoyer un message"
-                    android:layout_marginTop="16dp"
-                    android:backgroundTint="?attr/colorPrimary"/>
+                    android:layout_height="56dp"
+                    android:background="@drawable/bg_button_gradient"
+                    android:text="Envoyer un message"
+                    android:textColor="#FFFFFF"
+                    android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:stateListAnimator="@null"/>
 
             </LinearLayout>
-        </androidx.cardview.widget.CardView>
+        </com.google.android.material.card.MaterialCardView>
+
     </LinearLayout>
-</ScrollView>
+</androidx.core.widget.NestedScrollView>

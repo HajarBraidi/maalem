@@ -1,45 +1,54 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="#FAFAFA">
 
-    <!-- Header avec bouton retour -->
+    <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:padding="16dp"
+        android:background="@drawable/bg_banner_purple"
+        android:layout_marginHorizontal="16dp"
+        android:layout_marginTop="16dp"
+        android:padding="20dp"
         android:orientation="horizontal"
         android:gravity="center_vertical">
 
         <ImageView
             android:id="@+id/iv_back"
-            android:layout_width="32dp"
-            android:layout_height="32dp"
+            android:layout_width="36dp"
+            android:layout_height="36dp"
             android:src="@drawable/ic_home"
-            android:layout_marginEnd="12dp"
-            android:padding="4dp"/>
+            android:background="@drawable/bg_add_button"
+            android:padding="8dp"
+            android:layout_marginEnd="14dp"
+            app:tint="#5B4FCF"/>
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:orientation="vertical">
+
             <TextView
                 android:id="@+id/tv_request_title"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textColor="#FFFFFF"
                 android:textSize="16sp"
-                android:textStyle="bold"/>
+                android:textStyle="bold"
+                android:fontFamily="@font/poppins_bold"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="📨 Offres reçues"
+                android:text="Offres reçues"
                 android:textColor="#CCFFFFFF"
                 android:textSize="13sp"/>
+
         </LinearLayout>
     </LinearLayout>
 
@@ -48,7 +57,8 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
-        android:layout_marginTop="32dp"
+        android:layout_marginTop="40dp"
+        android:indeterminateTint="#5B4FCF"
         android:visibility="gone"/>
 
     <LinearLayout
@@ -57,27 +67,34 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="32dp"
+        android:padding="48dp"
         android:visibility="gone">
+
+        <ImageView
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:src="@drawable/ic_category_empty"
+            app:tint="#C8C4D6"/>
+
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="📭"
-            android:textSize="48sp"/>
-        <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
             android:text="Aucune offre reçue pour cette demande"
             android:textSize="15sp"
-            android:textColor="#888888"
+            android:textColor="#787585"
+            android:textStyle="bold"
             android:gravity="center"
-            android:layout_marginTop="8dp"/>
+            android:fontFamily="@font/poppins_bold"/>
+
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_offers"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="8dp"/>
+        android:paddingHorizontal="8dp"
+        android:paddingVertical="12dp"
+        android:clipToPadding="false"/>
 
 </LinearLayout>

@@ -4,22 +4,33 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="#FAFAFA">
 
     <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="?attr/colorPrimary"
-        android:padding="16dp">
+        android:orientation="vertical"
+        android:paddingHorizontal="18dp"
+        android:paddingTop="22dp"
+        android:paddingBottom="14dp"
+        android:background="#FAFAFA">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text=" Demandes d'inscription artisans"
-            android:textColor="#FFFFFF"
-            android:textSize="18sp"
+            android:text="Demandes d'inscription artisans"
+            android:textColor="#121212"
+            android:textSize="23sp"
             android:textStyle="bold"/>
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Validation des profils artisans"
+            android:textColor="#6B7280"
+            android:textSize="13sp"
+            android:layout_marginTop="4dp"/>
     </LinearLayout>
 
     <!-- Loading -->
@@ -38,22 +49,25 @@
         android:layout_height="wrap_content"
         android:orientation="vertical"
         android:gravity="center"
-        android:padding="32dp"
+        android:padding="36dp"
         android:visibility="gone">
 
         <TextView
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="64dp"
+            android:layout_height="64dp"
+            android:gravity="center"
             android:text="✅"
-            android:textSize="48sp"/>
+            android:textSize="42sp"
+            android:background="#ECFDF5"/>
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Aucune demande en attente"
             android:textSize="16sp"
-            android:textColor="#888888"
-            android:layout_marginTop="8dp"/>
+            android:textStyle="bold"
+            android:textColor="#374151"
+            android:layout_marginTop="12dp"/>
     </LinearLayout>
 
     <!-- Liste -->
@@ -61,6 +75,8 @@
         android:id="@+id/rv_pending"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:paddingVertical="8dp"/>
+        android:clipToPadding="false"
+        android:paddingTop="8dp"
+        android:paddingBottom="88dp"/>
 
 </LinearLayout>

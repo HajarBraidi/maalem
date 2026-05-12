@@ -105,7 +105,7 @@ class OffersFragment : Fragment(R.layout.fragment_offers) {
                     .replace(R.id.fragment_container, fragment)
                     .addToBackStack(null)
                     .commit()
-            }, // ✅ Virgule ajoutée ici
+            }, //  Virgule ajoutée ici
             onChat = { offer ->
                 val fragment = ChatMessagesFragment.newInstance(
                     otherId = offer.artisanId,
