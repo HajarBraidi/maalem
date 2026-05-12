@@ -9,7 +9,7 @@
     <item
         android:id="@+id/nav_artisans"
         android:icon="@drawable/ic_person"
-        android:title="Artisans"/>
+        android:title="Demandes d'inscription"/>
 
     <item
         android:id="@+id/nav_users"
@@ -19,7 +19,7 @@
     <item
         android:id="@+id/nav_categories"
         android:icon="@drawable/ic_add"
-        android:title="Catégories"/>
+        android:title="Spécialités"/>
 
     <item
         android:id="@+id/nav_notif"

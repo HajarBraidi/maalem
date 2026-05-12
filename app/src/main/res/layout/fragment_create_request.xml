@@ -29,7 +29,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Nouvelle demande"
+                android:text="Nouvelle demande de service"
                 android:textColor="#FFFFFF"
                 android:textSize="22sp"
                 android:textStyle="bold"
@@ -59,7 +59,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Titre de la demande"
+                android:text="Titre de la demande de service"
                 android:textColor="#1A1A2E"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -124,7 +124,7 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Catégorie"
+                android:text="Spécialité"
                 android:textColor="#1A1A2E"
                 android:textSize="13sp"
                 android:textStyle="bold"
@@ -199,7 +199,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
                 android:background="@drawable/bg_button_gradient"
-                android:text="Envoyer la demande"
+                android:text="Envoyer la demande de service"
                 android:textColor="#FFFFFF"
                 android:textSize="15sp"
                 android:textStyle="bold"

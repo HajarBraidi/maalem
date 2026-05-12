@@ -73,7 +73,7 @@
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="14dp"
-            android:text="Envoyer une offre"
+            android:text="Envoyer une offre de service"
             android:textAllCaps="false"
             android:textStyle="bold"
             android:backgroundTint="#5B4FCF"
