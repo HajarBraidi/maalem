@@ -1,6 +1,5 @@
 package com.example.maalem.data.model
 
-// Classe de base
 open class User(
     open val uid: String = "",
     open val name: String = "",
@@ -11,7 +10,6 @@ open class User(
     open val createdAt: Long = System.currentTimeMillis()
 )
 
-// Citoyen
 data class Citizen(
     override val uid: String = "",
     override val name: String = "",
@@ -20,27 +18,44 @@ data class Citizen(
     override val role: String = "citizen",
     override val isActive: Boolean = true,
     override val createdAt: Long = System.currentTimeMillis(),
+
     val address: String = "",
+
+    val locationId: String = "",
+    val locationName: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+
     val photoUrl: String = ""
 ) : User(uid, name, email, phone, role, isActive, createdAt)
 
-// Artisan
 data class Artisan(
     override val uid: String = "",
     override val name: String = "",
     override val email: String = "",
     override val phone: String = "",
     override val role: String = "artisan",
-    override val isActive: Boolean = true, //  true (mapping explicite depuis Firestore)
+    override val isActive: Boolean = true,
     override val createdAt: Long = System.currentTimeMillis(),
+
     val specialty: String = "",
     val city: String = "",
     val bio: String = "",
+
+    val locationId: String = "",
+    val locationName: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
+
     val isValidated: Boolean = false,
-    val cinPhotoBase64: String = "" //  champ ajouté par Khadija
+    val cinPhotoBase64: String = "",
+
+    // ← NOUVEAU
+    val averageRating: Float = 0f,   // moyenne sur 10
+    val reviewCount: Int = 0         // nombre d'avis
 ) : User(uid, name, email, phone, role, isActive, createdAt)
 
-// Admin
+
 data class Admin(
     override val uid: String = "",
     override val name: String = "",

@@ -42,6 +42,7 @@
                 android:orientation="vertical"
                 android:paddingVertical="4dp">
 
+                <!-- Nom -->
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
@@ -51,6 +52,7 @@
                     android:textStyle="bold"
                     android:fontFamily="@font/poppins_bold"/>
 
+                <!-- Spécialité -->
                 <TextView
                     android:id="@+id/tv_specialty"
                     android:layout_width="wrap_content"
@@ -59,6 +61,37 @@
                     android:textColor="#5B4FCF"
                     android:textSize="13sp"/>
 
+                <!-- ★ Étoiles + note -->
+                <LinearLayout
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginTop="4dp">
+
+                    <RatingBar
+                        android:id="@+id/rating_bar_card"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:isIndicator="true"
+                        android:progressTint="#FFB300"
+                        android:rating="0"/>
+
+                    <TextView
+                        android:id="@+id/tv_rating_card"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="6dp"
+                        android:textSize="11sp"
+                        android:textColor="#787585"
+                        android:text="Aucun avis"/>
+
+                </LinearLayout>
+
+                <!-- Ville -->
                 <TextView
                     android:id="@+id/tv_city"
                     android:layout_width="wrap_content"
@@ -88,7 +121,7 @@
             android:layout_marginTop="16dp"
             android:background="#E5E1EC"/>
 
-        <!-- Ligne du bas : badge spécialité -->
+        <!-- Ligne du bas : badge + bouton profil -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -105,11 +138,14 @@
                 android:textSize="12sp"/>
 
             <LinearLayout
+                android:id="@+id/btn_voir_profil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:background="@drawable/bg_category_icon_active"
                 android:paddingHorizontal="14dp"
-                android:paddingVertical="6dp">
+                android:paddingVertical="6dp"
+                android:clickable="true"
+                android:focusable="true">
 
                 <TextView
                     android:layout_width="wrap_content"

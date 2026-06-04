@@ -27,6 +27,8 @@ import com.google.android.material.textfield.TextInputEditText
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
 import javax.inject.Inject
+import com.example.maalem.data.model.AppLocation
+import com.example.maalem.domain.repository.AdminRepository
 
 @AndroidEntryPoint
 class RegisterFragment : Fragment(R.layout.fragment_register) {
@@ -35,9 +37,15 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
     @Inject
     lateinit var categoryRepository: CategoryRepository
+    @Inject
+    lateinit var adminRepository: AdminRepository
 
     private var categories: List<String> = emptyList()
     private lateinit var spSpecialty: MaterialAutoCompleteTextView
+
+    private var locations: List<AppLocation> = emptyList()
+    private lateinit var spCitizenLocation: MaterialAutoCompleteTextView
+    private lateinit var spArtisanLocation: MaterialAutoCompleteTextView
 
     // Launcher pour sélectionner une image
     private val pickImageLauncher = registerForActivityResult(
@@ -75,11 +83,11 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
         val etPhone = view.findViewById<TextInputEditText>(R.id.etPhone)
         val etPassword = view.findViewById<TextInputEditText>(R.id.etPassword)
         val etConfirmPassword = view.findViewById<TextInputEditText>(R.id.etConfirmPassword)
-        val etAddress = view.findViewById<TextInputEditText>(R.id.etAddress)
+        spCitizenLocation = view.findViewById(R.id.spCitizenLocation)
 
         spSpecialty = view.findViewById(R.id.spSpecialty)
 
-        val etCity = view.findViewById<TextInputEditText>(R.id.etCity)
+        spArtisanLocation = view.findViewById(R.id.spArtisanLocation)
         val etBio = view.findViewById<TextInputEditText>(R.id.etBio)
 
         val btnPickCin = view.findViewById<LinearLayout>(R.id.btnPickCin)
@@ -89,6 +97,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
         // Charger les spécialités depuis Firebase
         loadCategories(view)
+        loadLocations(view)
 
         // Fonction pour sélectionner le rôle
         fun selectRole(isCitizen: Boolean) {
@@ -167,7 +176,13 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
 
             if (rbCitizen.isChecked) {
                 // Inscription CITOYEN
-                val address = etAddress.text.toString().trim()
+                val locationName = spCitizenLocation.text.toString().trim()
+                val selectedLocation = locations.find { it.name == locationName }
+
+                if (selectedLocation == null) {
+                    Snackbar.make(view, "Veuillez choisir une localisation valide", Snackbar.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
 
                 viewModel.registerCitizen(
                     name = name,
@@ -175,7 +190,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     phone = phone,
                     password = password,
                     confirmPassword = confirmPassword,
-                    address = address
+                    location = selectedLocation
                 )
             } else {
                 // Inscription ARTISAN
@@ -205,11 +220,17 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     return@setOnClickListener
                 }
 
-                val city = etCity.text.toString().trim()
+                val locationName = spArtisanLocation.text.toString().trim()
+                val selectedLocation = locations.find { it.name == locationName }
                 val bio = etBio.text.toString().trim()
 
-                if (city.isBlank() || bio.isBlank()) {
-                    Snackbar.make(view, "Ville et bio requises", Snackbar.LENGTH_SHORT).show()
+                if (selectedLocation == null) {
+                    Snackbar.make(view, "Veuillez choisir une localisation valide", Snackbar.LENGTH_SHORT).show()
+                    return@setOnClickListener
+                }
+
+                if (bio.isBlank()) {
+                    Snackbar.make(view, "Bio requise", Snackbar.LENGTH_SHORT).show()
                     return@setOnClickListener
                 }
 
@@ -221,7 +242,7 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
                     password = password,
                     confirmPassword = confirmPassword,
                     specialty = specialty,
-                    city = city,
+                    location = selectedLocation,
                     bio = bio
                 )
             }
@@ -310,4 +331,78 @@ class RegisterFragment : Fragment(R.layout.fragment_register) {
             }
         }
     }
+
+    private fun loadLocations(view: View) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            val result = adminRepository.getLocations()
+
+            result.onSuccess { list ->
+                locations = list
+                Log.d("RegisterFragment", "Locations loaded = $locations")
+
+                if (locations.isEmpty()) {
+                    Snackbar.make(
+                        view,
+                        "Aucune localisation trouvée. Contactez l'administrateur.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                    return@onSuccess
+                }
+
+                val locationNames = locations.map { it.name }
+
+                val adapter = ArrayAdapter(
+                    requireContext(),
+                    android.R.layout.simple_dropdown_item_1line,
+                    locationNames
+                )
+
+                spCitizenLocation.setAdapter(adapter)
+                spArtisanLocation.setAdapter(adapter)
+
+                spCitizenLocation.threshold = 0
+                spArtisanLocation.threshold = 0
+
+                spCitizenLocation.isFocusable = false
+                spArtisanLocation.isFocusable = false
+
+                spCitizenLocation.setOnClickListener {
+                    spCitizenLocation.post {
+                        spCitizenLocation.showDropDown()
+                    }
+                }
+
+                spArtisanLocation.setOnClickListener {
+                    spArtisanLocation.post {
+                        spArtisanLocation.showDropDown()
+                    }
+                }
+
+                spCitizenLocation.setOnTouchListener { _, _ ->
+                    spCitizenLocation.post {
+                        spCitizenLocation.showDropDown()
+                    }
+                    false
+                }
+
+                spArtisanLocation.setOnTouchListener { _, _ ->
+                    spArtisanLocation.post {
+                        spArtisanLocation.showDropDown()
+                    }
+                    false
+                }
+            }
+
+            result.onFailure { e ->
+                Log.e("RegisterFragment", "Erreur chargement localisations", e)
+
+                Snackbar.make(
+                    view,
+                    "Erreur lors du chargement des localisations : ${e.message}",
+                    Snackbar.LENGTH_LONG
+                ).show()
+            }
+        }
+    }
+
 }

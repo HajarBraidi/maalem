@@ -39,24 +39,24 @@ class OfferAdapter(
             tvMessage.text = offer.message
             btnChatArtisan.setOnClickListener { onChat(offer) }
 
-            // ✅ Badge + boutons selon statut
+            //  Badge + boutons selon statut
             when (OfferStatus.fromString(offer.status)) {
                 OfferStatus.PENDING -> {
-                    tvOfferStatus.text = "⏳ En attente"
+                    tvOfferStatus.text = "En attente"
                     tvOfferStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_orange_dark)
                     )
                     layoutAcceptReject.isVisible = true
                 }
                 OfferStatus.ACCEPTED -> {
-                    tvOfferStatus.text = "✅ Acceptée"
+                    tvOfferStatus.text = "Acceptée"
                     tvOfferStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_green_dark)
                     )
                     layoutAcceptReject.isVisible = false
                 }
                 OfferStatus.REJECTED -> {
-                    tvOfferStatus.text = "❌ Refusée"
+                    tvOfferStatus.text = "Refusée"
                     tvOfferStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_red_dark)
                     )

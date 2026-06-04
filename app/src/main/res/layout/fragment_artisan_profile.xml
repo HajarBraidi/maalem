@@ -182,5 +182,92 @@
             android:stateListAnimator="@null"
             app:cornerRadius="14dp" />
 
+        <!-- ★ SECTION AVIS -->
+
+        <!-- Séparateur -->
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="#E5E1EC"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- Titre section -->
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Mes avis clients"
+            android:textSize="16sp"
+            android:textStyle="bold"
+            android:textColor="#1A1A2E"
+            android:fontFamily="@font/poppins_bold"
+            android:layout_marginBottom="12dp"/>
+
+        <!-- Note moyenne -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_search_bar_light"
+            android:padding="16dp"
+            android:layout_marginBottom="12dp">
+
+            <RatingBar
+                android:id="@+id/rating_bar_my_average"
+                style="?android:attr/ratingBarStyleSmall"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                android:progressTint="#FFB300"
+                android:rating="0"/>
+
+            <TextView
+                android:id="@+id/tv_my_average_rating"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:layout_marginStart="10dp"
+                android:textSize="13sp"
+                android:textColor="#787585"
+                android:text="Aucun avis pour le moment"/>
+
+            <!-- Badge nombre d'avis -->
+            <TextView
+                android:id="@+id/tv_review_count_badge"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:background="@drawable/bg_category_icon_active"
+                android:paddingHorizontal="10dp"
+                android:paddingVertical="4dp"
+                android:textSize="12sp"
+                android:textStyle="bold"
+                android:textColor="#5B4FCF"
+                android:text="0 avis"
+                android:visibility="gone"/>
+
+        </LinearLayout>
+
+        <!-- Liste des avis (RecyclerView) -->
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/rv_my_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:nestedScrollingEnabled="false"
+            android:layout_marginBottom="16dp"/>
+
+        <!-- État vide avis -->
+        <TextView
+            android:id="@+id/tv_no_reviews"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="😊 Aucun avis reçu pour le moment"
+            android:textSize="13sp"
+            android:textColor="#BDBDBD"
+            android:gravity="center"
+            android:layout_marginBottom="16dp"
+            android:visibility="gone"/>
     </LinearLayout>
 </ScrollView>

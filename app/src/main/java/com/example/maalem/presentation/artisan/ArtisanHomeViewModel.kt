@@ -23,13 +23,19 @@ sealed class ArtisanUiState {
     data class ProfileLoaded(val artisan: Artisan) : ArtisanUiState()
     object OfferSent : ArtisanUiState()
     data class Error(val message: String) : ArtisanUiState()
+    data class ReviewsLoaded(
+        val reviews: List<com.example.maalem.data.model.Review>,
+        val averageRating: Float,
+        val reviewCount: Int
+    ) : ArtisanUiState()
 }
 
 @HiltViewModel
 class ArtisanHomeViewModel @Inject constructor(
     private val artisanRepository: ArtisanRepository,
     private val sendOfferUseCase: SendOfferUseCase,
-    private val auth: FirebaseAuth
+    private val auth: FirebaseAuth,
+    private val reviewRepository: com.example.maalem.domain.repository.ReviewRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<ArtisanUiState>(ArtisanUiState.Idle)
@@ -110,4 +116,31 @@ class ArtisanHomeViewModel @Inject constructor(
             onFailure = { _state.value = ArtisanUiState.Error(it.message ?: "Erreur") }
         )
     }
+    fun loadMyReviews() = viewModelScope.launch {
+        _state.value = ArtisanUiState.Loading
+        val uid = auth.currentUser?.uid ?: run {
+            _state.value = ArtisanUiState.Error("Non authentifié")
+            return@launch
+        }
+
+        reviewRepository.getReviewsForArtisan(uid).fold(
+            onSuccess = { reviews ->
+                val count = reviews.size
+                val average = if (count > 0)
+                    reviews.map { it.rating }.average().toFloat()
+                else 0f
+
+                _state.value = ArtisanUiState.ReviewsLoaded(
+                    reviews = reviews,
+                    averageRating = average,
+                    reviewCount = count
+                )
+            },
+            onFailure = {
+                _state.value = ArtisanUiState.Error(it.message ?: "Erreur")
+            }
+        )
+    }
+
+
 }

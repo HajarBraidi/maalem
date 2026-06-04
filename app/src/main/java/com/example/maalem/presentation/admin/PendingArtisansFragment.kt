@@ -79,7 +79,7 @@ class PendingArtisansFragment : Fragment(R.layout.fragment_pending_artisans) {
                     is AdminUiState.ActionSuccess -> {
                         Snackbar.make(
                             binding.root,
-                            "✅ Action effectuée avec succès !",
+                            " Action effectuée avec succès !",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }

@@ -2,6 +2,7 @@ package com.example.maalem.presentation.admin
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.maalem.data.model.AppLocation
 import com.example.maalem.data.model.AppStats
 import com.example.maalem.data.model.Artisan
 import com.example.maalem.data.model.Citizen
@@ -23,6 +24,9 @@ sealed class AdminUiState {
     data class StatsLoaded(val stats: AppStats) : AdminUiState()
     data class CategoriesLoaded(val categories: List<String>) : AdminUiState()
     data class Error(val message: String) : AdminUiState()
+
+    // États supplémentaires dans AdminUiState
+    data class LocationsLoaded(val locations: List<AppLocation>) : AdminUiState()
 }
 
 @HiltViewModel
@@ -119,6 +123,34 @@ class AdminViewModel @Inject constructor(
         _state.value = AdminUiState.Loading
         adminRepository.sendNotification(title, message).fold(
             onSuccess = { _state.value = AdminUiState.ActionSuccess },
+            onFailure = { _state.value = AdminUiState.Error(it.message ?: "Erreur") }
+        )
+    }
+
+    // Fonctions
+    fun loadLocations() = viewModelScope.launch {
+        _state.value = AdminUiState.Loading
+        adminRepository.getLocations().fold(
+            onSuccess = { _state.value = AdminUiState.LocationsLoaded(it) },
+            onFailure = { _state.value = AdminUiState.Error(it.message ?: "Erreur") }
+        )
+    }
+
+    fun addLocation(name: String, latitude: Double, longitude: Double) = viewModelScope.launch {
+        if (name.isBlank()) {
+            _state.value = AdminUiState.Error("Nom requis")
+            return@launch
+        }
+        val location = AppLocation(name = name, latitude = latitude, longitude = longitude)
+        adminRepository.addLocation(location).fold(
+            onSuccess = { loadLocations() },
+            onFailure = { _state.value = AdminUiState.Error(it.message ?: "Erreur") }
+        )
+    }
+
+    fun deleteLocation(locationId: String) = viewModelScope.launch {
+        adminRepository.deleteLocation(locationId).fold(
+            onSuccess = { loadLocations() },
             onFailure = { _state.value = AdminUiState.Error(it.message ?: "Erreur") }
         )
     }

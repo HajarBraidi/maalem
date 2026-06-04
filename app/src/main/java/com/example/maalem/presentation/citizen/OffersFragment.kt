@@ -76,7 +76,7 @@ class OffersFragment : Fragment(R.layout.fragment_offers) {
         adapter = OfferAdapter(
             onAccept = { offer ->
                 AlertDialog.Builder(requireContext())
-                    .setTitle("✅ Accepter l'offre")
+                    .setTitle(" Accepter l'offre")
                     .setMessage(
                         "Artisan : ${offer.artisanName}\n" +
                                 "Prix : ${offer.price} MAD\n" +
@@ -91,7 +91,7 @@ class OffersFragment : Fragment(R.layout.fragment_offers) {
             },
             onReject = { offer ->
                 AlertDialog.Builder(requireContext())
-                    .setTitle("❌ Refuser l'offre")
+                    .setTitle(" Refuser l'offre")
                     .setMessage("Voulez-vous refuser l'offre de ${offer.artisanName} ?")
                     .setPositiveButton("Oui") { _, _ ->
                         viewModel.rejectOffer(offer.id)
@@ -134,7 +134,7 @@ class OffersFragment : Fragment(R.layout.fragment_offers) {
                     is CitizenUiState.OfferAccepted -> {
                         Snackbar.make(
                             binding.root,
-                            "✅ Offre acceptée avec succès !",
+                            " Offre acceptée avec succès !",
                             Snackbar.LENGTH_SHORT
                         ).show()
                         viewModel.loadOffers(currentRequest.id)
@@ -142,7 +142,7 @@ class OffersFragment : Fragment(R.layout.fragment_offers) {
                     is CitizenUiState.OfferRejected -> {
                         Snackbar.make(
                             binding.root,
-                            "❌ Offre refusée",
+                            " Offre refusée",
                             Snackbar.LENGTH_SHORT
                         ).show()
                         viewModel.loadOffers(currentRequest.id)

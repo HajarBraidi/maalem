@@ -57,6 +57,12 @@ class AuthRepositoryImpl @Inject constructor(
                     "phone" to user.phone,
                     "role" to "citizen",
                     "address" to user.address,
+
+                    "locationId" to user.locationId,
+                    "locationName" to user.locationName,
+                    "latitude" to user.latitude,
+                    "longitude" to user.longitude,
+
                     "isActive" to true,
                     "createdAt" to System.currentTimeMillis()
                 )
@@ -69,11 +75,17 @@ class AuthRepositoryImpl @Inject constructor(
                     "specialty" to user.specialty,
                     "city" to user.city,
                     "bio" to user.bio,
+
+                    "locationId" to user.locationId,
+                    "locationName" to user.locationName,
+                    "latitude" to user.latitude,
+                    "longitude" to user.longitude,
+
                     "isActive" to false,
                     "isValidated" to false,
-                    "cinPhotoBase64" to user.cinPhotoBase64,  // ← NOUVEAU
-                    "createdAt" to System.currentTimeMillis()
-                )
+                    "cinPhotoBase64" to user.cinPhotoBase64,
+                    "createdAt" to System.currentTimeMillis())
+
                 else -> hashMapOf(
                     "uid" to uid,
                     "name" to user.name,

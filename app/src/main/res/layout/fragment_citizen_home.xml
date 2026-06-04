@@ -45,6 +45,14 @@
 
         </LinearLayout>
 
+        <org.osmdroid.views.MapView
+            android:id="@+id/mapView"
+            android:layout_width="match_parent"
+            android:layout_height="220dp"
+            android:layout_marginHorizontal="16dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp" />
+
         <!-- ═══════════════════════════════════ -->
         <!--         FILTRE CATÉGORIES           -->
         <!-- ═══════════════════════════════════ -->

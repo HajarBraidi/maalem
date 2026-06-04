@@ -332,11 +332,28 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Adresse"
+                android:text="Localisation"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#474554"
                 android:layout_marginBottom="6dp"/>
+
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/spCitizenLocation"
+                android:layout_width="match_parent"
+                android:layout_height="56dp"
+                android:layout_marginBottom="16dp"
+                android:background="@drawable/bg_input_field"
+                android:hint="Choisir votre ville"
+                android:paddingHorizontal="16dp"
+                android:textSize="14sp"
+                android:textColor="#111827"
+                android:textColorHint="#9CA3AF"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:completionThreshold="0" />
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
@@ -353,7 +370,7 @@
                     android:id="@+id/etAddress"
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:hint="Votre adresse"
+                    android:hint="Adresse détaillée"
                     android:textColorHint="#9CA3AF"
                     android:textSize="14sp"/>
             </com.google.android.material.textfield.TextInputLayout>
@@ -413,31 +430,29 @@
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Ville"
+                android:text="Localisation"
                 android:textSize="13sp"
                 android:textStyle="bold"
                 android:textColor="#474554"
                 android:layout_marginBottom="6dp"/>
 
-            <com.google.android.material.textfield.TextInputLayout
+            <com.google.android.material.textfield.MaterialAutoCompleteTextView
+                android:id="@+id/spArtisanLocation"
                 android:layout_width="match_parent"
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                app:boxBackgroundColor="#F3F4F6"
-                app:boxCornerRadiusTopStart="12dp"
-                app:boxCornerRadiusTopEnd="12dp"
-                app:boxCornerRadiusBottomStart="12dp"
-                app:boxCornerRadiusBottomEnd="12dp"
-                app:hintEnabled="false">
-                <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/etCity"
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:hint="Casablanca, Rabat..."
-                    android:textColorHint="#9CA3AF"
-                    android:textSize="14sp"/>
-            </com.google.android.material.textfield.TextInputLayout>
+                android:background="@drawable/bg_input_field"
+                android:hint="Choisir votre ville"
+                android:paddingHorizontal="16dp"
+                android:textSize="14sp"
+                android:textColor="#111827"
+                android:textColorHint="#9CA3AF"
+                android:inputType="none"
+                android:focusable="false"
+                android:clickable="true"
+                android:cursorVisible="false"
+                android:completionThreshold="0" />
+
 
             <!-- Bio -->
             <TextView

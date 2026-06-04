@@ -92,7 +92,7 @@ class CitizenProfileFragment : Fragment(R.layout.fragment_citizen_profile) {
                     }
 
                     is ProfileState.Updated -> {
-                        Snackbar.make(binding.root, "✅ Profil mis à jour !", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(binding.root, " Profil mis à jour !", Snackbar.LENGTH_SHORT).show()
                         viewModel.loadProfile()
                     }
 

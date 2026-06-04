@@ -30,6 +30,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
         setupRecyclerView()
         setupFab()
         observeState()
+        setupLocationButton()
 
         viewModel.loadCategories()
     }
@@ -37,6 +38,15 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
     override fun onResume() {
         super.onResume()
         viewModel.loadCategories()
+    }
+
+    private fun setupLocationButton() {
+        binding.btnLocations.setOnClickListener {
+            parentFragmentManager.beginTransaction()
+                .replace(R.id.fragment_container, LocationsFragment())
+                .addToBackStack(null)
+                .commit()
+        }
     }
 
     private fun setupRecyclerView() {
@@ -72,7 +82,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
                     } else {
                         Snackbar.make(
                             binding.root,
-                            "⚠️ Veuillez entrer un nom",
+                            "Veuillez entrer un nom",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
@@ -96,7 +106,7 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
                     is AdminUiState.ActionSuccess -> {
                         Snackbar.make(
                             binding.root,
-                            "✅ Catégorie mise à jour !",
+                            " Catégorie mise à jour !",
                             Snackbar.LENGTH_SHORT
                         ).show()
                     }
@@ -112,6 +122,8 @@ class CategoriesFragment : Fragment(R.layout.fragment_categories) {
             }
         }
     }
+
+
 
     override fun onDestroyView() {
         super.onDestroyView()

@@ -8,6 +8,7 @@ import com.example.maalem.domain.repository.AdminRepository
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
+import com.example.maalem.data.model.AppLocation
 
 class AdminRepositoryImpl @Inject constructor(
     private val firestore: FirebaseFirestore
@@ -177,6 +178,57 @@ class AdminRepositoryImpl @Inject constructor(
                     "createdAt" to System.currentTimeMillis()
                 )
             ).await()
+            Result.success(Unit)
+        } catch (e: Exception) { Result.failure(e) }
+    }
+
+    override suspend fun getLocations(): Result<List<AppLocation>> {
+        return try {
+            val doc = firestore.collection("config")
+                .document("locations").get().await()
+            @Suppress("UNCHECKED_CAST")
+            val list = doc.get("list") as? List<Map<String, Any>> ?: emptyList()
+            val locations = list.map { map ->
+                AppLocation(
+                    id = map["id"] as? String ?: "",
+                    name = map["name"] as? String ?: "",
+                    latitude = (map["latitude"] as? Double) ?: 0.0,
+                    longitude = (map["longitude"] as? Double) ?: 0.0
+                )
+            }
+            Result.success(locations)
+        } catch (e: Exception) { Result.failure(e) }
+    }
+
+    override suspend fun addLocation(location: AppLocation): Result<Unit> {
+        return try {
+            val ref = firestore.collection("config").document("locations")
+            val doc = ref.get().await()
+            @Suppress("UNCHECKED_CAST")
+            val list = (doc.get("list") as? List<Map<String, Any>>
+                ?: emptyList()).toMutableList()
+
+            val newLocation = mapOf(
+                "id" to System.currentTimeMillis().toString(),
+                "name" to location.name,
+                "latitude" to location.latitude,
+                "longitude" to location.longitude
+            )
+            list.add(newLocation)
+            ref.set(mapOf("list" to list)).await()
+            Result.success(Unit)
+        } catch (e: Exception) { Result.failure(e) }
+    }
+
+    override suspend fun deleteLocation(locationId: String): Result<Unit> {
+        return try {
+            val ref = firestore.collection("config").document("locations")
+            val doc = ref.get().await()
+            @Suppress("UNCHECKED_CAST")
+            val list = (doc.get("list") as? List<Map<String, Any>>
+                ?: emptyList()).toMutableList()
+            list.removeAll { it["id"] == locationId }
+            ref.set(mapOf("list" to list)).await()
             Result.success(Unit)
         } catch (e: Exception) { Result.failure(e) }
     }

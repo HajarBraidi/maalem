@@ -40,7 +40,7 @@ class RequestAdapter(
         holder.tvTitle.text = request.title
         holder.tvCategory.text = request.category
         holder.tvDescription.text = request.description
-        holder.tvCity.text = "📍 ${request.city}"
+        holder.tvCity.text = " ${request.city}"
         holder.tvCitizen.text = "Par ${request.citizenName}"
 
         val alreadyApplied = appliedRequestIds.contains(request.id)

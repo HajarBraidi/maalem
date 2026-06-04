@@ -1,5 +1,6 @@
 package com.example.maalem.domain.repository
 
+import com.example.maalem.data.model.AppLocation
 import com.example.maalem.data.model.Artisan
 import com.example.maalem.data.model.AppStats
 import com.example.maalem.data.model.Citizen
@@ -26,4 +27,10 @@ interface AdminRepository {
 
     // --- Notifications ---
     suspend fun sendNotification(title: String, message: String): Result<Unit>
+
+    // --- Localisations ---
+    suspend fun getLocations(): Result<List<AppLocation>>
+    suspend fun addLocation(location: AppLocation): Result<Unit>
+    suspend fun deleteLocation(locationId: String): Result<Unit>
+
 }

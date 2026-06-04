@@ -90,7 +90,37 @@
                     android:textSize="14sp"
                     android:textColor="#5B4FCF"
                     android:textStyle="bold"
-                    android:layout_marginBottom="16dp"/>
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- ★ Note moyenne -->
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="horizontal"
+                    android:gravity="center_vertical"
+                    android:layout_marginBottom="16dp">
+
+                    <RatingBar
+                        android:id="@+id/rating_bar_average"
+                        style="?android:attr/ratingBarStyleSmall"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:numStars="5"
+                        android:stepSize="0.1"
+                        android:isIndicator="true"
+                        android:progressTint="#FFB300"
+                        android:rating="0"/>
+
+                    <TextView
+                        android:id="@+id/tv_average_rating"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginStart="8dp"
+                        android:textSize="13sp"
+                        android:textColor="#787585"
+                        android:text="Aucun avis"/>
+
+                </LinearLayout>
 
                 <!-- Séparateur -->
                 <View
@@ -208,6 +238,32 @@
                     android:text="Envoyer un message"
                     android:textColor="#FFFFFF"
                     android:textSize="15sp"
+                    android:textStyle="bold"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- ★ Bouton Voir les avis -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_see_reviews"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_category_icon_active"
+                    android:text="Voir les avis"
+                    android:textColor="#5B4FCF"
+                    android:textSize="14sp"
+                    android:textStyle="bold"
+                    android:stateListAnimator="@null"
+                    android:layout_marginBottom="12dp"/>
+
+                <!-- ★ Bouton Laisser un avis -->
+                <androidx.appcompat.widget.AppCompatButton
+                    android:id="@+id/btn_leave_review"
+                    android:layout_width="match_parent"
+                    android:layout_height="52dp"
+                    android:background="@drawable/bg_category_icon_active"
+                    android:text="Laisser un avis"
+                    android:textColor="#5B4FCF"
+                    android:textSize="14sp"
                     android:textStyle="bold"
                     android:stateListAnimator="@null"/>
 

@@ -30,8 +30,16 @@ class CitizenRepositoryImpl @Inject constructor(
                     specialty = doc.getString("specialty") ?: "",
                     city = doc.getString("city") ?: "",
                     bio = doc.getString("bio") ?: "",
+                    locationId = doc.getString("locationId") ?: "",
+                    locationName = doc.getString("locationName") ?: "",
+                    latitude = doc.getDouble("latitude") ?: 0.0,
+                    longitude = doc.getDouble("longitude") ?: 0.0,
+
                     isActive = doc.getBoolean("isActive") ?: true,
-                    isValidated = doc.getBoolean("isValidated") ?: false
+                    isValidated = doc.getBoolean("isValidated") ?: false,
+                    cinPhotoBase64 = doc.getString("cinPhotoBase64") ?: "",
+                    averageRating = (doc.getDouble("averageRating") ?: 0.0).toFloat(),
+                    reviewCount = (doc.getLong("reviewCount") ?: 0L).toInt()
                 )
             }
             Result.success(artisans)
@@ -141,15 +149,20 @@ class CitizenRepositoryImpl @Inject constructor(
         return try {
             val doc = firestore.collection("users").document(artisanId).get().await()
             val artisan = Artisan(
-                uid = doc.getString("uid") ?: doc.id,
+                uid = doc.getString("uid") ?: artisanId,
                 name = doc.getString("name") ?: "",
                 email = doc.getString("email") ?: "",
                 phone = doc.getString("phone") ?: "",
+                role = doc.getString("role") ?: "artisan",
+                isActive = doc.getBoolean("isActive") ?: false,
+                createdAt = doc.getLong("createdAt") ?: System.currentTimeMillis(),
                 specialty = doc.getString("specialty") ?: "",
                 city = doc.getString("city") ?: "",
                 bio = doc.getString("bio") ?: "",
-                isActive = doc.getBoolean("isActive") ?: true,
-                isValidated = doc.getBoolean("isValidated") ?: false
+                isValidated = doc.getBoolean("isValidated") ?: false,
+
+                averageRating = (doc.getDouble("averageRating") ?: 0.0).toFloat(),
+                reviewCount = (doc.getLong("reviewCount") ?: 0L).toInt()
             )
             Result.success(artisan)
         } catch (e: Exception) { Result.failure(e) }

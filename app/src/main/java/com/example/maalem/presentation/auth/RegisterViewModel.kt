@@ -17,6 +17,7 @@ import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.launch
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
+import com.example.maalem.data.model.AppLocation
 
 sealed class RegisterState {
     object Idle : RegisterState()
@@ -33,35 +34,41 @@ class RegisterViewModel @Inject constructor(
     private val _state = MutableStateFlow<RegisterState>(RegisterState.Idle)
     val state: StateFlow<RegisterState> = _state
 
-    // ✅ Stocke temporairement la photo CIN (ajout de Khadija)
+    //  Stocke temporairement la photo CIN (ajout de Khadija)
     private var cinUri: Uri? = null
 
     fun setCinUri(uri: Uri) { cinUri = uri }
     fun hasCinPhoto(): Boolean = cinUri != null
 
-    // ✅ Inscription Citoyen
+    //  Inscription Citoyen
     fun registerCitizen(
         name: String,
         email: String,
         phone: String,
         password: String,
         confirmPassword: String,
-        address: String
+        location: AppLocation
     ) = viewModelScope.launch {
         _state.value = RegisterState.Loading
+
         val citizen = Citizen(
             name = name,
             email = email,
             phone = phone,
-            address = address
+            address = location.name,
+            locationId = location.id,
+            locationName = location.name,
+            latitude = location.latitude,
+            longitude = location.longitude
         )
+
         registerUseCase(email, password, confirmPassword, citizen).fold(
             onSuccess = { _state.value = RegisterState.Success },
             onFailure = { _state.value = RegisterState.Error(it.message ?: "Erreur") }
         )
     }
 
-    // ✅ Inscription Artisan avec photo CIN (Khadija)
+    //  Inscription Artisan avec photo CIN (Khadija)
     @Suppress("DEPRECATION")
     fun registerArtisan(
         context: Context,
@@ -71,7 +78,7 @@ class RegisterViewModel @Inject constructor(
         password: String,
         confirmPassword: String,
         specialty: String,
-        city: String,
+        location: AppLocation,
         bio: String
     ) = viewModelScope.launch {
         _state.value = RegisterState.Loading
@@ -96,7 +103,7 @@ class RegisterViewModel @Inject constructor(
                 )
             } else bitmap
 
-            // ✅ Qualité 40% au lieu de 70% → ~50-80KB en Base64
+            //  Qualité 40% au lieu de 70% → ~50-80KB en Base64
             val baos = ByteArrayOutputStream()
             resized.compress(Bitmap.CompressFormat.JPEG, 40, baos)
             val cinBase64 = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
@@ -112,7 +119,11 @@ class RegisterViewModel @Inject constructor(
                 email = email,
                 phone = phone,
                 specialty = specialty,
-                city = city,
+                city = location.name,
+                locationId = location.id,
+                locationName = location.name,
+                latitude = location.latitude,
+                longitude = location.longitude,
                 bio = bio,
                 isActive = false,
                 isValidated = false,
@@ -128,7 +139,7 @@ class RegisterViewModel @Inject constructor(
         }
     }
 
-    // ✅ Inscription Admin (Hajar)
+    //  Inscription Admin (Hajar)
     fun registerAdmin(
         name: String,
         email: String,

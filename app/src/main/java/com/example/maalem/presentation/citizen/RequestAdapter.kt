@@ -39,14 +39,14 @@ class RequestAdapter(
             tvDate.text = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 .format(Date(request.createdAt))
 
-            // ✅ Badge statut + bouton selon statut
+            //  Badge statut + bouton selon statut
             when (RequestStatus.fromString(request.status)) {
                 RequestStatus.PENDING -> {
                     tvStatus.text = " En attente"
                     tvStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_orange_dark)
                     )
-                    // ✅ Bouton visible seulement si en attente
+                    // Bouton visible seulement si en attente
                     btnViewOffers.isVisible = true
                     btnViewOffers.setOnClickListener { onViewOffers(request) }
                 }
@@ -55,7 +55,7 @@ class RequestAdapter(
                     tvStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_green_dark)
                     )
-                    // ✅ Bouton caché si acceptée
+                    //  Bouton caché si acceptée
                     btnViewOffers.isVisible = false
                 }
                 RequestStatus.COMPLETED -> {
@@ -63,7 +63,7 @@ class RequestAdapter(
                     tvStatus.setBackgroundColor(
                         ContextCompat.getColor(root.context, android.R.color.holo_blue_dark)
                     )
-                    // ✅ Bouton caché si terminée
+                    //  Bouton caché si terminée
                     btnViewOffers.isVisible = false
                 }
             }

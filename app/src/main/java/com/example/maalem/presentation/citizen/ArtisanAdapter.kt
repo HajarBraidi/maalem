@@ -9,7 +9,8 @@ import com.example.maalem.data.model.Artisan
 import com.example.maalem.databinding.ItemArtisanBinding
 
 class ArtisanAdapter(
-    private val onClick: (Artisan) -> Unit
+    private val onClick: (Artisan) -> Unit,
+    private val onViewProfile: (Artisan) -> Unit
 ) : ListAdapter<Artisan, ArtisanAdapter.ViewHolder>(DiffCallback) {
 
     inner class ViewHolder(val binding: ItemArtisanBinding) :
@@ -27,8 +28,22 @@ class ArtisanAdapter(
         with(holder.binding) {
             tvName.text = artisan.name
             tvSpecialty.text = artisan.specialty
-            tvCity.text = "📍 ${artisan.city}"
+            tvCity.text = " ${artisan.city}"
+
+            // ★ Étoiles permanentes
+            if (artisan.reviewCount > 0) {
+                ratingBarCard.rating = artisan.averageRating / 2f
+                tvRatingCard.text = "%.1f/10 • %d avis".format(
+                    artisan.averageRating,
+                    artisan.reviewCount
+                )
+            } else {
+                ratingBarCard.rating = 0f
+                tvRatingCard.text = "Aucun avis"
+            }
+
             root.setOnClickListener { onClick(artisan) }
+            btnVoirProfil.setOnClickListener { onViewProfile(artisan) }
         }
     }
 

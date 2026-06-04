@@ -44,7 +44,7 @@ class CitizenHomeActivity : AppCompatActivity() {
     }
 
     private fun logout() {
-        // ✅ ORDRE CRITIQUE : arrêter Firestore AVANT signOut
+        //  ORDRE CRITIQUE : arrêter Firestore AVANT signOut
         unreadJob?.cancel()
         unreadJob = null
         chatViewModel.stopListening()  // ← coupe le Flow Firestore

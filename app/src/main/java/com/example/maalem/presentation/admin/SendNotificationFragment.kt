@@ -97,7 +97,7 @@ class SendNotificationFragment : Fragment() {
                 progressBar.isVisible = state is AdminUiState.Loading
                 when (state) {
                     is AdminUiState.ActionSuccess -> {
-                        Snackbar.make(layout, "✅ Notification envoyée !", Snackbar.LENGTH_SHORT).show()
+                        Snackbar.make(layout, " Notification envoyée !", Snackbar.LENGTH_SHORT).show()
                         etTitle.text?.clear()
                         etMessage.text?.clear()
                     }
