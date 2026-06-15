@@ -29,7 +29,7 @@
             android:layout_height="wrap_content"
             android:layout_gravity="end"
             android:textSize="10sp"
-            android:textColor="#C8C4D6"
+            android:textColor="@color/stroke_soft"
             android:layout_marginTop="4dp"/>
 
     </LinearLayout>

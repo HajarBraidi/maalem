@@ -17,7 +17,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="12sp"
-            android:textColor="#5B4FCF"
+            android:textColor="@color/emerald"
             android:textStyle="bold"
             android:layout_marginBottom="4dp"/>
 
@@ -27,7 +27,7 @@
             android:layout_height="wrap_content"
             android:background="@drawable/bg_message_received"
             android:padding="14dp"
-            android:textColor="#1A1A2E"
+            android:textColor="@color/text_primary"
             android:textSize="15sp"
             android:maxWidth="260dp"
             android:lineSpacingMultiplier="1.3"/>
@@ -37,7 +37,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textSize="10sp"
-            android:textColor="#C8C4D6"
+            android:textColor="@color/stroke_soft"
             android:layout_marginTop="4dp"/>
 
     </LinearLayout>

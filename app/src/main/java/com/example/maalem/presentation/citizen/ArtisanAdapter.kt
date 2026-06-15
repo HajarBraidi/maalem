@@ -32,7 +32,7 @@ class ArtisanAdapter(
 
             // ★ Étoiles permanentes
             if (artisan.reviewCount > 0) {
-                ratingBarCard.rating = artisan.averageRating / 2f
+                ratingBarCard.rating = (artisan.averageRating / 2.0).toFloat()
                 tvRatingCard.text = "%.1f/10 • %d avis".format(
                     artisan.averageRating,
                     artisan.reviewCount

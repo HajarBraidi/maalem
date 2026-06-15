@@ -38,7 +38,7 @@ class CitizenRepositoryImpl @Inject constructor(
                     isActive = doc.getBoolean("isActive") ?: true,
                     isValidated = doc.getBoolean("isValidated") ?: false,
                     cinPhotoBase64 = doc.getString("cinPhotoBase64") ?: "",
-                    averageRating = (doc.getDouble("averageRating") ?: 0.0).toFloat(),
+                    averageRating = doc.getDouble("averageRating") ?: 0.0,
                     reviewCount = (doc.getLong("reviewCount") ?: 0L).toInt()
                 )
             }
@@ -161,7 +161,7 @@ class CitizenRepositoryImpl @Inject constructor(
                 bio = doc.getString("bio") ?: "",
                 isValidated = doc.getBoolean("isValidated") ?: false,
 
-                averageRating = (doc.getDouble("averageRating") ?: 0.0).toFloat(),
+                averageRating = doc.getDouble("averageRating") ?: 0.0,
                 reviewCount = (doc.getLong("reviewCount") ?: 0L).toInt()
             )
             Result.success(artisan)

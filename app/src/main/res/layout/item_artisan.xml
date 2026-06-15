@@ -7,9 +7,9 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginVertical="8dp"
     app:cardCornerRadius="24dp"
-    app:cardElevation="4dp"
+    app:cardElevation="3dp"
     app:strokeWidth="0dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/surface_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -31,7 +31,8 @@
                 android:background="@drawable/bg_avatar_radius"
                 android:padding="8dp"
                 android:scaleType="centerCrop"
-                android:src="@drawable/ic_person"/>
+                android:src="@drawable/ic_person"
+                app:tint="@color/emerald" />
 
             <!-- Infos -->
             <LinearLayout
@@ -47,10 +48,10 @@
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:textSize="16sp"
                     android:textStyle="bold"
-                    android:fontFamily="@font/poppins_bold"/>
+                    android:fontFamily="@font/poppins_bold" />
 
                 <!-- Spécialité -->
                 <TextView
@@ -58,10 +59,10 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="2dp"
-                    android:textColor="#5B4FCF"
-                    android:textSize="13sp"/>
+                    android:textColor="@color/emerald"
+                    android:textSize="13sp" />
 
-                <!-- ★ Étoiles + note -->
+                <!-- Étoiles + note -->
                 <LinearLayout
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -77,8 +78,8 @@
                         android:numStars="5"
                         android:stepSize="0.1"
                         android:isIndicator="true"
-                        android:progressTint="#FFB300"
-                        android:rating="0"/>
+                        android:progressTint="@color/gold"
+                        android:rating="0" />
 
                     <TextView
                         android:id="@+id/tv_rating_card"
@@ -86,8 +87,8 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="6dp"
                         android:textSize="11sp"
-                        android:textColor="#787585"
-                        android:text="Aucun avis"/>
+                        android:textColor="@color/text_secondary"
+                        android:text="Aucun avis" />
 
                 </LinearLayout>
 
@@ -97,12 +98,12 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
-                    android:textColor="#787585"
-                    android:textSize="12sp"/>
+                    android:textColor="@color/text_secondary"
+                    android:textSize="12sp" />
 
             </LinearLayout>
 
-            <!-- Icône flèche -->
+            <!-- Icône -->
             <ImageView
                 android:layout_width="32dp"
                 android:layout_height="32dp"
@@ -110,7 +111,7 @@
                 android:background="@drawable/bg_category_icon_normal"
                 android:padding="6dp"
                 android:src="@drawable/ic_home"
-                app:tint="#5B4FCF"/>
+                app:tint="@color/emerald" />
 
         </LinearLayout>
 
@@ -119,7 +120,7 @@
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:layout_marginTop="16dp"
-            android:background="#E5E1EC"/>
+            android:background="@color/divider" />
 
         <!-- Ligne du bas : badge + bouton profil -->
         <LinearLayout
@@ -134,14 +135,14 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Artisan vérifié ✓"
-                android:textColor="#787585"
-                android:textSize="12sp"/>
+                android:textColor="@color/emerald"
+                android:textSize="12sp" />
 
             <LinearLayout
                 android:id="@+id/btn_voir_profil"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_category_icon_active"
+                android:background="@drawable/bg_btn_logout"
                 android:paddingHorizontal="14dp"
                 android:paddingVertical="6dp"
                 android:clickable="true"
@@ -151,9 +152,9 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Voir le profil"
-                    android:textColor="#5B4FCF"
+                    android:textColor="@color/terracotta"
                     android:textSize="12sp"
-                    android:textStyle="bold"/>
+                    android:textStyle="bold" />
 
             </LinearLayout>
 

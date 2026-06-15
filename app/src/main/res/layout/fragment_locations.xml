@@ -5,13 +5,13 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#F5F5F5">
+    android:background="@color/cream">
 
     <!-- Header -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="@drawable/bg_banner_purple"
+        android:background="@color/emerald"
         android:layout_marginHorizontal="16dp"
         android:layout_marginTop="16dp"
         android:padding="20dp"
@@ -66,7 +66,7 @@
             android:layout_height="wrap_content"
             android:text="Aucune localisation"
             android:textSize="15sp"
-            android:textColor="#888888"/>
+            android:textColor="@color/text_secondary"/>
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView

@@ -2,4 +2,39 @@
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
+
+    <color name="majorelle">#1A4B8C</color>        <!-- bleu Majorelle : headers, titres -->
+        <color name="terracotta">#C75B39</color>       <!-- terracotta : boutons d'action -->
+        <color name="emerald">#2E7D6B</color>          <!-- vert émeraude : accents, succès -->
+        <color name="gold">#E8C24A</color>             <!-- or : badges, étoiles, highlights -->
+
+        <!-- Fonds & surfaces -->
+        <color name="cream">#FBF7F0</color>            <!-- fond crème de l'app -->
+        <color name="surface_white">#FFFFFF</color>    <!-- cartes -->
+        <color name="surface_soft">#F4EFE6</color>     <!-- champs, zones secondaires -->
+
+        <!-- Textes -->
+        <color name="text_primary">#2A2521</color>     <!-- texte principal (presque noir chaud) -->
+        <color name="text_secondary">#7A726A</color>  <!-- texte secondaire / sous-titres -->
+        <color name="text_on_dark">#FFFFFF</color>     <!-- texte sur header coloré -->
+
+        <!-- États -->
+        <color name="success">#2E7D6B</color>
+        <color name="warning">#E8A23A</color>
+        <color name="error">#C0392B</color>
+
+        <!-- Bordures / séparateurs -->
+        <color name="divider">#E8E0D4</color>
+        <color name="stroke_soft">#E0D7C8</color>
+
+        <!-- Variantes claires (fonds d'icônes, chips) -->
+        <color name="majorelle_light">#E8EEF7</color>
+        <color name="terracotta_light">#F7E9E3</color>
+        <color name="emerald_light">#E4F0EC</color>
+        <color name="gold_light">#FBF3DA</color>
+
+        <!-- Dégradé header (vert profond façon zellige) -->
+        <color name="header_gradient_start">#2E7D6B</color>
+        <color name="header_gradient_end">#1F5A4D</color>
+
 </resources>

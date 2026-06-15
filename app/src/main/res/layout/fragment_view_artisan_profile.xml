@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/cream"
     android:scrollbars="none">
 
     <LinearLayout
@@ -13,37 +13,57 @@
         android:orientation="vertical"
         android:paddingBottom="32dp">
 
-        <!-- Header -->
-        <LinearLayout
+        <!-- ═══════════════════════════════════ -->
+        <!--    HEADER ZELLIGE (100dp)           -->
+        <!-- ═══════════════════════════════════ -->
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_banner_purple"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="20dp"
-            android:orientation="horizontal"
-            android:gravity="center_vertical">
+            android:layout_height="100dp"
+            android:background="@drawable/bg_header_zellige">
 
             <ImageView
-                android:id="@+id/iv_back"
-                android:layout_width="36dp"
-                android:layout_height="36dp"
-                android:src="@drawable/ic_home"
-                android:background="@drawable/bg_add_button"
-                android:padding="8dp"
-                android:layout_marginEnd="14dp"
-                app:tint="#5B4FCF"/>
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/zellige_bg"
+                android:scaleType="centerCrop"
+                android:alpha="0.22"
+                android:contentDescription="@null" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Profil Artisan"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/header_gradient_end"
+                android:alpha="0.45" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:paddingHorizontal="20dp"
+                android:orientation="horizontal"
+                android:gravity="center_vertical">
+
+                <ImageView
+                    android:id="@+id/iv_back"
+                    android:layout_width="36dp"
+                    android:layout_height="36dp"
+                    android:src="@drawable/ic_home"
+                    android:background="@drawable/bg_add_button"
+                    android:padding="8dp"
+                    android:layout_marginEnd="14dp"
+                    app:tint="@color/emerald" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Profil Artisan"
+                    android:textColor="@color/text_on_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -51,8 +71,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:indeterminateTint="#5B4FCF"
-            android:visibility="gone"/>
+            android:indeterminateTint="@color/emerald"
+            android:visibility="gone" />
 
         <!-- Carte infos -->
         <com.google.android.material.card.MaterialCardView
@@ -61,9 +81,9 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="4dp"
+            app:cardElevation="3dp"
             app:strokeWidth="0dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardBackgroundColor="@color/surface_white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -71,28 +91,25 @@
                 android:orientation="vertical"
                 android:padding="24dp">
 
-                <!-- Nom -->
                 <TextView
                     android:id="@+id/tv_name"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="22sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:fontFamily="@font/poppins_bold"
-                    android:layout_marginBottom="4dp"/>
+                    android:layout_marginBottom="4dp" />
 
-                <!-- Spécialité -->
                 <TextView
                     android:id="@+id/tv_specialty"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
-                    android:textColor="#5B4FCF"
+                    android:textColor="@color/emerald"
                     android:textStyle="bold"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp" />
 
-                <!-- ★ Note moyenne -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,8 +125,8 @@
                         android:numStars="5"
                         android:stepSize="0.1"
                         android:isIndicator="true"
-                        android:progressTint="#FFB300"
-                        android:rating="0"/>
+                        android:progressTint="@color/gold"
+                        android:rating="0" />
 
                     <TextView
                         android:id="@+id/tv_average_rating"
@@ -117,19 +134,17 @@
                         android:layout_height="wrap_content"
                         android:layout_marginStart="8dp"
                         android:textSize="13sp"
-                        android:textColor="#787585"
-                        android:text="Aucun avis"/>
+                        android:textColor="@color/text_secondary"
+                        android:text="Aucun avis" />
 
                 </LinearLayout>
 
-                <!-- Séparateur -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E5E1EC"
-                    android:layout_marginBottom="16dp"/>
+                    android:background="@color/divider"
+                    android:layout_marginBottom="16dp" />
 
-                <!-- Email -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -142,18 +157,17 @@
                         android:layout_height="18dp"
                         android:src="@drawable/ic_notifications"
                         android:layout_marginEnd="10dp"
-                        app:tint="#5B4FCF"/>
+                        app:tint="@color/emerald" />
 
                     <TextView
                         android:id="@+id/tv_email"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#474554"/>
+                        android:textColor="@color/text_primary" />
 
                 </LinearLayout>
 
-                <!-- Téléphone -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -166,18 +180,17 @@
                         android:layout_height="18dp"
                         android:src="@drawable/ic_info"
                         android:layout_marginEnd="10dp"
-                        app:tint="#5B4FCF"/>
+                        app:tint="@color/emerald" />
 
                     <TextView
                         android:id="@+id/tv_phone"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#474554"/>
+                        android:textColor="@color/text_primary" />
 
                 </LinearLayout>
 
-                <!-- Ville -->
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -190,82 +203,77 @@
                         android:layout_height="18dp"
                         android:src="@drawable/ic_location_on"
                         android:layout_marginEnd="10dp"
-                        app:tint="#5B4FCF"/>
+                        app:tint="@color/emerald" />
 
                     <TextView
                         android:id="@+id/tv_city"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:textSize="14sp"
-                        android:textColor="#474554"/>
+                        android:textColor="@color/text_primary" />
 
                 </LinearLayout>
 
-                <!-- Bio -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Bio :"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A2E"
-                    android:layout_marginBottom="8dp"/>
+                    android:textColor="@color/text_primary"
+                    android:layout_marginBottom="8dp" />
 
                 <TextView
                     android:id="@+id/tv_bio"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:textSize="13sp"
-                    android:textColor="#787585"
+                    android:textColor="@color/text_secondary"
                     android:lineSpacingMultiplier="1.4"
                     android:background="@drawable/bg_search_bar_light"
                     android:padding="12dp"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="20dp" />
 
-                <!-- Séparateur -->
                 <View
                     android:layout_width="match_parent"
                     android:layout_height="1dp"
-                    android:background="#E5E1EC"
-                    android:layout_marginBottom="16dp"/>
+                    android:background="@color/divider"
+                    android:layout_marginBottom="16dp" />
 
-                <!-- Bouton message -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_start_chat"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:background="@drawable/bg_button_gradient"
+                    android:background="@drawable/bg_btn_primary"
                     android:text="Envoyer un message"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/surface_white"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:stateListAnimator="@null"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp" />
 
-                <!-- ★ Bouton Voir les avis -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_see_reviews"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:background="@drawable/bg_category_icon_active"
+                    android:background="@drawable/bg_btn_logout"
                     android:text="Voir les avis"
-                    android:textColor="#5B4FCF"
+                    android:textColor="@color/terracotta"
                     android:textSize="14sp"
                     android:textStyle="bold"
                     android:stateListAnimator="@null"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp" />
 
-                <!-- ★ Bouton Laisser un avis -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_leave_review"
                     android:layout_width="match_parent"
                     android:layout_height="52dp"
-                    android:background="@drawable/bg_category_icon_active"
+                    android:background="@drawable/bg_btn_logout"
                     android:text="Laisser un avis"
-                    android:textColor="#5B4FCF"
+                    android:textColor="@color/terracotta"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:stateListAnimator="@null"/>
+                    android:stateListAnimator="@null" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>

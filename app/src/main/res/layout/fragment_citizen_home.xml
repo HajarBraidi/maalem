@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/cream"
     android:scrollbars="none">
 
     <LinearLayout
@@ -14,47 +14,76 @@
         android:paddingBottom="100dp">
 
         <!-- ═══════════════════════════════════ -->
-        <!--         HEADER BANNIÈRE             -->
+        <!--    HEADER ZELLIGE (hauteur fixe)     -->
         <!-- ═══════════════════════════════════ -->
-        <LinearLayout
+        <FrameLayout
+            android:layout_width="match_parent"
+            android:layout_height="130dp"
+            android:background="@drawable/bg_header_zellige">
+
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/zellige_bg"
+                android:scaleType="centerCrop"
+                android:alpha="0.22"
+                android:contentDescription="@null" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/header_gradient_end"
+                android:alpha="0.45" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="24dp">
+
+                <TextView
+                    android:id="@+id/tv_welcome"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Bonjour "
+                    android:textColor="@color/text_on_dark"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Trouvez votre maalem !"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="14sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
+
+        <!-- ═══════════════════════════════════ -->
+        <!--    CARTE MAP (arrondie)              -->
+        <!-- ═══════════════════════════════════ -->
+        <androidx.cardview.widget.CardView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_banner_purple"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
-            android:padding="24dp"
-            android:orientation="vertical">
+            app:cardCornerRadius="20dp"
+            app:cardElevation="2dp">
 
-            <TextView
-                android:id="@+id/tv_welcome"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Bonjour "
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+            <org.osmdroid.views.MapView
+                android:id="@+id/mapView"
+                android:layout_width="match_parent"
+                android:layout_height="220dp" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Trouvez votre maalem !"
-                android:textColor="#CCFFFFFF"
-                android:textSize="14sp"/>
-
-        </LinearLayout>
-
-        <org.osmdroid.views.MapView
-            android:id="@+id/mapView"
-            android:layout_width="match_parent"
-            android:layout_height="220dp"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="12dp"
-            android:layout_marginBottom="12dp" />
+        </androidx.cardview.widget.CardView>
 
         <!-- ═══════════════════════════════════ -->
-        <!--         FILTRE CATÉGORIES           -->
+        <!--    FILTRE CATÉGORIES (ChipGroup)     -->
         <!-- ═══════════════════════════════════ -->
         <TextView
             android:layout_width="wrap_content"
@@ -63,10 +92,8 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
             android:text="Spécialités"
-            android:textColor="#1A1A2E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/poppins_bold"/>
+            style="@style/Maalem.Text.Section"
+            android:fontFamily="@font/poppins_bold" />
 
         <HorizontalScrollView
             android:layout_width="match_parent"
@@ -75,16 +102,17 @@
             android:paddingVertical="4dp"
             android:scrollbars="none">
 
-            <LinearLayout
+            <com.google.android.material.chip.ChipGroup
                 android:id="@+id/ll_categories"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:orientation="horizontal"/>
+                app:singleSelection="true"
+                app:singleLine="true" />
 
         </HorizontalScrollView>
 
         <!-- ═══════════════════════════════════ -->
-        <!--         TITRE SECTION ARTISANS      -->
+        <!--    TITRE SECTION ARTISANS            -->
         <!-- ═══════════════════════════════════ -->
         <TextView
             android:layout_width="wrap_content"
@@ -93,13 +121,11 @@
             android:layout_marginTop="24dp"
             android:layout_marginBottom="8dp"
             android:text="Artisans disponibles"
-            android:textColor="#1A1A2E"
-            android:textSize="16sp"
-            android:textStyle="bold"
-            android:fontFamily="@font/poppins_bold"/>
+            style="@style/Maalem.Text.Section"
+            android:fontFamily="@font/poppins_bold" />
 
         <!-- ═══════════════════════════════════ -->
-        <!--         LOADING                     -->
+        <!--    LOADING                           -->
         <!-- ═══════════════════════════════════ -->
         <ProgressBar
             android:id="@+id/progress_bar"
@@ -107,11 +133,11 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="32dp"
-            android:indeterminateTint="#5B4FCF"
-            android:visibility="gone"/>
+            android:indeterminateTint="@color/emerald"
+            android:visibility="gone" />
 
         <!-- ═══════════════════════════════════ -->
-        <!--         LISTE ARTISANS              -->
+        <!--    LISTE ARTISANS                    -->
         <!-- ═══════════════════════════════════ -->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/rv_artisans"
@@ -119,7 +145,7 @@
             android:layout_height="wrap_content"
             android:nestedScrollingEnabled="false"
             android:paddingHorizontal="8dp"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false" />
 
     </LinearLayout>
 </androidx.core.widget.NestedScrollView>

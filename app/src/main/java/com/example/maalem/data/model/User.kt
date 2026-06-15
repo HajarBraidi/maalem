@@ -1,5 +1,6 @@
 package com.example.maalem.data.model
 
+
 open class User(
     open val uid: String = "",
     open val name: String = "",
@@ -50,8 +51,8 @@ data class Artisan(
     val isValidated: Boolean = false,
     val cinPhotoBase64: String = "",
 
-    // ← NOUVEAU
-    val averageRating: Float = 0f,   // moyenne sur 10
+
+    val averageRating: Double = 0.0,   // moyenne sur 10
     val reviewCount: Int = 0         // nombre d'avis
 ) : User(uid, name, email, phone, role, isActive, createdAt)
 

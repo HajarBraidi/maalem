@@ -9,7 +9,7 @@
     app:cardCornerRadius="20dp"
     app:cardElevation="3dp"
     app:strokeWidth="0dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/surface_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -35,7 +35,7 @@
                 android:textStyle="bold"
                 android:textColor="#FFFFFF"
                 android:background="@drawable/bg_avatar_radius"
-                android:backgroundTint="#5B4FCF"
+                android:backgroundTint="@color/emerald"
                 android:layout_marginEnd="12dp"/>
 
             <LinearLayout
@@ -50,14 +50,14 @@
                     android:layout_height="wrap_content"
                     android:textSize="14sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A2E"/>
+                    android:textColor="@color/text_primary"/>
 
                 <TextView
                     android:id="@+id/tv_date"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:textSize="11sp"
-                    android:textColor="#BDBDBD"
+                    android:textColor="@color/text_secondary"
                     android:layout_marginTop="2dp"/>
 
             </LinearLayout>
@@ -67,12 +67,12 @@
                 android:id="@+id/tv_rating_badge"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:background="@drawable/bg_category_icon_active"
+                android:background="@drawable/bg_btn_logout"
                 android:paddingHorizontal="10dp"
                 android:paddingVertical="4dp"
                 android:textSize="12sp"
                 android:textStyle="bold"
-                android:textColor="#5B4FCF"/>
+                android:textColor="@color/terracotta"/>
 
         </LinearLayout>
 
@@ -85,7 +85,7 @@
             android:numStars="5"
             android:stepSize="0.5"
             android:isIndicator="true"
-            android:progressTint="#FFB300"
+            android:progressTint="@color/gold"
             android:layout_marginBottom="10dp"/>
 
         <!-- Commentaire -->
@@ -94,7 +94,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:textSize="13sp"
-            android:textColor="#474554"
+            android:textColor="@color/text_secondary"
             android:lineSpacingMultiplier="1.4"
             android:background="@drawable/bg_search_bar_light"
             android:padding="12dp"/>

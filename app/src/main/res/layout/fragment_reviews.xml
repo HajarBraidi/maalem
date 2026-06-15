@@ -5,94 +5,113 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="@color/cream">
 
-    <!-- Header -->
-    <LinearLayout
+    <!-- ═══════════════════════════════════ -->
+    <!--    HEADER ZELLIGE                   -->
+    <!-- ═══════════════════════════════════ -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_banner_purple"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:padding="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_height="110dp"
+        android:background="@drawable/bg_header_zellige">
 
         <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_home"
-            android:background="@drawable/bg_add_button"
-            android:padding="8dp"
-            android:layout_marginEnd="14dp"
-            app:tint="#5B4FCF"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/zellige_bg"
+            android:scaleType="centerCrop"
+            android:alpha="0.22"
+            android:contentDescription="@null" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/header_gradient_end"
+            android:alpha="0.45" />
 
         <LinearLayout
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:orientation="vertical">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <TextView
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_home"
+                android:background="@drawable/bg_add_button"
+                android:padding="8dp"
+                android:layout_marginEnd="14dp"
+                app:tint="@color/emerald" />
+
+            <LinearLayout
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:orientation="vertical">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Avis"
+                    android:textColor="@color/text_on_dark"
+                    android:textSize="18sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold" />
+
+                <TextView
+                    android:id="@+id/tv_artisan_name_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+            <!-- Moyenne globale -->
+            <LinearLayout
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Avis"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+                android:orientation="vertical"
+                android:gravity="center">
 
-            <TextView
-                android:id="@+id/tv_artisan_name_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#E0D8FF"
-                android:textSize="13sp"/>
+                <RatingBar
+                    android:id="@+id/rating_bar_header"
+                    style="?android:attr/ratingBarStyleSmall"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:numStars="5"
+                    android:stepSize="0.1"
+                    android:isIndicator="true"
+                    android:progressTint="@color/gold"
+                    android:rating="0" />
+
+                <TextView
+                    android:id="@+id/tv_header_average"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="11sp"
+                    android:gravity="center"
+                    android:layout_marginTop="2dp"
+                    android:text="Aucun avis" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
-        <!-- Moyenne globale dans le header -->
-        <LinearLayout
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:orientation="vertical"
-            android:gravity="center">
+    </FrameLayout>
 
-            <RatingBar
-                android:id="@+id/rating_bar_header"
-                style="?android:attr/ratingBarStyleSmall"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:numStars="5"
-                android:stepSize="0.1"
-                android:isIndicator="true"
-                android:progressTint="#FFB300"
-                android:rating="0"/>
-
-            <TextView
-                android:id="@+id/tv_header_average"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:textColor="#E0D8FF"
-                android:textSize="11sp"
-                android:gravity="center"
-                android:layout_marginTop="2dp"
-                android:text="Aucun avis"/>
-
-        </LinearLayout>
-
-    </LinearLayout>
-
-    <!-- ProgressBar -->
     <ProgressBar
         android:id="@+id/progress_bar"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="32dp"
-        android:indeterminateTint="#5B4FCF"
-        android:visibility="gone"/>
+        android:indeterminateTint="@color/emerald"
+        android:visibility="gone" />
 
     <!-- État vide -->
     <LinearLayout
@@ -109,27 +128,26 @@
             android:layout_height="wrap_content"
             android:text="😕"
             android:textSize="48sp"
-            android:layout_marginBottom="12dp"/>
+            android:layout_marginBottom="12dp" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Aucun avis pour le moment"
             android:textSize="15sp"
-            android:textColor="#787585"
-            android:textStyle="bold"/>
+            android:textColor="@color/text_secondary"
+            android:textStyle="bold" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Soyez le premier à laisser un avis !"
             android:textSize="13sp"
-            android:textColor="#BDBDBD"
-            android:layout_marginTop="6dp"/>
+            android:textColor="@color/text_secondary"
+            android:layout_marginTop="6dp" />
 
     </LinearLayout>
 
-    <!-- Liste des avis -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_reviews"
         android:layout_width="match_parent"
@@ -137,6 +155,6 @@
         android:layout_weight="1"
         android:paddingTop="8dp"
         android:paddingBottom="16dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false" />
 
 </LinearLayout>

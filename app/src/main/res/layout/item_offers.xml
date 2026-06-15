@@ -9,7 +9,7 @@
     app:cardCornerRadius="24dp"
     app:cardElevation="4dp"
     app:strokeWidth="0dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/surface_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -32,7 +32,7 @@
                 android:layout_weight="1"
                 android:textSize="16sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"
+                android:textColor="@color/text_primary"
                 android:fontFamily="@font/poppins_bold"/>
 
             <TextView
@@ -53,7 +53,7 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal"
             android:gravity="center_vertical"
-            android:background="@drawable/bg_category_icon_active"
+            android:background="@color/terracotta_light"
             android:paddingHorizontal="14dp"
             android:paddingVertical="10dp"
             android:layout_marginBottom="10dp">
@@ -63,7 +63,7 @@
                 android:layout_height="18dp"
                 android:src="@drawable/ic_star_filled"
                 android:layout_marginEnd="8dp"
-                app:tint="#5B4FCF"/>
+                app:tint="@color/terracotta"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -71,14 +71,14 @@
                 android:text="Prix : "
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"/>
+                android:textColor="@color/text_primary"/>
 
             <TextView
                 android:id="@+id/tv_price"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="#5B4FCF"
+                android:textColor="@color/terracotta"
                 android:textStyle="bold"/>
 
         </LinearLayout>
@@ -96,7 +96,7 @@
                 android:layout_height="16dp"
                 android:src="@drawable/ic_info"
                 android:layout_marginEnd="8dp"
-                app:tint="#787585"/>
+                app:tint="@color/text_secondary"/>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -104,14 +104,14 @@
                 android:text="Délai : "
                 android:textSize="14sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"/>
+                android:textColor="@color/text_primary"/>
 
             <TextView
                 android:id="@+id/tv_delay"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="14sp"
-                android:textColor="#787585"/>
+                android:textColor="@color/text_secondary"/>
 
         </LinearLayout>
 
@@ -128,7 +128,7 @@
                 android:text="Message :"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:textColor="#1A1A2E"
+                android:textColor="@color/text_primary"
                 android:layout_marginBottom="6dp"/>
 
             <TextView
@@ -136,7 +136,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#787585"
+                android:textColor="@color/text_secondary"
                 android:lineSpacingMultiplier="1.4"
                 android:background="@drawable/bg_search_bar_light"
                 android:padding="12dp"/>
@@ -147,7 +147,7 @@
         <View
             android:layout_width="match_parent"
             android:layout_height="1dp"
-            android:background="#E5E1EC"
+            android:background="@color/divider"
             android:layout_marginBottom="14dp"/>
 
         <!-- Bouton profil artisan -->
@@ -155,7 +155,8 @@
             android:id="@+id/btn_view_artisan"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/bg_button_gradient"
+            android:background="@drawable/bg_btn_primary"
+            android:backgroundTint="@null"
             android:text="Voir profil artisan"
             android:textColor="#FFFFFF"
             android:textSize="13sp"
@@ -168,7 +169,8 @@
             android:id="@+id/btn_chat_artisan"
             android:layout_width="match_parent"
             android:layout_height="48dp"
-            android:background="@drawable/bg_button_gradient"
+            android:background="@drawable/bg_btn_primary"
+            android:backgroundTint="@null"
             android:text="Contacter l'artisan"
             android:textColor="#FFFFFF"
             android:textSize="13sp"
@@ -188,7 +190,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_button_green"
+                android:background="@color/emerald"
                 android:text="Accepter"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp"
@@ -201,7 +203,7 @@
                 android:layout_width="0dp"
                 android:layout_height="48dp"
                 android:layout_weight="1"
-                android:background="@drawable/bg_button_logout"
+                android:background="@color/error"
                 android:text="Refuser"
                 android:textColor="#FFFFFF"
                 android:textSize="13sp"

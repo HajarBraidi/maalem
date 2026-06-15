@@ -4,7 +4,7 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA">
+    android:background="@color/cream">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -17,48 +17,64 @@
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:background="@drawable/bg_banner_purple"
+            android:background="@color/emerald"
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             android:padding="20dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+            android:orientation="vertical">
 
+            <!-- Ligne 1 : Titre seul, en entier -->
             <TextView
-                android:layout_width="0dp"
+                android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_weight="1"
                 android:text="Spécialités des artisans"
-                android:textColor="#FFFFFF"
-                android:textSize="18sp"
+                android:textColor="@color/text_on_dark"
+                android:textSize="19sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_bold" />
 
-            <!-- Bouton Localisations -->
-            <com.google.android.material.button.MaterialButton
-                android:id="@+id/btn_locations"
-                android:layout_width="wrap_content"
-                android:layout_height="40dp"
-                android:text="Lieux"
-                android:textAllCaps="false"
-                android:textSize="12sp"
-                android:textColor="#5B4FCF"
-                app:backgroundTint="#FFFFFF"
-                app:cornerRadius="20dp"
-                app:icon="@android:drawable/ic_dialog_map"
-                app:iconTint="#5B4FCF"
-                android:layout_marginEnd="10dp"/>
-
-            <!-- Bouton ajouter spécialité -->
-            <com.google.android.material.floatingactionbutton.FloatingActionButton
-                android:id="@+id/fab_add"
-                android:layout_width="wrap_content"
+            <!-- Ligne 2 : Deux boutons identiques alignés à droite -->
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:src="@drawable/ic_add"
-                app:fabSize="mini"
-                app:backgroundTint="#FFFFFF"
-                app:tint="#5B4FCF"
-                app:elevation="2dp"/>
+                android:orientation="horizontal"
+                android:gravity="end|center_vertical"
+                android:layout_marginTop="16dp">
+
+                <!-- Bouton Lieux -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/btn_locations"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="Lieux"
+                    android:textAllCaps="false"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/emerald"
+                    app:backgroundTint="@color/surface_white"
+                    app:cornerRadius="21dp"
+                    app:icon="@android:drawable/ic_dialog_map"
+                    app:iconTint="@color/emerald"
+                    app:iconSize="18dp"
+                    android:layout_marginEnd="12dp" />
+
+                <!-- Bouton Spécialités (ajouter) - même style que Lieux -->
+                <com.google.android.material.button.MaterialButton
+                    android:id="@+id/fab_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="42dp"
+                    android:text="Spécialités"
+                    android:textAllCaps="false"
+                    android:textSize="13sp"
+                    android:textStyle="bold"
+                    android:textColor="@color/emerald"
+                    app:backgroundTint="@color/surface_white"
+                    app:cornerRadius="21dp"
+                    app:icon="@drawable/ic_add"
+                    app:iconTint="@color/emerald"
+                    app:iconSize="18dp" />
+
+            </LinearLayout>
 
         </LinearLayout>
 
@@ -71,8 +87,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_marginTop="40dp"
-            android:indeterminateTint="#5B4FCF"
-            android:visibility="gone"/>
+            android:indeterminateTint="@color/emerald"
+            android:visibility="gone" />
 
         <!-- ═══════════════════════════════════ -->
         <!--           LISTE VIDE                -->
@@ -90,26 +106,26 @@
                 android:layout_width="64dp"
                 android:layout_height="64dp"
                 android:src="@drawable/ic_category_empty"
-                app:tint="#C8C4D6"/>
+                app:tint="@color/stroke_soft" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="16dp"
                 android:text="Aucune catégorie trouvée"
-                android:textColor="#787585"
+                android:textColor="@color/text_secondary"
                 android:textSize="15sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_bold" />
 
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="6dp"
                 android:text="Ajoutez une nouvelle catégorie\nen appuyant sur le bouton +"
-                android:textColor="#ABABAB"
+                android:textColor="@color/text_secondary"
                 android:textSize="13sp"
-                android:gravity="center"/>
+                android:gravity="center" />
 
         </LinearLayout>
 
@@ -124,7 +140,7 @@
             android:layout_marginTop="12dp"
             android:paddingHorizontal="16dp"
             android:paddingVertical="8dp"
-            android:clipToPadding="false"/>
+            android:clipToPadding="false" />
 
     </LinearLayout>
 

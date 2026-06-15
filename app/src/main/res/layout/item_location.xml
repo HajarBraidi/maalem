@@ -34,7 +34,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#888888"/>
+                android:textColor="@color/text_secondary"/>
         </LinearLayout>
 
         <ImageButton
@@ -43,6 +43,6 @@
             android:layout_height="40dp"
             android:src="@android:drawable/ic_menu_close_clear_cancel"
             android:padding="8dp"
-            app:tint="#FFFFFF"/>
+            app:tint="@color/error"/>
     </LinearLayout>
 </androidx.cardview.widget.CardView>

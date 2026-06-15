@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Grande rosace zellige (style sandokti) : étoile à 16 pétales
+  rayonnant depuis un octogone central. Dessin vectoriel pur,
+  aucun bitmap = aucun crash. La couleur se règle via android:tint.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="280dp"
+    android:height="280dp"
+    android:viewportWidth="200"
+    android:viewportHeight="200">
+
+    <!-- Pétales rayonnants (16 branches façon rosace) -->
+    <group android:name="rosace" android:pivotX="100" android:pivotY="100">
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M100,18 L108,70 L92,70 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M100,182 L108,130 L92,130 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M18,100 L70,108 L70,92 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M182,100 L130,108 L130,92 Z" />
+
+        <!-- diagonales -->
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M42,42 L82,78 L78,82 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M158,42 L122,78 L118,82 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M42,158 L82,122 L78,118 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M158,158 L122,122 L118,118 Z" />
+
+        <!-- demi-diagonales (16 branches) -->
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M70,28 L96,74 L88,76 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M130,28 L104,74 L112,76 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M70,172 L96,126 L88,124 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M130,172 L104,126 L112,124 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M28,70 L74,96 L76,88 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M28,130 L74,104 L76,112 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M172,70 L126,96 L124,88 Z" />
+        <path android:fillColor="#FFFFFF"
+            android:pathData="M172,130 L126,104 L124,112 Z" />
+    </group>
+
+    <!-- Octogone central -->
+    <path android:fillColor="#FFFFFF"
+        android:pathData="M100,75 L118,82 L125,100 L118,118 L100,125 L82,118 L75,100 L82,82 Z" />
+
+    <!-- Cercle creux au centre (effet khatam) -->
+    <path android:fillColor="#00000000"
+        android:strokeColor="#FFFFFF" android:strokeWidth="3"
+        android:pathData="M100,88 A12,12 0 1,1 99.9,88 Z" />
+
+</vector>

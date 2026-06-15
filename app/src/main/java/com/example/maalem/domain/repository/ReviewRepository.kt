@@ -72,8 +72,7 @@ class ReviewRepository @Inject constructor(
         }
 
         val count = reviews.size
-        val average = if (count > 0) reviews.map { it.rating }.average().toFloat() else 0f
-
+        val average = if (count > 0) reviews.map { it.rating }.average() else 0.0
         firestore.collection("users").document(artisanId)
             .update(
                 mapOf(

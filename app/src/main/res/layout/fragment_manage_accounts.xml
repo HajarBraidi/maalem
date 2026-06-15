@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="@color/cream">
 
     <!-- Header -->
     <LinearLayout
@@ -15,13 +15,13 @@
         android:paddingHorizontal="18dp"
         android:paddingTop="22dp"
         android:paddingBottom="14dp"
-        android:background="#FAFAFA">
+        android:background="@color/cream">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Gestion des comptes"
-            android:textColor="#121212"
+            android:textColor="@color/text_primary"
             android:textSize="24sp"
             android:textStyle="bold"/>
 
@@ -29,7 +29,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Consulter et gérer les utilisateurs"
-            android:textColor="#6B7280"
+            android:textColor="@color/text_secondary"
             android:textSize="13sp"
             android:layout_marginTop="4dp"/>
     </LinearLayout>
@@ -44,11 +44,11 @@
         android:background="#FFFFFF"
         app:tabGravity="fill"
         app:tabMode="fixed"
-        app:tabSelectedTextColor="#5B4FCF"
-        app:tabTextColor="#6B7280"
-        app:tabIndicatorColor="#5B4FCF"
+        app:tabSelectedTextColor="@color/emerald"
+        app:tabTextColor="@color/text_secondary"
+        app:tabIndicatorColor="@color/emerald"
         app:tabIndicatorHeight="3dp"
-        app:tabRippleColor="#EEEAFE"/>
+        app:tabRippleColor="@color/emerald_light"/>
 
     <!-- Loading -->
     <ProgressBar
@@ -75,7 +75,7 @@
             android:gravity="center"
             android:text="📭"
             android:textSize="42sp"
-            android:background="#F1EEFF"/>
+            android:background="@color/emerald_light"/>
 
         <TextView
             android:layout_width="wrap_content"
@@ -83,7 +83,7 @@
             android:text="Aucun utilisateur trouvé"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:textColor="#374151"
+            android:textColor="@color/text_primary"
             android:layout_marginTop="12dp"/>
     </LinearLayout>
 

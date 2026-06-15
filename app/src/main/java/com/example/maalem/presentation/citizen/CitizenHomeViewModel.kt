@@ -18,6 +18,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.tasks.await
 import javax.inject.Inject
 import android.util.Log
+import com.example.maalem.domain.repository.ReviewRepository
 
 data class NearbyArtisan(
     val artisan: Artisan,
@@ -58,7 +59,7 @@ class CitizenHomeViewModel @Inject constructor(
     private val createRequestUseCase: CreateRequestUseCase,
     private val auth: FirebaseAuth,
     private val firestore: FirebaseFirestore,
-    private val reviewRepository: com.example.maalem.domain.repository.ReviewRepository
+    private val reviewRepository: ReviewRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<CitizenUiState>(CitizenUiState.Idle)

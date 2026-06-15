@@ -4,49 +4,68 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
-    android:paddingBottom="32dp"
+    android:background="@color/cream"
     android:clipToPadding="false"
     android:scrollbars="none">
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="vertical">
+        android:orientation="vertical"
+        android:paddingBottom="32dp">
 
         <!-- ═══════════════════════════════════ -->
-        <!--         HEADER BANNIÈRE             -->
+        <!--    HEADER ZELLIGE (130dp)           -->
         <!-- ═══════════════════════════════════ -->
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_banner_purple"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:padding="24dp"
-            android:orientation="vertical">
+            android:layout_height="130dp"
+            android:background="@drawable/bg_header_zellige">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Nouvelle demande de service"
-                android:textColor="#FFFFFF"
-                android:textSize="22sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/zellige_bg"
+                android:scaleType="centerCrop"
+                android:alpha="0.22"
+                android:contentDescription="@null" />
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:text="Décrivez votre besoin, on trouve le bon artisan."
-                android:textColor="#CCFFFFFF"
-                android:textSize="13sp"/>
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/header_gradient_end"
+                android:alpha="0.45" />
 
-        </LinearLayout>
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:orientation="vertical"
+                android:gravity="center_vertical"
+                android:paddingHorizontal="24dp">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Nouvelle demande"
+                    android:textColor="@color/text_on_dark"
+                    android:textSize="22sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="4dp"
+                    android:text="Décrivez votre besoin, on trouve le bon artisan."
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <!-- ═══════════════════════════════════ -->
-        <!--         CHAMPS DU FORMULAIRE        -->
+        <!--    FORMULAIRE                       -->
         <!-- ═══════════════════════════════════ -->
         <LinearLayout
             android:layout_width="match_parent"
@@ -55,61 +74,57 @@
             android:paddingHorizontal="16dp"
             android:paddingTop="24dp">
 
-            <!-- Label Titre -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Titre de la demande de service"
-                android:textColor="#1A1A2E"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="6dp"/>
+                android:layout_marginBottom="6dp" />
 
-            <!-- Champ Titre — ID inchangé -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ex: Fuite d'eau sous l'évier"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                app:boxBackgroundColor="#F3F4F6"
+                app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="#5B4FCF"
+                app:boxStrokeColor="@color/emerald"
                 android:layout_marginBottom="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_title"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Label Description -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Description du problème"
-                android:textColor="#1A1A2E"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="6dp"/>
+                android:layout_marginBottom="6dp" />
 
-            <!-- Champ Description — ID inchangé -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Expliquez les symptômes, la panne, les détails..."
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                app:boxBackgroundColor="#F3F4F6"
+                app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="#5B4FCF"
+                app:boxStrokeColor="@color/emerald"
                 android:layout_marginBottom="16dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_description"
@@ -117,94 +132,88 @@
                     android:layout_height="wrap_content"
                     android:inputType="textMultiLine"
                     android:lines="4"
-                    android:gravity="top"/>
+                    android:gravity="top" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Label Catégorie -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Spécialité"
-                android:textColor="#1A1A2E"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="6dp"/>
+                android:layout_marginBottom="6dp" />
 
-            <!-- Champ Catégorie — ID inchangé -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Sélectionnez un service"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
-                app:boxBackgroundColor="#F3F4F6"
+                app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="#5B4FCF"
+                app:boxStrokeColor="@color/emerald"
                 android:layout_marginBottom="16dp">
                 <AutoCompleteTextView
                     android:id="@+id/et_category"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false"/>
+                    android:focusable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- Label Ville -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:text="Ville d'intervention"
-                android:textColor="#1A1A2E"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"
                 android:textStyle="bold"
-                android:layout_marginBottom="6dp"/>
+                android:layout_marginBottom="6dp" />
 
-            <!-- Champ Ville — ID inchangé -->
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="Ex: Casablanca"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                app:boxBackgroundColor="#F3F4F6"
+                app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
                 app:boxCornerRadiusBottomStart="16dp"
                 app:boxCornerRadiusBottomEnd="16dp"
                 app:boxStrokeWidth="0dp"
                 app:boxStrokeWidthFocused="2dp"
-                app:boxStrokeColor="#5B4FCF"
+                app:boxStrokeColor="@color/emerald"
                 android:layout_marginBottom="28dp">
                 <com.google.android.material.textfield.TextInputEditText
                     android:id="@+id/et_city"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"/>
+                    android:layout_height="wrap_content" />
             </com.google.android.material.textfield.TextInputLayout>
 
-            <!-- ProgressBar — ID inchangé -->
             <ProgressBar
                 android:id="@+id/progress_bar"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center"
-                android:indeterminateTint="#5B4FCF"
+                android:indeterminateTint="@color/emerald"
                 android:layout_marginBottom="16dp"
-                android:visibility="gone"/>
+                android:visibility="gone" />
 
-            <!-- Bouton Submit — ID inchangé -->
             <androidx.appcompat.widget.AppCompatButton
                 android:id="@+id/btn_submit"
                 android:layout_width="match_parent"
                 android:layout_height="60dp"
-                android:background="@drawable/bg_button_gradient"
+                android:background="@drawable/bg_btn_primary"
                 android:text="Envoyer la demande de service"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/surface_white"
                 android:textSize="15sp"
                 android:textStyle="bold"
                 android:stateListAnimator="@null"
-                android:layout_marginBottom="16dp"/>
+                android:layout_marginBottom="16dp" />
 
         </LinearLayout>
     </LinearLayout>

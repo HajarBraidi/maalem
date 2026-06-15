@@ -5,52 +5,72 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="@color/cream">
 
-    <!-- Header -->
-    <LinearLayout
+    <!-- ═══════════════════════════════════ -->
+    <!--    HEADER ZELLIGE                   -->
+    <!-- ═══════════════════════════════════ -->
+    <FrameLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/bg_banner_purple"
-        android:layout_marginHorizontal="16dp"
-        android:layout_marginTop="16dp"
-        android:padding="20dp"
-        android:orientation="horizontal"
-        android:gravity="center_vertical">
+        android:layout_height="110dp"
+        android:background="@drawable/bg_header_zellige">
 
         <ImageView
-            android:id="@+id/iv_back"
-            android:layout_width="36dp"
-            android:layout_height="36dp"
-            android:src="@drawable/ic_home"
-            android:background="@drawable/bg_add_button"
-            android:padding="8dp"
-            android:layout_marginEnd="14dp"
-            app:tint="#5B4FCF"/>
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:src="@drawable/zellige_bg"
+            android:scaleType="centerCrop"
+            android:alpha="0.22"
+            android:contentDescription="@null" />
+
+        <View
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="@color/header_gradient_end"
+            android:alpha="0.45" />
 
         <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical">
+            android:layout_height="match_parent"
+            android:padding="20dp"
+            android:orientation="horizontal"
+            android:gravity="center_vertical">
 
-            <TextView
-                android:id="@+id/tv_request_title"
-                android:layout_width="wrap_content"
+            <ImageView
+                android:id="@+id/iv_back"
+                android:layout_width="36dp"
+                android:layout_height="36dp"
+                android:src="@drawable/ic_home"
+                android:background="@drawable/bg_add_button"
+                android:padding="8dp"
+                android:layout_marginEnd="14dp"
+                app:tint="@color/emerald" />
+
+            <LinearLayout
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:textColor="#FFFFFF"
-                android:textSize="16sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+                android:orientation="vertical">
 
-            <TextView
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Offres de service reçues"
-                android:textColor="#CCFFFFFF"
-                android:textSize="13sp"/>
+                <TextView
+                    android:id="@+id/tv_request_title"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:textColor="@color/text_on_dark"
+                    android:textSize="16sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold" />
 
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="Offres de service reçues"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
         </LinearLayout>
-    </LinearLayout>
+
+    </FrameLayout>
 
     <ProgressBar
         android:id="@+id/progress_bar"
@@ -58,8 +78,8 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center"
         android:layout_marginTop="40dp"
-        android:indeterminateTint="#5B4FCF"
-        android:visibility="gone"/>
+        android:indeterminateTint="@color/emerald"
+        android:visibility="gone" />
 
     <LinearLayout
         android:id="@+id/layout_empty"
@@ -74,7 +94,7 @@
             android:layout_width="64dp"
             android:layout_height="64dp"
             android:src="@drawable/ic_category_empty"
-            app:tint="#C8C4D6"/>
+            app:tint="@color/stroke_soft" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -82,10 +102,10 @@
             android:layout_marginTop="16dp"
             android:text="Aucune offre reçue pour cette demande de service"
             android:textSize="15sp"
-            android:textColor="#787585"
+            android:textColor="@color/text_secondary"
             android:textStyle="bold"
             android:gravity="center"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
     </LinearLayout>
 
@@ -95,6 +115,6 @@
         android:layout_height="match_parent"
         android:paddingHorizontal="8dp"
         android:paddingVertical="12dp"
-        android:clipToPadding="false"/>
+        android:clipToPadding="false" />
 
 </LinearLayout>

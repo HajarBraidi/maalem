@@ -6,6 +6,7 @@ import com.example.maalem.data.model.Artisan
 import com.example.maalem.data.model.Offer
 import com.example.maalem.data.model.Request
 import com.example.maalem.domain.repository.ArtisanRepository
+import com.example.maalem.domain.repository.ReviewRepository
 import com.example.maalem.domain.usecase.SendOfferUseCase
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -35,7 +36,7 @@ class ArtisanHomeViewModel @Inject constructor(
     private val artisanRepository: ArtisanRepository,
     private val sendOfferUseCase: SendOfferUseCase,
     private val auth: FirebaseAuth,
-    private val reviewRepository: com.example.maalem.domain.repository.ReviewRepository
+    private val reviewRepository: ReviewRepository
 ) : ViewModel() {
 
     private val _state = MutableStateFlow<ArtisanUiState>(ArtisanUiState.Idle)

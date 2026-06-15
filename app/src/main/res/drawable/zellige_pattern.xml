@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!--
+  Motif zellige : étoile à 8 branches (khatam) répétée.
+  À utiliser en filigrane derrière les headers avec android:alpha="0.10"
+  La couleur se règle via android:tint sur l'ImageView qui l'affiche.
+-->
+<vector xmlns:android="http://schemas.android.com/apk/res/android"
+    android:width="120dp"
+    android:height="120dp"
+    android:viewportWidth="120"
+    android:viewportHeight="120"
+    android:tint="@color/surface_white">
+
+    <!-- Étoile à 8 branches centrale -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M60,10 L70,40 L100,30 L80,55 L110,60 L80,65 L100,90 L70,80 L60,110 L50,80 L20,90 L40,65 L10,60 L40,55 L20,30 L50,40 Z" />
+
+    <!-- Quart d'étoile coin haut-gauche (pour effet de répétition) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M0,0 L8,18 L0,30 L-12,18 Z" />
+
+    <!-- Petits losanges aux angles (lien entre étoiles) -->
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M110,10 L118,20 L110,30 L102,20 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M10,110 L18,100 L10,90 L2,100 Z" />
+    <path
+        android:fillColor="#FFFFFF"
+        android:pathData="M110,110 L118,100 L110,90 L102,100 Z" />
+
+</vector>

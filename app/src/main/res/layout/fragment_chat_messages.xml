@@ -5,47 +5,46 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="#FAFAFA">
+    android:background="@color/cream">
 
     <!-- ═══════════════════════════════════ -->
-    <!--         HEADER                      -->
+    <!--    HEADER (vert épuré)              -->
     <!-- ═══════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:background="#FFFFFF"
+        android:background="@color/emerald"
         android:paddingHorizontal="16dp"
         android:paddingVertical="14dp"
         android:orientation="horizontal"
         android:gravity="center_vertical"
         android:elevation="4dp">
 
-        <!-- Bouton retour -->
         <ImageView
             android:id="@+id/iv_back"
             android:layout_width="52dp"
             android:layout_height="52dp"
-            android:background="@drawable/bg_avatar_radius"
+            android:background="@drawable/circle_white"
             android:src="@drawable/ic_person"
             android:padding="10dp"
-            android:scaleType="centerCrop"/>
+            android:scaleType="centerCrop"
+            app:tint="@color/emerald" />
 
-
-        <!-- Nom interlocuteur -->
         <TextView
             android:id="@+id/tv_other_name"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:textColor="#1A1A2E"
+            android:layout_marginStart="12dp"
+            android:textColor="@color/text_on_dark"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:fontFamily="@font/poppins_bold"/>
+            android:fontFamily="@font/poppins_bold" />
 
     </LinearLayout>
 
     <!-- ═══════════════════════════════════ -->
-    <!--         LISTE MESSAGES              -->
+    <!--    LISTE MESSAGES                   -->
     <!-- ═══════════════════════════════════ -->
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_messages"
@@ -55,23 +54,22 @@
         android:paddingHorizontal="8dp"
         android:paddingVertical="12dp"
         android:clipToPadding="false"
-        android:scrollbars="none"/>
+        android:scrollbars="none" />
 
     <!-- ═══════════════════════════════════ -->
-    <!--         ZONE DE SAISIE              -->
+    <!--    ZONE DE SAISIE                   -->
     <!-- ═══════════════════════════════════ -->
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:background="#FFFFFF"
+        android:background="@color/surface_white"
         android:paddingHorizontal="12dp"
         android:paddingVertical="10dp"
         android:layout_marginBottom="16dp"
         android:elevation="8dp"
         android:gravity="center_vertical">
 
-        <!-- Champ message -->
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/et_message"
             android:layout_width="0dp"
@@ -83,19 +81,18 @@
             android:paddingHorizontal="16dp"
             android:paddingVertical="12dp"
             android:textSize="14sp"
-            android:textColor="#1A1A2E"
-            android:textColorHint="#C8C4D6"
-            android:layout_marginEnd="10dp"/>
+            android:textColor="@color/text_primary"
+            android:textColorHint="@color/text_secondary"
+            android:layout_marginEnd="10dp" />
 
-        <!-- Bouton envoyer -->
         <ImageButton
             android:id="@+id/btn_send"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/bg_button_gradient"
+            android:background="@drawable/circle_terracotta"
             android:src="@drawable/ic_add"
             android:padding="12dp"
-            app:tint="#FFFFFF"/>
+            app:tint="@color/surface_white" />
 
     </LinearLayout>
 </LinearLayout>

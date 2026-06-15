@@ -4,19 +4,23 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FCF8FF">
+    android:background="@color/cream">
 
-    <!-- ══════════════════════════════════ -->
-    <!-- WAVE PURPLE TOP                    -->
-    <!-- ══════════════════════════════════ -->
+    <!-- Bandeau haut vert zellige -->
     <View
         android:layout_width="match_parent"
         android:layout_height="220dp"
-        android:background="@drawable/bg_wave_top"/>
+        android:background="@drawable/bg_wave_top_green" />
 
-    <!-- ══════════════════════════════════ -->
-    <!-- SCROLL CONTENT                     -->
-    <!-- ══════════════════════════════════ -->
+    <!-- Motif zellige discret sur le bandeau -->
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="220dp"
+        android:src="@drawable/zellige_bg"
+        android:scaleType="centerCrop"
+        android:alpha="0.15"
+        android:contentDescription="@null" />
+
     <ScrollView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
@@ -29,29 +33,27 @@
             android:orientation="vertical"
             android:paddingBottom="40dp">
 
-            <!-- TITRE MAALEM (sur la wave) -->
+            <!-- TITRE MAALEM -->
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_gravity="center_horizontal"
                 android:layout_marginTop="56dp"
                 android:text="Maalem"
-                android:textColor="#FFFFFF"
+                android:textColor="@color/text_on_dark"
                 android:textSize="36sp"
                 android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+                android:fontFamily="@font/poppins_bold" />
 
-            <!-- ══════════════════════════════════ -->
-            <!-- CARD BLANCHE                        -->
-            <!-- ══════════════════════════════════ -->
+            <!-- CARD BLANCHE -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginHorizontal="20dp"
                 android:layout_marginTop="32dp"
                 app:cardCornerRadius="32dp"
-                app:cardElevation="8dp"
-                app:cardBackgroundColor="#FFFFFF">
+                app:cardElevation="6dp"
+                app:cardBackgroundColor="@color/surface_white">
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -59,7 +61,6 @@
                     android:orientation="vertical"
                     android:padding="28dp">
 
-                    <!-- Titre Bon retour -->
                     <TextView
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
@@ -67,9 +68,9 @@
                         android:text="Bon retour"
                         android:textSize="28sp"
                         android:textStyle="bold"
-                        android:textColor="#1C1B23"
+                        android:textColor="@color/text_primary"
                         android:fontFamily="@font/poppins_bold"
-                        android:layout_marginBottom="6dp"/>
+                        android:layout_marginBottom="6dp" />
 
                     <TextView
                         android:layout_width="wrap_content"
@@ -77,8 +78,8 @@
                         android:layout_gravity="center_horizontal"
                         android:text="Connectez-vous à votre compte"
                         android:textSize="14sp"
-                        android:textColor="#6B7280"
-                        android:layout_marginBottom="28dp"/>
+                        android:textColor="@color/text_secondary"
+                        android:layout_marginBottom="28dp" />
 
                     <!-- Label Email -->
                     <TextView
@@ -87,10 +88,9 @@
                         android:text="Email"
                         android:textSize="13sp"
                         android:textStyle="bold"
-                        android:textColor="#474554"
-                        android:layout_marginBottom="8dp"/>
+                        android:textColor="@color/text_primary"
+                        android:layout_marginBottom="8dp" />
 
-                    <!-- Champ Email -->
                     <FrameLayout
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
@@ -103,7 +103,7 @@
                             android:layout_gravity="center_vertical"
                             android:layout_marginStart="14dp"
                             android:src="@drawable/ic_mail"
-                            app:tint="#787585"/>
+                            app:tint="@color/terracotta" />
 
                         <com.google.android.material.textfield.TextInputEditText
                             android:id="@+id/etEmail"
@@ -113,11 +113,11 @@
                             android:hint="exemple@domain.com"
                             android:textColorHint="#9CA3AF"
                             android:textSize="14sp"
-                            android:textColor="#1C1B23"
+                            android:textColor="@color/text_primary"
                             android:inputType="textEmailAddress"
                             android:paddingStart="46dp"
                             android:paddingEnd="14dp"
-                            android:gravity="center_vertical"/>
+                            android:gravity="center_vertical" />
                     </FrameLayout>
 
                     <!-- Label + Oublié -->
@@ -134,7 +134,7 @@
                             android:text="Mot de passe"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            android:textColor="#474554"/>
+                            android:textColor="@color/text_primary" />
 
                         <TextView
                             android:layout_width="wrap_content"
@@ -142,18 +142,17 @@
                             android:text="Oublié ?"
                             android:textSize="13sp"
                             android:textStyle="bold"
-                            android:textColor="#5B4FCF"/>
+                            android:textColor="@color/terracotta" />
                     </LinearLayout>
 
-                    <!-- Champ Mot de passe -->
                     <com.google.android.material.textfield.TextInputLayout
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:layout_marginBottom="24dp"
                         app:passwordToggleEnabled="true"
-                        app:passwordToggleTint="#787585"
+                        app:passwordToggleTint="@color/text_secondary"
                         style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                        app:boxBackgroundColor="#F3F4F6"
+                        app:boxBackgroundColor="@color/surface_soft"
                         app:boxCornerRadiusTopStart="12dp"
                         app:boxCornerRadiusTopEnd="12dp"
                         app:boxCornerRadiusBottomStart="12dp"
@@ -168,18 +167,18 @@
                             android:hint="••••••••"
                             android:textColorHint="#9CA3AF"
                             android:textSize="14sp"
-                            android:textColor="#1C1B23"
-                            android:paddingStart="14dp"/>
+                            android:textColor="@color/text_primary"
+                            android:paddingStart="14dp" />
                     </com.google.android.material.textfield.TextInputLayout>
 
-                    <!-- ProgressBar -->
                     <ProgressBar
                         android:id="@+id/progressBar"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_gravity="center_horizontal"
+                        android:indeterminateTint="@color/emerald"
                         android:visibility="gone"
-                        android:layout_marginBottom="12dp"/>
+                        android:layout_marginBottom="12dp" />
 
                     <!-- Bouton Se connecter -->
                     <androidx.appcompat.widget.AppCompatButton
@@ -187,12 +186,12 @@
                         android:layout_width="match_parent"
                         android:layout_height="56dp"
                         android:text="Se connecter"
-                        android:textColor="#FFFFFF"
+                        android:textColor="@color/surface_white"
                         android:textSize="16sp"
                         android:textStyle="bold"
-                        android:background="@drawable/bg_button_gradient"
+                        android:background="@drawable/bg_btn_primary"
                         android:stateListAnimator="@null"
-                        android:layout_marginBottom="24dp"/>
+                        android:layout_marginBottom="24dp" />
 
                     <!-- Divider ou -->
                     <LinearLayout
@@ -206,21 +205,21 @@
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_weight="1"
-                            android:background="#C8C4D6"/>
+                            android:background="@color/divider" />
 
                         <TextView
                             android:layout_width="wrap_content"
                             android:layout_height="wrap_content"
                             android:text="ou"
                             android:textSize="13sp"
-                            android:textColor="#787585"
-                            android:paddingHorizontal="16dp"/>
+                            android:textColor="@color/text_secondary"
+                            android:paddingHorizontal="16dp" />
 
                         <View
                             android:layout_width="0dp"
                             android:layout_height="1dp"
                             android:layout_weight="1"
-                            android:background="#C8C4D6"/>
+                            android:background="@color/divider" />
                     </LinearLayout>
 
                     <!-- Boutons sociaux -->
@@ -236,13 +235,13 @@
                             android:layout_weight="1"
                             android:layout_marginEnd="8dp"
                             android:text="Google"
-                            android:textColor="#1C1B23"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:background="@drawable/bg_social_btn"
                             android:stateListAnimator="@null"
                             android:drawableStart="@drawable/ic_google"
-                            android:drawablePadding="8dp"/>
+                            android:drawablePadding="8dp" />
 
                         <androidx.appcompat.widget.AppCompatButton
                             android:layout_width="0dp"
@@ -250,12 +249,11 @@
                             android:layout_weight="1"
                             android:layout_marginStart="8dp"
                             android:text="Facebook"
-                            android:textColor="#1C1B23"
+                            android:textColor="@color/text_primary"
                             android:textSize="14sp"
                             android:textStyle="bold"
                             android:background="@drawable/bg_social_btn"
-                            android:stateListAnimator="@null"/>
-
+                            android:stateListAnimator="@null" />
 
                     </LinearLayout>
 
@@ -271,8 +269,8 @@
                 android:layout_marginTop="24dp"
                 android:text="Pas de compte? S'inscrire"
                 android:textSize="14sp"
-                android:textColor="#6B7280"
-                android:paddingVertical="8dp"/>
+                android:textColor="@color/text_secondary"
+                android:paddingVertical="8dp" />
 
         </LinearLayout>
     </ScrollView>

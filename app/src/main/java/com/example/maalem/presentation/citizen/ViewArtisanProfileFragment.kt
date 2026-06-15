@@ -65,7 +65,7 @@ class ViewArtisanProfileFragment : Fragment(R.layout.fragment_view_artisan_profi
 
                         // ★ Afficher la note moyenne (sur 10 → convertie en 5 étoiles)
                         if (a.reviewCount > 0) {
-                            val starsOn5 = a.averageRating / 2f
+                            val starsOn5 = (a.averageRating / 2.0).toFloat()
                             binding.ratingBarAverage.rating = starsOn5
                             binding.tvAverageRating.text =
                                 "%.1f/10 • %d avis".format(a.averageRating, a.reviewCount)

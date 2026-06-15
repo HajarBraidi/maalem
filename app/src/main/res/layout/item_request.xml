@@ -7,8 +7,8 @@
     android:layout_marginHorizontal="16dp"
     android:layout_marginBottom="14dp"
     app:cardCornerRadius="20dp"
-    app:cardElevation="5dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardElevation="3dp"
+    app:cardBackgroundColor="@color/surface_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -22,7 +22,7 @@
             android:layout_height="wrap_content"
             android:textSize="17sp"
             android:textStyle="bold"
-            android:textColor="#111827"/>
+            android:textColor="@color/text_primary" />
 
         <TextView
             android:id="@+id/tvRequestCategory"
@@ -30,8 +30,8 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="6dp"
             android:textSize="13sp"
-            android:textColor="#5B4FCF"
-            android:textStyle="bold"/>
+            android:textColor="@color/emerald"
+            android:textStyle="bold" />
 
         <TextView
             android:id="@+id/tvRequestDescription"
@@ -39,10 +39,10 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="10dp"
             android:textSize="14sp"
-            android:textColor="#4B5563"
+            android:textColor="@color/text_secondary"
             android:lineSpacingExtra="2dp"
             android:maxLines="3"
-            android:ellipsize="end"/>
+            android:ellipsize="end" />
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -50,7 +50,7 @@
             android:layout_marginTop="14dp"
             android:orientation="horizontal"
             android:padding="10dp"
-            android:background="#F7F4FF">
+            android:background="@color/surface_soft">
 
             <TextView
                 android:id="@+id/tvRequestCity"
@@ -58,17 +58,18 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:textSize="12sp"
-                android:textColor="#6B7280"/>
+                android:textColor="@color/text_secondary" />
 
             <TextView
                 android:id="@+id/tvRequestCitizen"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="12sp"
-                android:textColor="#6B7280"/>
+                android:textColor="@color/text_secondary" />
         </LinearLayout>
 
-        <Button
+        <!-- Bouton principal : on force backgroundTint=null pour que le drawable terracotta s'affiche -->
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btnSendOffer"
             android:layout_width="match_parent"
             android:layout_height="48dp"
@@ -76,19 +77,23 @@
             android:text="Envoyer une offre de service"
             android:textAllCaps="false"
             android:textStyle="bold"
-            android:backgroundTint="#5B4FCF"
-            android:textColor="#FFFFFF"/>
+            android:backgroundTint="@null"
+            android:background="@drawable/bg_btn_primary"
+            android:textColor="@color/surface_white"
+            android:stateListAnimator="@null" />
 
-        <Button
+        <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/btn_chat_citizen"
             android:layout_width="match_parent"
             android:layout_height="48dp"
             android:layout_marginTop="8dp"
-            android:text=" Contacter le citoyen"
+            android:text="Contacter le citoyen"
             android:textAllCaps="false"
             android:textStyle="bold"
-            android:backgroundTint="#F1EEFF"
-            android:textColor="#5B4FCF"/>
+            android:backgroundTint="@null"
+            android:background="@drawable/bg_btn_logout"
+            android:textColor="@color/terracotta"
+            android:stateListAnimator="@null" />
 
     </LinearLayout>
 </androidx.cardview.widget.CardView>

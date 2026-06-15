@@ -8,7 +8,7 @@
     android:layout_marginVertical="9dp"
     app:cardCornerRadius="22dp"
     app:cardElevation="6dp"
-    app:cardBackgroundColor="#FFFFFF">
+    app:cardBackgroundColor="@color/surface_white">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -41,14 +41,14 @@
                 android:layout_height="wrap_content"
                 android:text="Nom : "
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_name"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#111827"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -64,14 +64,14 @@
                 android:layout_height="wrap_content"
                 android:text="Email : "
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_email"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4B5563"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -87,14 +87,14 @@
                 android:layout_height="wrap_content"
                 android:text="Tél : "
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_phone"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4B5563"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -110,14 +110,14 @@
                 android:layout_height="wrap_content"
                 android:text="Spécialité : "
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_specialty"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#5B4FCF"
+                android:textColor="@color/emerald"
                 android:textStyle="bold"
                 android:textSize="14sp"/>
         </LinearLayout>
@@ -134,14 +134,14 @@
                 android:layout_height="wrap_content"
                 android:text="Ville : "
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
 
             <TextView
                 android:id="@+id/tv_city"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:textColor="#4B5563"
+                android:textColor="@color/text_secondary"
                 android:textSize="14sp"/>
         </LinearLayout>
 
@@ -157,7 +157,7 @@
                 android:layout_height="wrap_content"
                 android:text="Bio :"
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="14sp"/>
 
             <TextView
@@ -165,7 +165,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#6B7280"
+                android:textColor="@color/text_secondary"
                 android:lineSpacingExtra="2dp"
                 android:layout_marginTop="4dp"/>
         </LinearLayout>
@@ -182,7 +182,7 @@
                 android:layout_height="wrap_content"
                 android:text="Inscrit le : "
                 android:textStyle="bold"
-                android:textColor="#374151"
+                android:textColor="@color/text_primary"
                 android:textSize="13sp"/>
 
             <TextView
@@ -190,7 +190,7 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:textSize="13sp"
-                android:textColor="#6B7280"/>
+                android:textColor="@color/text_secondary"/>
 
         </LinearLayout>
 
@@ -200,7 +200,7 @@
             android:layout_height="wrap_content"
             android:text="Photo CIN :"
             android:textStyle="bold"
-            android:textColor="#111827"
+            android:textColor="@color/text_primary"
             android:textSize="14sp"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"/>
@@ -252,7 +252,7 @@
                 android:text="Valider"
                 android:textAllCaps="false"
                 android:textStyle="bold"
-                android:backgroundTint="#10B981"
+                android:backgroundTint="@color/emerald"
                 android:textColor="#FFFFFF"
                 android:layout_marginEnd="8dp"/>
 

@@ -5,7 +5,7 @@
     android:id="@+id/registerScroll"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="#FAFAFA"
+    android:background="@color/cream"
     android:fillViewport="true"
     android:scrollbars="none">
 
@@ -72,7 +72,7 @@
                         android:layout_height="32dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_person"
-                        app:tint="#5B4FCF"/>
+                        app:tint="@color/emerald"/>
                 </FrameLayout>
 
                 <TextView
@@ -126,7 +126,7 @@
                         android:layout_height="32dp"
                         android:layout_gravity="center"
                         android:src="@drawable/ic_build"
-                        app:tint="#5B4FCF"/>
+                        app:tint="@color/emerald"/>
                 </FrameLayout>
 
                 <TextView
@@ -175,7 +175,7 @@
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            app:boxBackgroundColor="#F3F4F6"
+            app:boxBackgroundColor="@color/surface_soft"
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
@@ -206,7 +206,7 @@
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            app:boxBackgroundColor="#F3F4F6"
+            app:boxBackgroundColor="@color/surface_soft"
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
@@ -237,7 +237,7 @@
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            app:boxBackgroundColor="#F3F4F6"
+            app:boxBackgroundColor="@color/surface_soft"
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
@@ -268,7 +268,7 @@
             android:layout_height="56dp"
             android:layout_marginBottom="16dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            app:boxBackgroundColor="#F3F4F6"
+            app:boxBackgroundColor="@color/surface_soft"
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
@@ -301,7 +301,7 @@
             android:layout_height="56dp"
             android:layout_marginBottom="24dp"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            app:boxBackgroundColor="#F3F4F6"
+            app:boxBackgroundColor="@color/surface_soft"
             app:boxCornerRadiusTopStart="12dp"
             app:boxCornerRadiusTopEnd="12dp"
             app:boxCornerRadiusBottomStart="12dp"
@@ -360,7 +360,7 @@
                 android:layout_height="56dp"
                 android:layout_marginBottom="16dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                app:boxBackgroundColor="#F3F4F6"
+                app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
@@ -469,7 +469,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginBottom="20dp"
                 style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                app:boxBackgroundColor="#F3F4F6"
+                app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="12dp"
                 app:boxCornerRadiusTopEnd="12dp"
                 app:boxCornerRadiusBottomStart="12dp"
@@ -511,7 +511,7 @@
                     android:layout_height="44dp"
                     android:background="@drawable/bg_rating_badge"
                     android:src="@drawable/ic_add"
-                    app:tint="#5B4FCF"
+                    app:tint="@color/emerald"
                     android:padding="10dp"/>
 
                 <TextView
@@ -520,7 +520,7 @@
                     android:text="Prendre une photo de la CIN"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:textColor="#5B4FCF"
+                    android:textColor="@color/emerald"
                     android:layout_marginTop="8dp"/>
 
                 <TextView
@@ -561,7 +561,8 @@
             android:textColor="#FFFFFF"
             android:textSize="16sp"
             android:textStyle="bold"
-            android:background="@drawable/bg_btn_login"
+            android:background="@drawable/bg_btn_primary"
+            android:backgroundTint="@null"
             android:stateListAnimator="@null"
             android:layout_marginTop="8dp"
             android:layout_marginBottom="16dp"/>

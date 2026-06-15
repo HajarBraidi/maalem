@@ -68,7 +68,7 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
             onClick = { artisan ->
                 viewModel.selectArtisan(artisan)
             },
-            onViewProfile = { artisan ->                   // ← nouveau
+            onViewProfile = { artisan ->
                 val fragment = ViewArtisanProfileFragment.newInstance(artisan.uid)
                 parentFragmentManager.beginTransaction()
                     .replace(R.id.fragment_container, fragment)
@@ -102,31 +102,36 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
         }
     }
 
+    // ════════════════════════════════════════════════════════
+    // CHIPS STYLÉS (gonflés depuis item_category_chip.xml)
+    // ════════════════════════════════════════════════════════
     private fun setupCategories(categoriesFromFirebase: List<String>) {
         binding.llCategories.removeAllViews()
 
-        val chipAll = Chip(requireContext()).apply {
-            text = "Tous"
-            isCheckable = true
-            isChecked = true
-
-            setOnClickListener {
-                viewModel.loadHome(null)
-            }
+        // Chip "Tous"
+        val chipAll = layoutInflater.inflate(
+            R.layout.item_category_chip,
+            binding.llCategories,
+            false
+        ) as Chip
+        chipAll.text = "Tous"
+        chipAll.isChecked = true
+        chipAll.setOnClickListener {
+            viewModel.loadHome(null)
         }
-
         binding.llCategories.addView(chipAll)
 
+        // Chips des catégories
         categoriesFromFirebase.forEach { category ->
-            val chip = Chip(requireContext()).apply {
-                text = category
-                isCheckable = true
-
-                setOnClickListener {
-                    viewModel.loadHome(category)
-                }
+            val chip = layoutInflater.inflate(
+                R.layout.item_category_chip,
+                binding.llCategories,
+                false
+            ) as Chip
+            chip.text = category
+            chip.setOnClickListener {
+                viewModel.loadHome(category)
             }
-
             binding.llCategories.addView(chip)
         }
     }
@@ -203,7 +208,6 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
                 setOnMarkerClickListener { clickedMarker, _ ->
                     clickedMarker.showInfoWindow()
 
-                    // Sélectionner l’artisan sans quitter la page
                     viewModel.selectArtisan(artisan)
 
                     Snackbar.make(

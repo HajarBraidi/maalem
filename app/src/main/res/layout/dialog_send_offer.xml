@@ -5,7 +5,7 @@
     android:layout_height="wrap_content"
     android:orientation="vertical"
     android:padding="28dp"
-    android:background="@android:color/white">
+    android:background="@color/surface_white">
 
     <TextView
         android:layout_width="wrap_content"
@@ -26,8 +26,8 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#6C47FF"
-        app:hintTextColor="#6C47FF">
+        app:boxStrokeColor="@color/emerald"
+        app:hintTextColor="@color/emerald">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etOfferPrice"
@@ -48,8 +48,8 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#6C47FF"
-        app:hintTextColor="#6C47FF">
+        app:boxStrokeColor="@color/emerald"
+        app:hintTextColor="@color/emerald">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etOfferDelay"
@@ -69,8 +69,8 @@
         app:boxCornerRadiusTopEnd="12dp"
         app:boxCornerRadiusBottomStart="12dp"
         app:boxCornerRadiusBottomEnd="12dp"
-        app:boxStrokeColor="#6C47FF"
-        app:hintTextColor="#6C47FF">
+        app:boxStrokeColor="@color/emerald"
+        app:hintTextColor="@color/emerald">
 
         <com.google.android.material.textfield.TextInputEditText
             android:id="@+id/etOfferMessage"

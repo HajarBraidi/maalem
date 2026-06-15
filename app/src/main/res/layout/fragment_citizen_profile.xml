@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:fillViewport="true"
-    android:background="#FAFAFA"
+    android:background="@color/cream"
     android:scrollbars="none">
 
     <LinearLayout
@@ -15,69 +15,88 @@
         android:paddingBottom="32dp">
 
         <!-- ═══════════════════════════════════ -->
-        <!--         HEADER PROFIL               -->
+        <!--    HEADER PROFIL ZELLIGE (190dp)    -->
         <!-- ═══════════════════════════════════ -->
-        <LinearLayout
+        <FrameLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/bg_banner_purple"
-            android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="16dp"
-            android:gravity="center"
-            android:orientation="vertical"
-            android:paddingVertical="32dp"
-            android:paddingHorizontal="20dp">
+            android:layout_height="190dp"
+            android:background="@drawable/bg_header_zellige">
 
-            <!-- Avatar + bouton photo -->
-            <FrameLayout
-                android:layout_width="100dp"
-                android:layout_height="100dp">
+            <!-- Image zellige en fond -->
+            <ImageView
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:src="@drawable/zellige_bg"
+                android:scaleType="centerCrop"
+                android:alpha="0.22"
+                android:contentDescription="@null" />
 
-                <ImageView
-                    android:id="@+id/iv_avatar"
-                    android:layout_width="100dp"
-                    android:layout_height="100dp"
-                    android:background="@drawable/circle_white"
-                    android:scaleType="centerCrop"
-                    android:src="@drawable/ic_person"/>
+            <!-- Voile vert -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@color/header_gradient_end"
+                android:alpha="0.45" />
 
-                <!-- Bouton changer photo -->
-                <ImageView
-                    android:id="@+id/iv_change_photo"
-                    android:layout_width="32dp"
-                    android:layout_height="32dp"
-                    android:layout_gravity="bottom|end"
-                    android:background="@drawable/bg_button_gradient"
-                    android:padding="6dp"
-                    android:src="@drawable/ic_add"
-                    app:tint="#FFFFFF"/>
+            <!-- Contenu centré -->
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical"
+                android:paddingHorizontal="20dp">
 
-            </FrameLayout>
+                <!-- Avatar + bouton photo -->
+                <FrameLayout
+                    android:layout_width="90dp"
+                    android:layout_height="90dp">
 
-            <!-- Nom -->
-            <TextView
-                android:id="@+id/tv_name_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="14dp"
-                android:textColor="#FFFFFF"
-                android:textSize="20sp"
-                android:textStyle="bold"
-                android:fontFamily="@font/poppins_bold"/>
+                    <ImageView
+                        android:id="@+id/iv_avatar"
+                        android:layout_width="90dp"
+                        android:layout_height="90dp"
+                        android:background="@drawable/circle_white"
+                        android:scaleType="centerCrop"
+                        android:src="@drawable/ic_person" />
 
-            <!-- Email -->
-            <TextView
-                android:id="@+id/tv_email_header"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:textColor="#CCFFFFFF"
-                android:textSize="13sp"/>
+                    <ImageView
+                        android:id="@+id/iv_change_photo"
+                        android:layout_width="30dp"
+                        android:layout_height="30dp"
+                        android:layout_gravity="bottom|end"
+                        android:background="@drawable/circle_terracotta"
+                        android:padding="6dp"
+                        android:src="@drawable/ic_add"
+                        app:tint="@color/surface_white" />
 
-        </LinearLayout>
+                </FrameLayout>
+
+                <!-- Nom -->
+                <TextView
+                    android:id="@+id/tv_name_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="12dp"
+                    android:textColor="@color/text_on_dark"
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:fontFamily="@font/poppins_bold" />
+
+                <!-- Email -->
+                <TextView
+                    android:id="@+id/tv_email_header"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="2dp"
+                    android:textColor="#E6FFFFFF"
+                    android:textSize="13sp" />
+
+            </LinearLayout>
+
+        </FrameLayout>
 
         <!-- ═══════════════════════════════════ -->
-        <!--         FORMULAIRE                  -->
+        <!--    FORMULAIRE                       -->
         <!-- ═══════════════════════════════════ -->
         <com.google.android.material.card.MaterialCardView
             android:layout_width="match_parent"
@@ -85,9 +104,9 @@
             android:layout_marginHorizontal="16dp"
             android:layout_marginTop="16dp"
             app:cardCornerRadius="24dp"
-            app:cardElevation="4dp"
+            app:cardElevation="3dp"
             app:strokeWidth="0dp"
-            app:cardBackgroundColor="#FFFFFF">
+            app:cardBackgroundColor="@color/surface_white">
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -101,57 +120,55 @@
                     android:text="Mes informations"
                     android:textSize="17sp"
                     android:textStyle="bold"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:fontFamily="@font/poppins_bold"
-                    android:layout_marginBottom="20dp"/>
+                    android:layout_marginBottom="20dp" />
 
-                <!-- Nom complet -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Nom complet"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
+                    android:layout_marginBottom="6dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nom complet"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    app:boxBackgroundColor="#F3F4F6"
+                    app:boxBackgroundColor="@color/surface_soft"
                     app:boxCornerRadiusTopStart="16dp"
                     app:boxCornerRadiusTopEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
                     app:boxCornerRadiusBottomEnd="16dp"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:boxStrokeColor="#5B4FCF"
+                    app:boxStrokeColor="@color/emerald"
                     android:layout_marginBottom="16dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_name"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="textPersonName"/>
+                        android:inputType="textPersonName" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Email -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Email (non modifiable)"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
+                    android:layout_marginBottom="6dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Email"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    app:boxBackgroundColor="#F0ECF7"
+                    app:boxBackgroundColor="@color/emerald_light"
                     app:boxCornerRadiusTopStart="16dp"
                     app:boxCornerRadiusTopEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
@@ -164,104 +181,99 @@
                         android:layout_height="wrap_content"
                         android:enabled="false"
                         android:inputType="textEmailAddress"
-                        android:textColor="#787585"/>
+                        android:textColor="@color/text_secondary" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Téléphone -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Téléphone"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
+                    android:layout_marginBottom="6dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Téléphone"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    app:boxBackgroundColor="#F3F4F6"
+                    app:boxBackgroundColor="@color/surface_soft"
                     app:boxCornerRadiusTopStart="16dp"
                     app:boxCornerRadiusTopEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
                     app:boxCornerRadiusBottomEnd="16dp"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:boxStrokeColor="#5B4FCF"
+                    app:boxStrokeColor="@color/emerald"
                     android:layout_marginBottom="16dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_phone"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:inputType="phone"/>
+                        android:inputType="phone" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- Adresse -->
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:text="Adresse"
-                    android:textColor="#1A1A2E"
+                    android:textColor="@color/text_primary"
                     android:textSize="13sp"
                     android:textStyle="bold"
-                    android:layout_marginBottom="6dp"/>
+                    android:layout_marginBottom="6dp" />
 
                 <com.google.android.material.textfield.TextInputLayout
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Adresse"
                     style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-                    app:boxBackgroundColor="#F3F4F6"
+                    app:boxBackgroundColor="@color/surface_soft"
                     app:boxCornerRadiusTopStart="16dp"
                     app:boxCornerRadiusTopEnd="16dp"
                     app:boxCornerRadiusBottomStart="16dp"
                     app:boxCornerRadiusBottomEnd="16dp"
                     app:boxStrokeWidth="0dp"
                     app:boxStrokeWidthFocused="2dp"
-                    app:boxStrokeColor="#5B4FCF"
+                    app:boxStrokeColor="@color/emerald"
                     android:layout_marginBottom="28dp">
                     <com.google.android.material.textfield.TextInputEditText
                         android:id="@+id/et_address"
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"/>
+                        android:layout_height="wrap_content" />
                 </com.google.android.material.textfield.TextInputLayout>
 
-                <!-- ProgressBar -->
                 <ProgressBar
                     android:id="@+id/progress_bar"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:indeterminateTint="#5B4FCF"
+                    android:indeterminateTint="@color/emerald"
                     android:layout_marginBottom="12dp"
-                    android:visibility="gone"/>
+                    android:visibility="gone" />
 
-                <!-- Bouton Sauvegarder -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_save"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:background="@drawable/bg_button_gradient"
+                    android:background="@drawable/bg_btn_primary"
                     android:text="Sauvegarder"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/surface_white"
                     android:textSize="15sp"
                     android:textStyle="bold"
                     android:stateListAnimator="@null"
-                    android:layout_marginBottom="12dp"/>
+                    android:layout_marginBottom="12dp" />
 
-                <!-- Bouton Déconnexion -->
                 <androidx.appcompat.widget.AppCompatButton
                     android:id="@+id/btn_logout"
                     android:layout_width="match_parent"
                     android:layout_height="56dp"
-                    android:background="@drawable/bg_button_logout"
+                    android:background="@drawable/bg_btn_logout"
                     android:text="Se déconnecter"
-                    android:textColor="#FFFFFF"
+                    android:textColor="@color/terracotta"
                     android:textSize="15sp"
                     android:textStyle="bold"
-                    android:stateListAnimator="@null"/>
+                    android:stateListAnimator="@null" />
 
             </LinearLayout>
         </com.google.android.material.card.MaterialCardView>
