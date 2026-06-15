@@ -84,7 +84,9 @@ class AuthRepositoryImpl @Inject constructor(
                     "isActive" to false,
                     "isValidated" to false,
                     "cinPhotoBase64" to user.cinPhotoBase64,
-                    "createdAt" to System.currentTimeMillis())
+                    "createdAt" to System.currentTimeMillis(),
+                    "averageRating" to 0.0,
+                    "reviewCount" to 0)
 
                 else -> hashMapOf(
                     "uid" to uid,
