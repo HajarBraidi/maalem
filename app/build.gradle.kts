@@ -10,6 +10,7 @@ android {
     namespace = "com.example.maalem"
     compileSdk = 34
 
+
     defaultConfig {
         applicationId = "com.example.maalem"
         minSdk = 26
@@ -41,6 +42,9 @@ android {
     buildFeatures {
         viewBinding = true
 
+    }
+    androidResources {
+        noCompress += "tflite"
     }
 
 
@@ -77,6 +81,6 @@ dependencies {
     implementation("com.google.android.material:material:1.9.0")
 
     implementation("org.osmdroid:osmdroid-android:6.1.20")
-
+    implementation("com.google.ai.edge.litert:litert:1.4.0")
 
 }

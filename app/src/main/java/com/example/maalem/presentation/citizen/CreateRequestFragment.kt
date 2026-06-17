@@ -17,11 +17,14 @@ import com.example.maalem.data.model.AppLocation
 import com.example.maalem.databinding.FragmentCreateRequestBinding
 import com.example.maalem.domain.repository.CategoryRepository
 import com.example.maalem.domain.repository.LocationRepository
+import com.example.maalem.ml.WallDefectClassifier
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 import java.io.ByteArrayOutputStream
 import javax.inject.Inject
 
@@ -43,6 +46,9 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
 
     // Photo choisie, encodée en Base64 (vide si aucune)
     private var photoBase64: String = ""
+
+    // Classifieur IA (chargé à la demande, libéré dans onDestroyView)
+    private var classifier: WallDefectClassifier? = null
 
     private val pickImageLauncher = registerForActivityResult(
         ActivityResultContracts.GetContent()
@@ -70,12 +76,11 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
 
     private fun onPhotoPicked(uri: Uri) {
         try {
-            // Lecture + redimensionnement de l'image
             val inputStream = requireContext().contentResolver.openInputStream(uri)
             val bitmap = BitmapFactory.decodeStream(inputStream)
             inputStream?.close()
 
-            // Redimensionner pour limiter la taille (224x224 = taille d'entrée du futur modèle IA)
+            // Redimensionnement à 224x224 (entrée du modèle + stockage léger)
             val resized = Bitmap.createScaledBitmap(bitmap, 224, 224, true)
 
             // Aperçu
@@ -89,8 +94,8 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
             photoBase64 = "data:image/jpeg;base64," +
                     Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT)
 
-            // ── Point d'extension futur : ici on appellera le modèle TFLite
-            //    sur `resized` pour prédire la catégorie et pré-remplir le formulaire.
+            // Lancer la prédiction IA
+            classifyPhoto(resized)
 
         } catch (e: Exception) {
             Snackbar.make(
@@ -98,6 +103,57 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
                 "Impossible de charger l'image",
                 Snackbar.LENGTH_LONG
             ).show()
+        }
+    }
+
+    /**
+     * Analyse la photo avec le modèle TFLite et pré-remplit la catégorie
+     * si la confiance est suffisante.
+     */
+    private fun classifyPhoto(bitmap: Bitmap) {
+        viewLifecycleOwner.lifecycleScope.launch {
+            try {
+                // Inférence hors du thread principal
+                val prediction = withContext(Dispatchers.Default) {
+                    val clf = classifier ?: WallDefectClassifier(requireContext().applicationContext)
+                        .also { classifier = it }
+                    clf.classify(bitmap)
+                }
+
+                val percent = (prediction.confidence * 100).toInt()
+
+                if (prediction.confidence >= WallDefectClassifier.CONFIDENCE_THRESHOLD) {
+                    // Pré-remplir le dropdown catégorie seulement si la catégorie
+                    // prédite fait partie des catégories chargées depuis Firestore
+                    if (categories.any { it.equals(prediction.specialty, ignoreCase = true) }) {
+                        binding.etCategory.setText(prediction.specialty, false)
+                        Snackbar.make(
+                            binding.root,
+                            "Catégorie détectée : ${prediction.specialty} ($percent%)",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    } else {
+                        Snackbar.make(
+                            binding.root,
+                            "Catégorie détectée (${prediction.specialty}) mais absente de la liste. Choisissez manuellement.",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+                } else {
+                    // Confiance trop faible → on laisse l'utilisateur choisir
+                    Snackbar.make(
+                        binding.root,
+                        "Analyse peu fiable ($percent%). Choisissez la catégorie manuellement.",
+                        Snackbar.LENGTH_LONG
+                    ).show()
+                }
+            } catch (e: Exception) {
+                Snackbar.make(
+                    binding.root,
+                    "ERR: ${e.javaClass.simpleName} - ${e.message}",
+                    Snackbar.LENGTH_INDEFINITE
+                ).setAction("OK") { }.show()
+            }
         }
     }
 
@@ -253,6 +309,8 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
 
     override fun onDestroyView() {
         super.onDestroyView()
+        classifier?.close()
+        classifier = null
         _binding = null
     }
 }
