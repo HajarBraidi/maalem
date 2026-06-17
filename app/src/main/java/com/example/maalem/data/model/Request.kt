@@ -8,6 +8,8 @@ data class Request(
     val description: String = "",
     val category: String = "",
     val city: String = "",
+    val latitude: Double = 0.0,
+    val longitude: Double = 0.0,
     val status: String = "pending",  // pending | accepted | completed
     val photoUrl: String = "",
     val createdAt: Long = System.currentTimeMillis()

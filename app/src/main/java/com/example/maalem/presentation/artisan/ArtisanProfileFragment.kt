@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Button
 import android.widget.RatingBar
 import android.widget.TextView
@@ -15,10 +16,13 @@ import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.maalem.R
+import com.example.maalem.data.model.AppLocation
 import com.example.maalem.domain.repository.ArtisanRepository
 import com.example.maalem.domain.repository.AuthRepository
+import com.example.maalem.domain.repository.LocationRepository
 import com.example.maalem.domain.usecase.UpdateArtisanProfileUseCase
 import com.example.maalem.presentation.citizen.ReviewAdapter
+import com.google.android.material.textfield.MaterialAutoCompleteTextView
 import com.google.android.material.textfield.TextInputEditText
 import com.google.firebase.auth.FirebaseAuth
 import dagger.hilt.android.AndroidEntryPoint
@@ -32,10 +36,14 @@ class ArtisanProfileFragment : Fragment() {
     @Inject lateinit var authRepository: AuthRepository
     @Inject lateinit var updateUseCase: UpdateArtisanProfileUseCase
     @Inject lateinit var auth: FirebaseAuth
+    @Inject lateinit var locationRepository: LocationRepository
 
     // ★ NOUVEAU
     private val viewModel: ArtisanHomeViewModel by viewModels()
     private lateinit var reviewAdapter: ReviewAdapter
+
+    // Liste des villes (chargée depuis config/locations)
+    private var cities: List<AppLocation> = emptyList()
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -52,7 +60,7 @@ class ArtisanProfileFragment : Fragment() {
         val etName = view.findViewById<TextInputEditText>(R.id.etArtisanName)
         val etPhone = view.findViewById<TextInputEditText>(R.id.etArtisanPhone)
         val etSpecialty = view.findViewById<TextInputEditText>(R.id.etArtisanSpecialty)
-        val etCity = view.findViewById<TextInputEditText>(R.id.etArtisanCity)
+        val etCity = view.findViewById<MaterialAutoCompleteTextView>(R.id.etArtisanCity)
         val etBio = view.findViewById<TextInputEditText>(R.id.etArtisanBio)
         val btnSave = view.findViewById<Button>(R.id.btnSaveArtisanProfile)
         val btnLogout = view.findViewById<Button>(R.id.btnArtisanLogout)
@@ -69,8 +77,28 @@ class ArtisanProfileFragment : Fragment() {
         rvMyReviews.layoutManager = LinearLayoutManager(requireContext())
         rvMyReviews.adapter = reviewAdapter
 
-        // Charger le profil (code existant)
+        // Charger les villes puis le profil (l'adapter du dropdown doit être prêt
+        // avant de positionner la ville actuelle de l'artisan)
         viewLifecycleOwner.lifecycleScope.launch {
+            // 1) Charger les villes pour le dropdown
+            locationRepository.getCities().onSuccess { list ->
+                cities = list
+                etCity.setAdapter(
+                    ArrayAdapter(
+                        requireContext(),
+                        android.R.layout.simple_dropdown_item_1line,
+                        list.map { it.name }
+                    )
+                )
+            }.onFailure {
+                Toast.makeText(
+                    requireContext(),
+                    "Erreur lors du chargement des villes",
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+
+            // 2) Charger le profil (code existant)
             val uid = auth.currentUser?.uid ?: return@launch
             artisanRepository.getArtisanProfile(uid).fold(
                 onSuccess = { artisan ->
@@ -78,7 +106,8 @@ class ArtisanProfileFragment : Fragment() {
                     etName.setText(artisan.name)
                     etPhone.setText(artisan.phone)
                     etSpecialty.setText(artisan.specialty)
-                    etCity.setText(artisan.city)
+                    // setText(..., false) : affiche la valeur sans filtrer la liste du dropdown
+                    etCity.setText(artisan.city, false)
                     etBio.setText(artisan.bio)
                     tvStatus.text = if (artisan.isValidated) "✓ Compte validé"
                     else "⏳ En attente de validation admin"
@@ -138,13 +167,26 @@ class ArtisanProfileFragment : Fragment() {
         // Bouton enregistrer (code existant)
         btnSave.setOnClickListener {
             val uid = auth.currentUser?.uid ?: return@setOnClickListener
+
+            val selectedCity = etCity.text.toString().trim()
+
+            // Vérifier que la ville fait bien partie de la liste de l'admin
+            if (cities.none { it.name.equals(selectedCity, ignoreCase = true) }) {
+                Toast.makeText(
+                    requireContext(),
+                    "Veuillez choisir une ville valide dans la liste",
+                    Toast.LENGTH_SHORT
+                ).show()
+                return@setOnClickListener
+            }
+
             viewLifecycleOwner.lifecycleScope.launch {
                 updateUseCase(
                     artisanId = uid,
                     name = etName.text.toString().trim(),
                     phone = etPhone.text.toString().trim(),
                     specialty = etSpecialty.text.toString().trim(),
-                    city = etCity.text.toString().trim(),
+                    city = selectedCity,
                     bio = etBio.text.toString().trim()
                 ).fold(
                     onSuccess = {

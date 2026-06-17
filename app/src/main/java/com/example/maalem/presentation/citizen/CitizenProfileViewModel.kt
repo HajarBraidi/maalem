@@ -6,6 +6,7 @@ import android.net.Uri
 import android.provider.MediaStore
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
+import com.example.maalem.data.model.AppLocation
 import com.example.maalem.data.model.Citizen
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
@@ -51,6 +52,10 @@ class CitizenProfileViewModel @Inject constructor(
                 email = doc.getString("email") ?: "",
                 phone = doc.getString("phone") ?: "",
                 address = doc.getString("address") ?: "",
+                locationId = doc.getString("locationId") ?: "",
+                locationName = doc.getString("locationName") ?: "",
+                latitude = doc.getDouble("latitude") ?: 0.0,
+                longitude = doc.getDouble("longitude") ?: 0.0,
                 photoUrl = doc.getString("photoUrl") ?: ""
             )
             _state.value = ProfileState.Loaded(citizen)
@@ -59,7 +64,12 @@ class CitizenProfileViewModel @Inject constructor(
         }
     }
 
-    fun updateProfile(name: String, phone: String, address: String) = viewModelScope.launch {
+    fun updateProfile(
+        name: String,
+        phone: String,
+        address: String,
+        city: AppLocation?
+    ) = viewModelScope.launch {
         _state.value = ProfileState.Loading
         try {
             val uid = auth.currentUser?.uid ?: return@launch
@@ -67,13 +77,24 @@ class CitizenProfileViewModel @Inject constructor(
                 _state.value = ProfileState.Error("Le nom est requis")
                 return@launch
             }
-            firestore.collection("users").document(uid).update(
-                mapOf(
-                    "name" to name,
-                    "phone" to phone,
-                    "address" to address
-                )
-            ).await()
+
+            // Champs de base toujours mis à jour
+            val updates = mutableMapOf<String, Any>(
+                "name" to name,
+                "phone" to phone,
+                "address" to address
+            )
+
+            // Si une ville valide est choisie, on met aussi à jour la localisation
+            if (city != null) {
+                updates["locationId"] = city.id
+                updates["locationName"] = city.name
+                updates["latitude"] = city.latitude
+                updates["longitude"] = city.longitude
+            }
+
+            firestore.collection("users").document(uid).update(updates).await()
+
             // 2. Mettre à jour citizenName dans toutes ses requêtes
             val requests = firestore.collection("requests")
                 .whereEqualTo("citizenId", uid)
@@ -115,6 +136,7 @@ class CitizenProfileViewModel @Inject constructor(
             _state.value = ProfileState.Error(e.message ?: "Erreur")
         }
     }
+
     fun logout() {
         auth.signOut()
         _state.value = ProfileState.LoggedOut

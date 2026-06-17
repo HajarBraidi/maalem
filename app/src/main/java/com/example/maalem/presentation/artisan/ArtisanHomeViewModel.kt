@@ -43,6 +43,7 @@ class ArtisanHomeViewModel @Inject constructor(
     val state: StateFlow<ArtisanUiState> = _state
 
     // Charger les demandes disponibles pour l'artisan connecté
+    // (filtrées : seulement les demandes de la même ville que l'artisan)
     fun loadAvailableRequests() = viewModelScope.launch {
         _state.value = ArtisanUiState.Loading
         val uid = auth.currentUser?.uid ?: run {
@@ -50,12 +51,18 @@ class ArtisanHomeViewModel @Inject constructor(
             return@launch
         }
 
-        // D'abord, récupérer la spécialité de l'artisan
+        // D'abord, récupérer le profil de l'artisan (spécialité + ville)
         artisanRepository.getArtisanProfile(uid).fold(
             onSuccess = { artisan ->
                 // Puis charger les requests de cette spécialité
                 artisanRepository.getAvailableRequests(artisan.specialty).fold(
-                    onSuccess = { _state.value = ArtisanUiState.RequestsLoaded(it) },
+                    onSuccess = { requests ->
+                        // Ne garder que les demandes de la même ville que l'artisan
+                        val cityRequests = requests.filter { req ->
+                            req.city.equals(artisan.city, ignoreCase = true)
+                        }
+                        _state.value = ArtisanUiState.RequestsLoaded(cityRequests)
+                    },
                     onFailure = { _state.value = ArtisanUiState.Error(it.message ?: "Erreur") }
                 )
             },
@@ -117,6 +124,7 @@ class ArtisanHomeViewModel @Inject constructor(
             onFailure = { _state.value = ArtisanUiState.Error(it.message ?: "Erreur") }
         )
     }
+
     fun loadMyReviews() = viewModelScope.launch {
         _state.value = ArtisanUiState.Loading
         val uid = auth.currentUser?.uid ?: run {
@@ -142,6 +150,4 @@ class ArtisanHomeViewModel @Inject constructor(
             }
         )
     }
-
-
 }

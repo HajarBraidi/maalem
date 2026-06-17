@@ -71,14 +71,16 @@ class CitizenHomeViewModel @Inject constructor(
     private var currentArtisans: List<Artisan> = emptyList()
     private var currentNearestArtisans: List<NearbyArtisan> = emptyList()
     private var currentCategory: String? = null
+    private var currentCity: String? = null
 
     init {
         loadHome(null)
     }
 
-    fun loadHome(category: String? = null) = viewModelScope.launch {
+    fun loadHome(category: String? = null, city: String? = null) = viewModelScope.launch {
         _state.value = CitizenUiState.Loading
         currentCategory = category
+        currentCity = city
 
         try {
             val uid = currentUserId
@@ -121,7 +123,8 @@ class CitizenHomeViewModel @Inject constructor(
                     val validArtisans = artisans.filter { artisan ->
                         artisan.isValidated &&
                                 artisan.isActive &&
-                                !(artisan.latitude == 0.0 && artisan.longitude == 0.0)
+                                !(artisan.latitude == 0.0 && artisan.longitude == 0.0) &&
+                                (city.isNullOrBlank() || artisan.city.equals(city, ignoreCase = true))
                     }
 
                     Log.d("CitizenHomeVM", "Artisans valides = ${validArtisans.size}")
@@ -224,7 +227,8 @@ class CitizenHomeViewModel @Inject constructor(
         description: String,
         category: String,
         city: String,
-        citizenName: String
+        citizenName: String,
+        photoBase64: String = ""
     ) = viewModelScope.launch {
         _state.value = CitizenUiState.Loading
 
@@ -234,7 +238,8 @@ class CitizenHomeViewModel @Inject constructor(
             title = title,
             description = description,
             category = category,
-            city = city
+            city = city,
+            photoUrl = photoBase64
         )
 
         createRequestUseCase(request).fold(

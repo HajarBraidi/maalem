@@ -8,10 +8,12 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.maalem.R
+import com.example.maalem.data.model.AppLocation
 import com.example.maalem.data.model.Artisan
 import com.example.maalem.data.model.Citizen
 import com.example.maalem.databinding.FragmentCitizenHomeBinding
 import com.example.maalem.domain.repository.CategoryRepository
+import com.example.maalem.domain.repository.LocationRepository
 import com.google.android.material.chip.Chip
 import com.google.android.material.snackbar.Snackbar
 import com.google.firebase.auth.FirebaseAuth
@@ -36,8 +38,14 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
     @Inject lateinit var auth: FirebaseAuth
     @Inject lateinit var firestore: FirebaseFirestore
     @Inject lateinit var categoryRepository: CategoryRepository
+    @Inject lateinit var locationRepository: LocationRepository
 
     private var categories: List<String> = emptyList()
+    private var cities: List<AppLocation> = emptyList()
+
+    // Filtres actifs (combinés)
+    private var selectedCategory: String? = null
+    private var selectedCity: String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,9 +60,10 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
         setupMap()
         setupRecyclerView()
         loadCategories()
+        loadCities()
         observeState()
 
-        viewModel.loadHome(null)
+        viewModel.loadHome(null, null)
     }
 
     private fun setupMap() {
@@ -102,8 +111,24 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
         }
     }
 
+    private fun loadCities() {
+        viewLifecycleOwner.lifecycleScope.launch {
+            locationRepository.getCities().onSuccess { list ->
+                cities = list
+                setupCities(list.map { it.name })
+            }.onFailure {
+                Snackbar.make(
+                    binding.root,
+                    "Erreur lors du chargement des villes",
+                    Snackbar.LENGTH_LONG
+                ).show()
+                setupCities(emptyList())
+            }
+        }
+    }
+
     // ════════════════════════════════════════════════════════
-    // CHIPS STYLÉS (gonflés depuis item_category_chip.xml)
+    // CHIPS SPÉCIALITÉS (gonflés depuis item_category_chip.xml)
     // ════════════════════════════════════════════════════════
     private fun setupCategories(categoriesFromFirebase: List<String>) {
         binding.llCategories.removeAllViews()
@@ -117,7 +142,8 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
         chipAll.text = "Tous"
         chipAll.isChecked = true
         chipAll.setOnClickListener {
-            viewModel.loadHome(null)
+            selectedCategory = null
+            viewModel.loadHome(selectedCategory, selectedCity)
         }
         binding.llCategories.addView(chipAll)
 
@@ -130,9 +156,46 @@ class CitizenHomeFragment : Fragment(R.layout.fragment_citizen_home) {
             ) as Chip
             chip.text = category
             chip.setOnClickListener {
-                viewModel.loadHome(category)
+                selectedCategory = category
+                viewModel.loadHome(selectedCategory, selectedCity)
             }
             binding.llCategories.addView(chip)
+        }
+    }
+
+    // ════════════════════════════════════════════════════════
+    // CHIPS VILLES (même design que les spécialités)
+    // ════════════════════════════════════════════════════════
+    private fun setupCities(cityNames: List<String>) {
+        binding.llCities.removeAllViews()
+
+        // Chip "Toutes"
+        val chipAll = layoutInflater.inflate(
+            R.layout.item_category_chip,
+            binding.llCities,
+            false
+        ) as Chip
+        chipAll.text = "Toutes"
+        chipAll.isChecked = true
+        chipAll.setOnClickListener {
+            selectedCity = null
+            viewModel.loadHome(selectedCategory, selectedCity)
+        }
+        binding.llCities.addView(chipAll)
+
+        // Chips des villes
+        cityNames.forEach { cityName ->
+            val chip = layoutInflater.inflate(
+                R.layout.item_category_chip,
+                binding.llCities,
+                false
+            ) as Chip
+            chip.text = cityName
+            chip.setOnClickListener {
+                selectedCity = cityName
+                viewModel.loadHome(selectedCategory, selectedCity)
+            }
+            binding.llCities.addView(chip)
         }
     }
 

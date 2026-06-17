@@ -1,6 +1,6 @@
 package com.example.maalem.di
 
-// ✅ Imports fusionnés des deux branches
+//  Imports fusionnés des deux branches
 import com.example.maalem.data.repository.AdminRepositoryImpl
 import com.example.maalem.data.repository.ArtisanRepositoryImpl
 import com.example.maalem.data.repository.AuthRepositoryImpl
@@ -22,8 +22,10 @@ import dagger.Provides
 import dagger.hilt.InstallIn
 import dagger.hilt.components.SingletonComponent
 import javax.inject.Singleton
+import com.example.maalem.domain.repository.LocationRepository
+import com.example.maalem.data.repository.LocationRepositoryImpl
 
-// ✅ Module Firebase (providers)
+//  Module Firebase (providers)
 @Module
 @InstallIn(SingletonComponent::class)
 object FirebaseModule {
@@ -86,5 +88,7 @@ abstract class RepositoryModule {
     abstract fun bindCategoryRepository(
         impl: CategoryRepositoryImpl
     ): CategoryRepository
+    @Binds
+    abstract fun bindLocationRepository(impl: LocationRepositoryImpl): LocationRepository
 
 }

@@ -152,7 +152,7 @@
                 </com.google.android.material.textfield.TextInputLayout>
 
                 <com.google.android.material.textfield.TextInputLayout
-                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                    style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginTop="14dp"
@@ -164,10 +164,12 @@
                     app:boxStrokeColor="@color/emerald"
                     app:hintTextColor="@color/emerald">
 
-                    <com.google.android.material.textfield.TextInputEditText
+                    <com.google.android.material.textfield.MaterialAutoCompleteTextView
                         android:id="@+id/etArtisanCity"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
+                        android:inputType="none"
+                        android:focusable="false"
                         android:textColor="@color/text_primary"
                         android:textSize="15sp" />
                 </com.google.android.material.textfield.TextInputLayout>

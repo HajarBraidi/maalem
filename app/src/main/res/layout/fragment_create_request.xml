@@ -43,6 +43,7 @@
                 android:gravity="center_vertical"
                 android:paddingHorizontal="24dp">
 
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
@@ -73,6 +74,60 @@
             android:orientation="vertical"
             android:paddingHorizontal="16dp"
             android:paddingTop="24dp">
+            <!-- ═══════════════════════════════════ -->
+            <!--    PHOTO (optionnelle, pour l'IA)   -->
+            <!-- ═══════════════════════════════════ -->
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Photo du problème (optionnel)"
+                android:textColor="@color/text_primary"
+                android:textSize="13sp"
+                android:textStyle="bold"
+                android:layout_marginBottom="6dp" />
+
+            <FrameLayout
+                android:id="@+id/photo_container"
+                android:layout_width="match_parent"
+                android:layout_height="180dp"
+                android:layout_marginBottom="20dp"
+                android:background="@color/surface_soft"
+                android:foreground="?android:attr/selectableItemBackground">
+
+                <!-- Placeholder quand aucune photo -->
+                <LinearLayout
+                    android:id="@+id/photo_placeholder"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:orientation="vertical"
+                    android:gravity="center">
+
+                    <ImageView
+                        android:layout_width="40dp"
+                        android:layout_height="40dp"
+                        android:src="@android:drawable/ic_menu_camera"
+                        android:contentDescription="@null"
+                        app:tint="@color/emerald" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="8dp"
+                        android:text="Ajouter une photo"
+                        android:textColor="@color/text_primary"
+                        android:textSize="13sp" />
+                </LinearLayout>
+
+                <!-- Aperçu de la photo choisie -->
+                <ImageView
+                    android:id="@+id/iv_photo_preview"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:scaleType="centerCrop"
+                    android:visibility="gone"
+                    android:contentDescription="@null" />
+            </FrameLayout>
 
             <TextView
                 android:layout_width="wrap_content"
@@ -177,8 +232,8 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="Ex: Casablanca"
-                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
+                android:hint="Sélectionnez une ville"
+                style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox.ExposedDropdownMenu"
                 app:boxBackgroundColor="@color/surface_soft"
                 app:boxCornerRadiusTopStart="16dp"
                 app:boxCornerRadiusTopEnd="16dp"
@@ -188,10 +243,11 @@
                 app:boxStrokeWidthFocused="2dp"
                 app:boxStrokeColor="@color/emerald"
                 android:layout_marginBottom="28dp">
-                <com.google.android.material.textfield.TextInputEditText
+                <AutoCompleteTextView
                     android:id="@+id/et_city"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content" />
+                    android:layout_height="wrap_content"
+                    android:focusable="false" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <ProgressBar
