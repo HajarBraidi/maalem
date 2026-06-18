@@ -32,6 +32,14 @@
             android:textSize="13sp"
             android:textColor="@color/emerald"
             android:textStyle="bold" />
+        <ImageView
+            android:id="@+id/iv_request_photo"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="@null" />
 
         <TextView
             android:id="@+id/tvRequestDescription"

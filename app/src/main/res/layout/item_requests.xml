@@ -107,6 +107,14 @@
             android:ellipsize="end"
             android:lineSpacingMultiplier="1.3"
             android:layout_marginBottom="8dp"/>
+        <ImageView
+            android:id="@+id/iv_photo"
+            android:layout_width="match_parent"
+            android:layout_height="160dp"
+            android:layout_marginTop="10dp"
+            android:scaleType="centerCrop"
+            android:visibility="gone"
+            android:contentDescription="@null" />
 
         <!-- Date -->
         <TextView

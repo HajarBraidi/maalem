@@ -21,6 +21,7 @@ class RequestAdapter(
     class RequestViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val tvTitle: TextView = view.findViewById(R.id.tvRequestTitle)
         val tvCategory: TextView = view.findViewById(R.id.tvRequestCategory)
+        val ivPhoto: android.widget.ImageView = view.findViewById(R.id.iv_request_photo)
         val tvDescription: TextView = view.findViewById(R.id.tvRequestDescription)
         val tvCity: TextView = view.findViewById(R.id.tvRequestCity)
         val tvCitizen: TextView = view.findViewById(R.id.tvRequestCitizen)
@@ -42,6 +43,17 @@ class RequestAdapter(
         holder.tvDescription.text = request.description
         holder.tvCity.text = " ${request.city}"
         holder.tvCitizen.text = "Par ${request.citizenName}"
+        // Photo de la demande (si présente)
+        if (request.photoUrl.isNotBlank() && request.photoUrl.startsWith("data:image")) {
+            val base64 = request.photoUrl.substringAfter("base64,")
+            val bytes = android.util.Base64.decode(base64, android.util.Base64.DEFAULT)
+            holder.ivPhoto.visibility = View.VISIBLE
+            com.bumptech.glide.Glide.with(holder.itemView.context)
+                .load(bytes)
+                .into(holder.ivPhoto)
+        } else {
+            holder.ivPhoto.visibility = View.GONE
+        }
 
         val alreadyApplied = appliedRequestIds.contains(request.id)
 

@@ -107,13 +107,12 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
     }
 
     /**
-     * Analyse la photo avec le modèle TFLite et pré-remplit la catégorie
-     * si la confiance est suffisante.
+     * Analyse la photo avec le modèle TFLite et pré-remplit le titre, la description
+     * et la catégorie si la prédiction est fiable et dans le domaine.
      */
     private fun classifyPhoto(bitmap: Bitmap) {
         viewLifecycleOwner.lifecycleScope.launch {
             try {
-                // Inférence hors du thread principal
                 val prediction = withContext(Dispatchers.Default) {
                     val clf = classifier ?: WallDefectClassifier(requireContext().applicationContext)
                         .also { classifier = it }
@@ -122,37 +121,67 @@ class CreateRequestFragment : Fragment(R.layout.fragment_create_request) {
 
                 val percent = (prediction.confidence * 100).toInt()
 
-                if (prediction.confidence >= WallDefectClassifier.CONFIDENCE_THRESHOLD) {
-                    // Pré-remplir le dropdown catégorie seulement si la catégorie
-                    // prédite fait partie des catégories chargées depuis Firestore
-                    if (categories.any { it.equals(prediction.specialty, ignoreCase = true) }) {
+                when {
+                    // Cas 1 : photo hors-contexte (classe "autre")
+                    prediction.isOutOfScope -> {
+                        Snackbar.make(
+                            binding.root,
+                            "Image non reconnue comme un défaut de mur. Choisissez la catégorie manuellement.",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
+
+                    // Cas 2 : confiance suffisante + catégorie présente dans la liste
+                    prediction.confidence >= WallDefectClassifier.CONFIDENCE_THRESHOLD
+                            && prediction.specialty != null
+                            && categories.any { it.equals(prediction.specialty, ignoreCase = true) } -> {
+                        // Pré-remplir la catégorie
                         binding.etCategory.setText(prediction.specialty, false)
+
+                        // Pré-remplir le titre s'il est vide
+                        if (binding.etTitle.text.isNullOrBlank()
+                            && prediction.suggestedTitle.isNotEmpty()) {
+                            binding.etTitle.setText(prediction.suggestedTitle)
+                        }
+
+                        // Pré-remplir la description si elle est vide
+                        if (binding.etDescription.text.isNullOrBlank()
+                            && prediction.suggestedDescription.isNotEmpty()) {
+                            binding.etDescription.setText(prediction.suggestedDescription)
+                        }
+
                         Snackbar.make(
                             binding.root,
                             "Catégorie détectée : ${prediction.specialty} ($percent%)",
                             Snackbar.LENGTH_LONG
                         ).show()
-                    } else {
+                    }
+
+                    // Cas 3 : catégorie prédite absente de la liste Firestore
+                    prediction.specialty != null
+                            && categories.none { it.equals(prediction.specialty, ignoreCase = true) } -> {
                         Snackbar.make(
                             binding.root,
-                            "Catégorie détectée (${prediction.specialty}) mais absente de la liste. Choisissez manuellement.",
+                            "Catégorie détectée (${prediction.specialty}) absente de la liste. Choisissez manuellement.",
                             Snackbar.LENGTH_LONG
                         ).show()
                     }
-                } else {
-                    // Confiance trop faible → on laisse l'utilisateur choisir
-                    Snackbar.make(
-                        binding.root,
-                        "Analyse peu fiable ($percent%). Choisissez la catégorie manuellement.",
-                        Snackbar.LENGTH_LONG
-                    ).show()
+
+                    // Cas 4 : confiance trop faible
+                    else -> {
+                        Snackbar.make(
+                            binding.root,
+                            "Analyse peu fiable ($percent%). Choisissez la catégorie manuellement.",
+                            Snackbar.LENGTH_LONG
+                        ).show()
+                    }
                 }
             } catch (e: Exception) {
                 Snackbar.make(
                     binding.root,
-                    "ERR: ${e.javaClass.simpleName} - ${e.message}",
-                    Snackbar.LENGTH_INDEFINITE
-                ).setAction("OK") { }.show()
+                    "Analyse de l'image indisponible. Choisissez la catégorie manuellement.",
+                    Snackbar.LENGTH_LONG
+                ).show()
             }
         }
     }

@@ -10,12 +10,20 @@ import java.nio.ByteOrder
 
 /**
  * Résultat d'une prédiction.
- * @param specialty  nom de la spécialité de l'application (ex: "Maconnerie")
- * @param confidence probabilité de la classe prédite (0f..1f)
+ *
+ * @param specialty            spécialité de l'application (ex: "Maconnerie"), ou null si
+ *                             l'image est classée "autre" (hors-domaine) → saisie manuelle.
+ * @param confidence           probabilité de la classe prédite (0f..1f).
+ * @param isOutOfScope         true si la classe prédite est "autre" (photo hors-contexte).
+ * @param suggestedTitle       titre proposé pour la catégorie détectée (vide si hors-domaine).
+ * @param suggestedDescription description proposée pour la catégorie détectée (vide si hors-domaine).
  */
 data class DefectPrediction(
-    val specialty: String,
-    val confidence: Float
+    val specialty: String?,
+    val confidence: Float,
+    val isOutOfScope: Boolean,
+    val suggestedTitle: String = "",
+    val suggestedDescription: String = ""
 )
 
 /**
@@ -24,7 +32,12 @@ data class DefectPrediction(
  * Détails du modèle (vérifiés sur le .tflite) :
  *  - Entrée  : 1 x 224 x 224 x 3, float32, PIXELS BRUTS 0..255
  *              (le preprocess MobileNetV2 est intégré au modèle → NE PAS normaliser).
- *  - Sortie  : 1 x 3 probabilités softmax, ordre EXACT : [fissure, peinture, humidite].
+ *  - Sortie  : 1 x 4 probabilités softmax, ordre EXACT (cf. labels.txt) :
+ *              [fissure, peinture, humidite, autre].
+ *
+ * La classe "autre" (murs sains + images hors-domaine) sert à rejeter les photos
+ * qui ne sont pas des défauts de mur : aucune spécialité n'est proposée et
+ * l'utilisateur choisit manuellement.
  */
 class WallDefectClassifier(context: Context) {
 
@@ -33,20 +46,36 @@ class WallDefectClassifier(context: Context) {
     companion object {
         private const val MODEL_FILE = "maalem_model.tflite"
         private const val IMG_SIZE = 224
-        private const val NUM_CLASSES = 3
+        private const val NUM_CLASSES = 4
 
-        // Ordre EXACT des sorties du modèle (ne pas changer)
-        private val MODEL_CLASSES = listOf("fissure", "peinture", "humidite")
+        // Ordre EXACT des sorties du modèle (= labels.txt). Ne pas changer.
+        private val MODEL_CLASSES = listOf("fissure", "peinture", "humidite", "autre")
 
-        // Correspondance classe du modèle → spécialité de l'application
+        // Correspondance classe du modèle → spécialité de l'application.
+        // "autre" est volontairement absent : pas de spécialité → saisie manuelle.
         private val MODEL_TO_SPECIALTY = mapOf(
             "fissure" to "Maconnerie",
             "peinture" to "Peinture",
             "humidite" to "Etancheite"
         )
 
-        // Seuil de confiance recommandé (cf. analyse du seuil dans le notebook).
-        const val CONFIDENCE_THRESHOLD = 0.80f
+        // Titre suggéré selon la catégorie détectée (le citoyen peut le modifier).
+        private val MODEL_TO_TITLE = mapOf(
+            "fissure"  to "Réparation de fissure",
+            "peinture" to "Reprise de peinture",
+            "humidite" to "Traitement d'humidité"
+        )
+
+        // Description suggérée selon la catégorie détectée (le citoyen peut la modifier).
+        private val MODEL_TO_DESCRIPTION = mapOf(
+            "fissure"  to "Présence d'une fissure sur le mur à réparer.",
+            "peinture" to "Peinture écaillée ou abîmée à reprendre.",
+            "humidite" to "Traces d'humidité ou infiltration d'eau à traiter."
+        )
+
+        // Seuil de confiance (cf. cellule 9.4 du notebook : couverture vs précision).
+        // En dessous, on ne pré-remplit pas → l'utilisateur choisit manuellement.
+        const val CONFIDENCE_THRESHOLD = 0.70f
     }
 
     init {
@@ -61,8 +90,6 @@ class WallDefectClassifier(context: Context) {
      */
     private fun copyAssetToCache(context: Context, assetName: String): File {
         val outFile = File(context.cacheDir, assetName)
-
-        // Recopie systématique pour éviter un cache obsolète
         context.assets.open(assetName).use { input ->
             FileOutputStream(outFile).use { output ->
                 input.copyTo(output)
@@ -102,8 +129,7 @@ class WallDefectClassifier(context: Context) {
     }
 
     /**
-     * Lance l'inférence sur une image et renvoie la prédiction
-     * (spécialité de l'app + confiance).
+     * Lance l'inférence sur une image et renvoie la prédiction.
      */
     fun classify(bitmap: Bitmap): DefectPrediction {
         val input = bitmapToBuffer(bitmap)
@@ -118,11 +144,17 @@ class WallDefectClassifier(context: Context) {
         }
 
         val modelClass = MODEL_CLASSES[bestIdx]
-        val specialty = MODEL_TO_SPECIALTY[modelClass] ?: modelClass
+        val isOutOfScope = (modelClass == "autre")
+        val specialty = if (isOutOfScope) null else MODEL_TO_SPECIALTY[modelClass]
+        val suggestedTitle = if (isOutOfScope) "" else (MODEL_TO_TITLE[modelClass] ?: "")
+        val suggestedDescription = if (isOutOfScope) "" else (MODEL_TO_DESCRIPTION[modelClass] ?: "")
 
         return DefectPrediction(
             specialty = specialty,
-            confidence = probs[bestIdx]
+            confidence = probs[bestIdx],
+            isOutOfScope = isOutOfScope,
+            suggestedTitle = suggestedTitle,
+            suggestedDescription = suggestedDescription
         )
     }
 

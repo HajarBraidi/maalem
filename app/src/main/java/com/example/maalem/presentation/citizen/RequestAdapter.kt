@@ -36,6 +36,16 @@ class RequestAdapter(
             tvCategory.text = request.category
             tvCity.text = request.city
             tvDescription.text = request.description
+            if (request.photoUrl.isNotBlank() && request.photoUrl.startsWith("data:image")) {
+                val base64 = request.photoUrl.substringAfter("base64,")
+                val bytes = android.util.Base64.decode(base64, android.util.Base64.DEFAULT)
+                ivPhoto.visibility = android.view.View.VISIBLE
+                com.bumptech.glide.Glide.with(root.context)
+                    .load(bytes)
+                    .into(ivPhoto)
+            } else {
+                ivPhoto.visibility = android.view.View.GONE
+            }
             tvDate.text = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
                 .format(Date(request.createdAt))
 
